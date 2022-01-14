@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/14 18:09:04 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/14 18:17:11 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-static void	signal_handler(int signal)
-{
-	if (signal == 2)
-		write(1, "\n", 1);
-	else if(signal == 3)
-		return ;
-}
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
+# include "error_managment/get_next_line.h"
 
-int	main(void)
-{
-	char	*line;
-
-	while (1)
-	{
-		signal(SIGINT, signal_handler);
-		signal(SIGQUIT, signal_handler);
-		line = readline("minishell$ ");
-		//parser, executer, etc
-		free(line);
-	}
-}
+#endif
