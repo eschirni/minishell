@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/14 22:00:15 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/14 21:28:38 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/14 21:43:35 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../includes/minishell.h"
+#include <stdio.h>
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdlib.h>
-# include "get_next_line.h"
+void	pwd(void)
+{
+	char	cwd[256];
 
-void	ft_exit(char *arg);
-void	pwd(void);
-
-#endif
+	if (getcwd(cwd, 256) == NULL)
+		perror("pwd error");
+	else
+		write(1, cwd, 256);
+}
