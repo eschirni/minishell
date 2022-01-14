@@ -1,18 +1,19 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tom <tom@student.42.fr>                    +#+  +:+       +#+         #
+#    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 14:59:59 by eschirni          #+#    #+#              #
-#    Updated: 2022/01/14 20:34:08 by tom              ###   ########.fr        #
+#    Updated: 2022/01/14 20:53:05 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 FILES = src/main.c	\
-		src/gnl/get_next_line.c src/gnl/get_next_line_utils.c
+		src/gnl/get_next_line.c src/gnl/get_next_line_utils.c	\
+		src/executer/exit.c
 
 all: $(NAME)
 
