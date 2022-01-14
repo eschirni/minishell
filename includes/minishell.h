@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/14 20:30:52 by tom              ###   ########.fr       */
+/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/14 20:31:16 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
-int	main(void)
-{
-	char	*line;
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <signal.h>
+# include "get_next_line.h"
 
-	while (1)
-	{
-		line = readline("minishell$ ");
-		//call your function here
-		free(line);
-	}
-}
+#endif
