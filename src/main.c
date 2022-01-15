@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:21:08 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:28:43 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(void)
 		line = readline("minishell$ ");
 		if (strcmp(line, "pwd") == 0)
 			pwd();
-		ft_exit("1");
 		free(line);
 	}
 }
