@@ -6,15 +6,15 @@
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 14:59:59 by eschirni          #+#    #+#              #
-#    Updated: 2022/01/14 21:33:40 by eschirni         ###   ########.fr        #
+#    Updated: 2022/01/15 14:16:49 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 FILES = src/main.c	\
 		src/gnl/get_next_line.c src/gnl/get_next_line_utils.c	\
-		src/executer/exit.c	\
-		src/executer/pwd.c
+		src/executer/*.c	\
+		utils/*.c
 
 all: $(NAME)
 

@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_append.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:21:08 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/15 14:10:39 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/15 14:11:03 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <string.h>
 
-int	main(void)
+char	*ft_append(char *start, char *end)
 {
-	char	*line;
+	size_t	i;
+	size_t	j;
+	char	*tmp;
 
-	while (1)
+	tmp = malloc(ft_strclen(start, '\0') + ft_strclen(end, '\0') + 1);
+	if (tmp == NULL)
+		return (NULL);
+	i = 0;
+	while (start[i] != '\0')
 	{
-		line = readline("minishell$ ");
-		if (strcmp(line, "pwd") == 0)
-			pwd();
-		ft_exit("1");
-		free(line);
+		tmp[i] = start[i];
+		i++;
 	}
+	j = 0;
+	while (end[j] != '\0')
+	{
+		tmp[i] = end[j];
+		i++;
+		j++;
+	}
+	tmp[i] = '\0';
+	free(start);
+	return (tmp);
 }

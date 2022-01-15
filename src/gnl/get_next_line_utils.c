@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 16:54:07 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/14 20:33:12 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/15 14:14:34 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
-
-void	*ft_calloc(size_t size)
-{
-	char	*c;
-
-	c = malloc(size + 1);
-	if (c == NULL)
-		return (NULL);
-	while (size + 1 != 0)
-	{
-		c[size] = '\0';
-		size--;
-	}
-	return (c);
-}
-
-size_t	ft_strclen(const char *s, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != c)
-		i++;
-	return (i);
-}
+#include "../../includes/minishell.h"
 
 char	*ft_strcdup(char *s1, char c, size_t start)
 {

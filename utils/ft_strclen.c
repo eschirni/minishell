@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:21:08 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/15 14:13:28 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/15 14:13:45 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <string.h>
 
-int	main(void)
+size_t	ft_strclen(const char *s, char c)
 {
-	char	*line;
+	size_t	i;
 
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (strcmp(line, "pwd") == 0)
-			pwd();
-		ft_exit("1");
-		free(line);
-	}
+	i = 0;
+	while (s[i] != c)
+		i++;
+	return (i);
 }

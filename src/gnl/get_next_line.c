@@ -3,47 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 21:16:35 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/14 20:33:02 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/15 14:15:46 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/get_next_line.h"
+#include "../../includes/minishell.h"
 
 static char	*ft_delall(char **a)
 {
 	free(*a);
 	*a = NULL;
 	return (NULL);
-}
-
-static char	*ft_append(char *start, char *end)
-{
-	size_t	i;
-	size_t	j;
-	char	*tmp;
-
-	tmp = malloc(ft_strclen(start, '\0') + ft_strclen(end, '\0') + 1);
-	if (tmp == NULL)
-		return (NULL);
-	i = 0;
-	while (start[i] != '\0')
-	{
-		tmp[i] = start[i];
-		i++;
-	}
-	j = 0;
-	while (end[j] != '\0')
-	{
-		tmp[i] = end[j];
-		i++;
-		j++;
-	}
-	tmp[i] = '\0';
-	free(start);
-	return (tmp);
 }
 
 static void	ft_reading(char **rest, int fd)
@@ -96,20 +69,3 @@ char	*get_next_line(int fd)
 	}
 	return (ret);
 }
-// #include <stdio.h>
-// #include <fcntl.h>
-// int main()
-// {
-//     int 	fd;
-//     char	*str;
-
-//     fd = open("abc.txt",O_RDONLY);
-//     while ((str = get_next_line(fd)))
-//     {
-//         printf("%s",str);
-// 		free(str);
-//     }
-// 	free(str);
-// 	printf("\n");
-//     system("leaks a.out");
-// }

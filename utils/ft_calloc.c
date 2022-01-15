@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:21:08 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/15 14:08:49 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/15 14:09:10 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include <string.h>
 
-int	main(void)
+void	*ft_calloc(size_t size)
 {
-	char	*line;
+	char	*c;
 
-	while (1)
+	c = malloc(size + 1);
+	if (c == NULL)
+		return (NULL);
+	while (size + 1 != 0)
 	{
-		line = readline("minishell$ ");
-		if (strcmp(line, "pwd") == 0)
-			pwd();
-		ft_exit("1");
-		free(line);
+		c[size] = '\0';
+		size--;
 	}
+	return (c);
 }
