@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/14 20:52:17 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/15 21:06:39 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 # include <stdlib.h>
 # include "get_next_line.h"
 
-void	ft_exit(void);
+//utils
+void	*ft_calloc(size_t size);
+char	*ft_append(char *start, char *end);
+char	*ft_insert(char *start, char *end);
+size_t	ft_strclen(const char *s, char c);
+int		ft_atoi(const char *str);
+
+void	executer(char **envp, char ***commands);
+
+void	ft_exit(char *arg);
 
 #endif
