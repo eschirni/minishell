@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 20:08:08 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/15 21:05:11 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ int	main(int argc, char **argv, char **envp)
 			add_history(line);
 		free(line);
 		//parser, etc
-		commands = malloc(3 * sizeof(char *));
-		commands[0] = malloc(3 * sizeof(char *));
-		commands[0][0] = malloc(3 * sizeof(char));
-		commands[0][1] = malloc(2 * sizeof(char));
-		commands[0][0][0] = 'l';
-		commands[0][0][1] = 's';
-		commands[0][0][2] = '\0';
-		commands[0][1][0] = '.';
-		commands[0][1][1] = '\0';
+		commands = malloc(1 * sizeof(char *)); //Parser should return this, so I thought it is kind of practical to do this that way
+		commands[0] = malloc(1 * sizeof(char *));
+		commands[0][0] = ft_strcdup("pwd", '\0', 0);
 		executer(envp, commands);
+		free(commands[0][0]);
+		free(commands[0]);
+		free(commands);
 	}
 }

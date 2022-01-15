@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 19:48:29 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/15 21:06:39 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int		ft_atoi(const char *str);
 void	executer(char **envp, char ***commands);
 
 void	ft_exit(char *arg);
-void	pwd(void);
 
 #endif
