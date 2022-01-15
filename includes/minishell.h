@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:36:08 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/15 19:48:29 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ char	*ft_append(char *start, char *end);
 char	*ft_insert(char *start, char *end);
 size_t	ft_strclen(const char *s, char c);
 int		ft_atoi(const char *str);
+
+void	executer(char **envp, char ***commands);
 
 void	ft_exit(char *arg);
 void	pwd(void);
