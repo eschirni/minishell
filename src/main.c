@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 17:53:20 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:00:32 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
-	char	***commands;
+	char	**input;
+	int		i;
 
 	if (argc != 1)
 	{
@@ -28,14 +29,18 @@ int	main(int argc, char **argv, char **envp)
 		if (line != NULL)
 			add_history(line);
 		//parser, etc
-		commands = malloc(1 * sizeof(char *)); //Parser should return this, so I thought it is kind of practical to do this that way
-		commands[0] = malloc(1 * sizeof(char *));
-		commands[0][0] = line;
-		//if you want to test options
-		commands[0][1] = ft_strcdup("src/", '\0', 0);
-		executer(envp, commands);
-		free(commands[0][0]);
-		free(commands[0]);
-		free(commands);
+		input = ft_split(line, ' ');
+		if (input[0] != '\0')
+		{
+			executer(envp, input);
+			i = 0;
+			while (input[i] != NULL)
+			{
+				free(input[i]);
+				i++;
+			}
+			free(input);
+		}
+		free(line);
 	}
 }
