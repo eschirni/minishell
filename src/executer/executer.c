@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 16:03:32 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:42:37 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,18 @@ static void	exec_functions(char *function, char **args) //this is garbage too
 
 //Bugs: doesn't execute the command all the time
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
-void	executer(char **envp, char ***commands)
+void	executer(char **envp, char **commands)
 {
 	int	pid;
 
-	if (ft_strcmp(commands[0][0], "cd") == 0 || ft_strcmp(commands[0][0], "export") == 0 || ft_strcmp(commands[0][0], "unset") == 0)
-		exec_functions(commands[0][0], commands[0]);
+	if (ft_strcmp(commands[0], "cd") == 0 || ft_strcmp(commands[0], "export") == 0 || ft_strcmp(commands[0], "unset") == 0)
+		exec_functions(commands[0], commands);
 	else
 	{
-		commands[0][0] = ft_insert("/bin/", commands[0][0]);
+		commands[0] = ft_insert("/bin/", commands[0]);
 		pid = fork();
 		if (pid == 0)
-		{
-			execve(commands[0][0], commands[0], envp);
-		}
+			execve(commands[0], commands, envp);
 		else
 			wait(NULL); //waits until all child processes are terminated
 	}
