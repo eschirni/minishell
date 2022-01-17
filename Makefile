@@ -6,14 +6,13 @@
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 14:59:59 by eschirni          #+#    #+#              #
-#    Updated: 2022/01/17 15:52:03 by eschirni         ###   ########.fr        #
+#    Updated: 2022/01/17 19:59:39 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 FILES = src/main.c	\
-		src/gnl/get_next_line.c src/gnl/get_next_line_utils.c	\
 		src/executer/*.c	\
 		utils/*.c
 
