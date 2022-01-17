@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 15:41:34 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:59:54 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ int	main(int argc, char **argv, char **envp)
 		line = readline("minishell$ ");
 		if (line != NULL)
 			add_history(line);
-		free(line);
 		//parser, etc
 		commands = malloc(1 * sizeof(char *)); //Parser should return this, so I thought it is kind of practical to do this that way
 		commands[0] = malloc(1 * sizeof(char *));
-		commands[0][0] = ft_strcdup("env", '\0', 0);
+		commands[0][0] = line;
+		//if you want to test options
+		//commands[0][1] = ft_strcdup("-l", '\0', 0);
 		executer(envp, commands);
 		free(commands[0][0]);
 		free(commands[0]);
