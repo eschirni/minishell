@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 17:44:48 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:52:08 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	executer(char **envp, char ***commands)
 		pid = fork();
 		if (pid == 0)
 		{
+			printf("%s\n", commands[0][0]);
 			execve(commands[0][0], commands[0], envp);
 		}
 		else

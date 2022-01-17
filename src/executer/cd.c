@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:08:27 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 17:43:35 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:49:17 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void	cd(const char *path)
 {
-	printf("%s\n", path);
 	chdir(path);
 }
