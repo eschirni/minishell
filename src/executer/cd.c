@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert.c                                        :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:34:17 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 00:17:25 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/17 20:09:22 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/18 00:30:50 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+#include "../../includes/minishell.h"
+#include <errno.h>
+#include <string.h>
 
-char	*ft_insert(char *start, char *end)
+void	cd(char *path) //check if I even have access
 {
-	size_t	i;
-	size_t	j;
-	char	*tmp;
+	char	*home;
+	int		ret;
+	char	*error;
 
-	tmp = malloc(ft_strclen(start, '\0') + ft_strclen(end, '\0') + 1);
-	if (tmp == NULL)
-		return (NULL);
-	i = 0;
-	while (start[i] != '\0')
+	if (ft_strcmp(path, "~") == 0) //correct it so it works also for ~ in a string
 	{
-		tmp[i] = start[i];
-		i++;
+		home = getenv("HOME");
+		path = home;
 	}
-	j = 0;
-	while (end[j] != '\0')
+	ret = chdir(path);
+	if (ret == -1)
 	{
-		tmp[i] = end[j];
-		i++;
-		j++;
+		error = strerror(errno);
+		write(2, error, ft_strclen(error, '\0'));
 	}
-	tmp[i] = '\0';
-	free(end);
-	return (tmp);
 }
