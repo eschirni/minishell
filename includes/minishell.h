@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 15:54:46 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:09:20 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <signal.h>
 # include <stdlib.h>
 # include "get_next_line.h"
+
+typedef	struct		s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
 //utils
 void	*ft_calloc(size_t size);
