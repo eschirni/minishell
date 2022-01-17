@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 15:54:46 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:33:44 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 
 void	executer(char **envp, char ***commands);
 
-void	ft_exit(char *arg);
+void	cd(const char *path);
 
 #endif

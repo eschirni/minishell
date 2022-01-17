@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 16:03:32 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:44:48 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	exec_functions(char *function, char **args) //this is garbage too
 {
 	if (ft_strcmp(function, "cd") == 0)
-		return ;
+		cd(args[1]);
 	if (ft_strcmp(function, "export") == 0)
 		return ;
 	else
