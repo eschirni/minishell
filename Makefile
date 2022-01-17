@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tom <tom@student.42.fr>                    +#+  +:+       +#+         #
+#    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/14 14:59:59 by eschirni          #+#    #+#              #
-#    Updated: 2022/01/15 18:56:00 by eschirni         ###   ########.fr        #
+#    Updated: 2022/01/17 15:26:11 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,6 @@ FILES = src/main.c	\
 		utils/*.c
 
 CFLAGS = #-Wall -Werror -Wextra
-
-CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
