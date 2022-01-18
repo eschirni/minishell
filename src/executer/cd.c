@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:09:22 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 16:35:29 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:53:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static char	*replace_home(char *path)
 	char	*ret;
 
 	ret = malloc(ft_strclen(path, '\0') + ft_strclen(getenv("HOME"), '\0'));
-	//protect malloc
+	if (ret == NULL)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while(path[i] != '\0')
@@ -48,23 +49,22 @@ static char	*replace_home(char *path)
 		j++;
 	}
 	ret[j] = '\0';
-	//free(path);
 	return(ret);
 }
 
-void	cd(char *path) //check if I even have access
+void	cd(char *path)
 {
-	char	*home;
 	int		ret;
-	char	*error;
+	char	*home;
 
-	if (ft_strcmp(path, "~") == 0) //correct it so it works also for ~ in a string
-		path = replace_home(path);
-	ret = chdir(path);
-	if (ret == -1)
+	if (ft_strchr(path, '~') == false)
+		ret = chdir(path);
+	else
 	{
-		error = strerror(errno);
-		write(2, error, ft_strclen(error, '\0'));
+		home = replace_home(path);
+		ret = chdir(home);
+		free(home);
 	}
-	free(path);
+	if (ret == -1)
+		ft_write_error("cd", path, strerror(errno));
 }

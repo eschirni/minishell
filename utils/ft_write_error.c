@@ -1,44 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_write_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 17:22:35 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/18 17:44:28 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/18 17:54:41 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	ft_write_error(char *command, char *arg, char *error)
 {
-	char	*line;
-	char	**input;
-	int		i;
-
-	if (argc != 1)
-	{
-		perror("Usage: ./minishell");
-		return (1);
-	}
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (line != NULL)
-			add_history(line);
-		//parser, etc
-		input = ft_split(line, ' ');
-		if (input[0] != '\0')
-			executer(envp, input);
-		i = 0;
-		while (input[i] != NULL)
-		{
-			free(input[i]);
-			i++;
-		}
-		free(input);
-		free(line);
-	}
+	write(2, "minishell: ", 11);
+	write(2, command, ft_strclen(command, '\0'));
+	write(2, ": ", 2);
+	write(2, arg, ft_strclen(arg, '\0'));
+	write(2, ": ", 2);
+	write(2, error, ft_strclen(error, '\0'));
+	write(2, "\n", 1);
 }
