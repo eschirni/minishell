@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 20:09:52 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/18 16:23:35 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <stdlib.h>
+# include <stdbool.h>
+# include <limits.h>
 
 typedef	struct		s_env
 {
