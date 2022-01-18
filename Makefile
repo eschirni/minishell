@@ -1,4 +1,3 @@
-
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -6,10 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/14 14:59:59 by eschirni          #+#    #+#              #
-#    Updated: 2022/01/17 19:59:39 by eschirni         ###   ########.fr        #
+#    Created: 2022/01/18 16:56:04 by eschirni          #+#    #+#              #
+#    Updated: 2022/01/18 16:56:07 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+# FLAGS
+CC = gcc
+CFLAGS = #-Wall -Wextra -Werror
 
 # COLORS
 Y = "\033[33m"
@@ -20,38 +23,17 @@ X = "\033[0m"
 UP = "\033[A"
 CUT = "\033[K"
 
-NAME = minishell
+# EXECUTABLE
+NAME = ./minishell
 
-FILES = src/main.c	\
-		src/executer/*.c	\
-		utils/*.c
+# PATHS
+SRC_PATH = ./src/
+OBJ_PATH = ./obj/
+# UTILS_PATH = $(SRC_PATH)utils/
 
-CFLAGS = #-Wall -Werror -Wextra
-
-all: $(NAME)
-
-$(NAME): $(FILES)
-	@gcc $(FILES) $(CFLAGS) -lreadline -o $(NAME)
-
-clean:
-	rm -f src/*.o
-
-fclean: clean
-	rm -f $(NAME)
-
-re: fclean all
-
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/21 11:22:27 by tblaase           #+#    #+#              #
-#    Updated: 2022/01/18 16:46:59 by eschirni         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# SOURCES
+SRC =	$(SRC_PATH)main.c \
+		src/executer/*.c src/utils/*.c 
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
