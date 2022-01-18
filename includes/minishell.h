@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 17:52:13 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:14:44 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,17 @@
 # include <unistd.h> //write
 # include <stdlib.h> //malloc, free
 # include <signal.h> //signal, sigaction
-#include <errno.h> //errno
-#include <string.h> //strrerror
-#include <stdbool.h> //bools
+# include <errno.h> //errno
+# include <string.h> //strrerror
+# include <stdbool.h> //bools
+# include <limits.h>
+
+typedef	struct		s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
 //utils
 void	*ft_calloc(size_t count, size_t size);

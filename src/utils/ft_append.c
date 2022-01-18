@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_append.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:10:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:11:03 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:34:29 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_append(char *start, char *end)
 {

@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 18:32:43 by eschirni          #+#    #+#             */
-/*   Updated: 2021/07/20 19:15:28 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:34:41 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 
 void	ft_count(int *i, int *neg, const char *str)
 {

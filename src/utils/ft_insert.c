@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_insert.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 15:53:03 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/17 17:48:52 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/15 14:34:17 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/18 18:15:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char	*ft_insert(char *start, char *end)
 {
 	size_t	i;
+	size_t	j;
+	char	*tmp;
 
+	tmp = malloc(ft_strclen(start, '\0') + ft_strclen(end, '\0') + 1);
+	if (tmp == NULL)
+		return (NULL);
 	i = 0;
-	while (s1[i] != s2[i] && (!(s1[i] == '\0' || s2[i] == '\0')))
+	while (start[i] != '\0')
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
-		else if (s1[i] == '\0' || s2[i] == '\0')
-			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		tmp[i] = start[i];
 		i++;
 	}
-	if (s1[i] == s2[i])
-		return ((unsigned char) 0);
-	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+	j = 0;
+	while (end[j] != '\0')
+	{
+		tmp[i] = end[j];
+		i++;
+		j++;
+	}
+	tmp[i] = '\0';
+	free(end);
+	return (tmp);
 }
-
