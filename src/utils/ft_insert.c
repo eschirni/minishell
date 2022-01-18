@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_insert.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:34:17 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:35:42 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:34:49 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_insert(char *start, char *end)
 {

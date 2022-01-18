@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 14:13:28 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/15 14:13:45 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:34:56 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 size_t	ft_strclen(const char *s, char c)
 {
