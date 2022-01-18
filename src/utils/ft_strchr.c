@@ -6,11 +6,11 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:34:43 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 17:36:50 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:17:32 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 bool	ft_strchr(const char *s, int c)
 {
