@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/20 18:47:36 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 20:38:40 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,23 @@ char	*get_value(t_env *env, char *name)
 	if (env == NULL)
 		return (NULL);
 	return (env->value);
+}
+
+void	free_env(t_env **env)
+{
+	t_env	*tmp;
+	t_env	*next;
+
+	while (tmp != NULL)
+	{
+		printf("----\n");
+		next = tmp->next;
+		free(tmp->name);
+		free(tmp->value);
+		free(tmp);
+		tmp = next;
+	}
+	*env = NULL;
 }
 
 void	init_env(t_env **env, char **envp)

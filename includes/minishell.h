@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/20 18:47:18 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 20:31:41 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	add_env(t_env **env, char *name, char *value);
 void	del_env(t_env **env, char *name);
 void	rep_env(t_env **env, char *name, char *value);
 char	*get_value(t_env *env, char *name);
+void	free_env(t_env **env);
 
 #endif
