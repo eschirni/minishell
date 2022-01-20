@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/20 18:32:48 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 18:38:05 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	del_env(t_env **env, char *name)
 {
 	t_env	*tmp;
 	t_env	*prev;
-	
 
 	tmp = *env;
 	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)
@@ -79,17 +78,27 @@ void	del_env(t_env **env, char *name)
 		return ;
 	prev->next = tmp->next;
 	free(tmp); // Free memory
-	// while(ft_strcmp(tmp->name, name) != 0)
-	// 	tmp = tmp->next;
-	// if (tmp->next == NULL)
-	// {
-	// 	free(tmp->next);
-	// 	tmp->next = NULL;
-	// 	return ;
-	// }
-	// cache = tmp->next->next;
-	// free(tmp->next);
-	// tmp->next = cache;
+}
+
+void	rep_env(t_env **env, char *name, char *value)
+{
+	t_env	*tmp;
+
+	tmp = *env;
+	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)
+	{
+		free(tmp->value);
+		tmp->value = ft_strdup(value);
+		return ;
+	}
+	while (tmp != NULL && ft_strcmp(tmp->name, name) != 0)
+	{
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return ;
+	free(tmp->value);
+	tmp->value = ft_strdup(value);
 }
 
 void	init_env(t_env **env, char **envp)

@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/20 18:34:19 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 18:39:34 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,19 @@ int	main(int argc, char **argv, char **envp)
 	int		i;
 
 	t_env	*env;
+	//init env
 	init_env(&env, envp);
 	printf("----- ORIGINAL ENV -----\n\n");
 	print_env(env);
+	//add env
 	add_env(&env, "TEST_NAME", "TEST_VALUE");
 	printf("\n\n----- NEW ENV -----\n\n");
 	print_env(env);
+	//rep env
+	rep_env(&env, "TEST_NAME", "NEW_VALUE");
+	printf("\n\n----- DEL ENV -----\n\n");
+	print_env(env);
+	//del env
 	del_env(&env, "TEST_ENV");
 	printf("\n\n----- DEL ENV -----\n\n");
 	print_env(env);
