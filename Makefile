@@ -6,13 +6,13 @@
 #    By: tom <tom@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/01/18 17:10:02 by tom              ###   ########.fr        #
+#    Updated: 2022/01/20 15:09:24 by tom              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # FLAGS
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -g #-Wall -Wextra -Werror
 
 # COLORS
 Y = "\033[33m"

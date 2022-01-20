@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 16:23:35 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 17:32:17 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,14 @@ size_t	ft_strclen(const char *s, char c);
 int		ft_atoi(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(const char *s, char c);
+char	*ft_strdup(const char *s1);
+size_t	ft_strlen(const char *s);
+void	ft_lstadd_back(t_env **env, t_env *new);
 
 void	executer(char **envp, char **commands);
+void	init_env(t_env **env, char **envp);
+void	print_env(t_env *env);
+void	add_env(t_env **env, char *name, char *value);
+void	del_env(t_env **env, char *name);
 
 #endif
