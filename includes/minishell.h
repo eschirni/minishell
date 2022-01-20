@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 18:14:44 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/19 18:47:11 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ void	ft_write_error(char *command, char *arg, char *error);
 
 void	executer(char **envp, char **commands);
 void	cd(char *path);
+
+void	get_env(t_env **env, char **envp);
 
 #endif
