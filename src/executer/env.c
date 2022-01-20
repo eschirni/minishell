@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/20 17:35:13 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 18:19:27 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,14 @@ void	del_env(t_env **env, char *name)
 	t_env	*cache;
 
 	tmp = *env;
-	while(ft_strcmp(tmp->next->name, name) != 0)
+	while(ft_strcmp(tmp->name, name) != 0)
 		tmp = tmp->next;
-	printf("\n\n%s\n\n", tmp->name);
+	if (tmp->next == NULL)
+	{
+		free(tmp->next);
+		tmp->next = NULL;
+		return ;
+	}
 	cache = tmp->next->next;
 	free(tmp->next);
 	tmp->next = cache;
