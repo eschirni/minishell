@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/20 18:38:05 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 18:47:36 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,17 @@ void	rep_env(t_env **env, char *name, char *value)
 		return ;
 	free(tmp->value);
 	tmp->value = ft_strdup(value);
+}
+
+char	*get_value(t_env *env, char *name)
+{
+	if (env != NULL && ft_strcmp(env->name, name) == 0)
+		return (env->value);
+	while (env != NULL && ft_strcmp(env->name, name) != 0)
+		env = env->next;
+	if (env == NULL)
+		return (NULL);
+	return (env->value);
 }
 
 void	init_env(t_env **env, char **envp)
