@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/20 18:19:27 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 18:32:48 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,36 @@ void	add_env(t_env **env, char *name, char *value)
 void	del_env(t_env **env, char *name)
 {
 	t_env	*tmp;
-	t_env	*cache;
+	t_env	*prev;
+	
 
 	tmp = *env;
-	while(ft_strcmp(tmp->name, name) != 0)
-		tmp = tmp->next;
-	if (tmp->next == NULL)
+	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)
 	{
-		free(tmp->next);
-		tmp->next = NULL;
+		*env = tmp->next; // Changed head
+		free(tmp); // free old head
 		return ;
 	}
-	cache = tmp->next->next;
-	free(tmp->next);
-	tmp->next = cache;
+	while (tmp != NULL && ft_strcmp(tmp->name, name) != 0)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (tmp == NULL)
+		return ;
+	prev->next = tmp->next;
+	free(tmp); // Free memory
+	// while(ft_strcmp(tmp->name, name) != 0)
+	// 	tmp = tmp->next;
+	// if (tmp->next == NULL)
+	// {
+	// 	free(tmp->next);
+	// 	tmp->next = NULL;
+	// 	return ;
+	// }
+	// cache = tmp->next->next;
+	// free(tmp->next);
+	// tmp->next = cache;
 }
 
 void	init_env(t_env **env, char **envp)
