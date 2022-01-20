@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/19 18:47:11 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:20:25 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ char	**ft_split(const char *s, char c);
 bool	ft_strchr(const char *s, int c);
 void	ft_write_error(char *command, char *arg, char *error);
 
-void	executer(char **envp, char **commands);
+void	executer(char **envp, char **commands, t_env *env);
 void	cd(char *path);
 
 void	get_env(t_env **env, char **envp);
+char	*get_value(t_env *env, char *name);
 
 #endif

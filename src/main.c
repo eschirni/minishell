@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/20 18:28:25 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/20 21:23:53 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	get_env(&env, envp);
-	//free_env(&env);
-	//system("leaks minishell");
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -49,7 +47,7 @@ int	main(int argc, char **argv, char **envp)
 		//parser, etc
 		input = ft_split(line, ' ');
 		if (input[0] != '\0')
-			executer(envp, input);
+			executer(envp, input, env);
 		i = 0;
 		while (input[i] != NULL)
 		{

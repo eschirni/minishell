@@ -6,50 +6,59 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/19 18:46:45 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/20 21:23:06 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 #include <string.h>
 
-static t_env	*new_node(void)
+static int	fork_execute(char *path, char **args, char **envp)
 {
-	t_env *new;
+	int		pid;
+	int		error;
 
-	new = malloc(sizeof(t_env));
-	new->name = NULL;
-	new->value = NULL;
-	new->next = NULL;
-	return (new);
+	pid = fork();
+	if (pid == 0)
+		exit(execve(path, args, envp));
+	else
+		wait(&error); //catching signal sent by exit of(child)
+	error /= 255;
+	return (error);
 }
 
-void	get_env(t_env **env, char **envp)
+static void	exec_path(char **commands, char **envp, t_env *env)
 {
+	int		error;
 	int		i;
-	int		j;
-	char	**string;
-	t_env 	*tmp;
+	char	*path;
+	char	**path_vars;
 
-	*env = new_node();
 	i = 0;
-	tmp = *env;
-	while (envp[i] != NULL)
+	error = fork_execute(commands[0], commands, envp);
+	path_vars = ft_split(get_value(env, "PATH"), ':');
+	while (error > 1 && path_vars[i] != NULL)
 	{
-		j = 0;
-		string = ft_split(envp[i], '=');
-		tmp->name = string[j];
-		j++;
-		tmp->value = string[j];
-		free(string);
-		tmp->next = new_node();
-		tmp = tmp->next;
+		path = strdup(commands[0]); //TODO
+		path = ft_insert("/", path);
+		path = ft_insert(path_vars[i], path);
+		error = fork_execute(path, commands, envp);
+		free(path);
 		i++;
 	}
-	tmp->next = NULL;
+	i = 0;
+	while (path_vars[i] != NULL)
+	{
+		free(path_vars[i]);
+		i++;
+	}
+	free(path_vars);
+	if (error > 1)
+		ft_write_error(NULL, commands[0], "command not found");
 }
 
-static void	exec_functions(char *function, char **args) //this is garbage too
+static void	exec_functions(char *function, char **args)
 {
 	if (ft_strcmp(function, "cd") == 0)
 		cd(args[1]);
@@ -59,21 +68,11 @@ static void	exec_functions(char *function, char **args) //this is garbage too
 		return ;
 }
 
-//Bugs: doesn't execute the command all the time
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
-void	executer(char **envp, char **commands)
+void	executer(char **envp, char **commands, t_env *env)
 {
-	int	pid;
-
 	if (ft_strcmp(commands[0], "cd") == 0 || ft_strcmp(commands[0], "export") == 0 || ft_strcmp(commands[0], "unset") == 0)
 		exec_functions(commands[0], commands);
 	else
-	{
-		commands[0] = ft_insert("/bin/", commands[0]);
-		pid = fork();
-		if (pid == 0)
-			execve(commands[0], commands, envp);
-		else
-			wait(NULL); //waits until all child processes are terminated
-	}
+		exec_path(commands, envp, env);
 }
