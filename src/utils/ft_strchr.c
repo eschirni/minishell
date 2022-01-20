@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:34:17 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 18:15:05 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/18 17:34:43 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/18 18:17:32 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_insert(char *start, char *end)
+bool	ft_strchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	j;
-	char	*tmp;
+	int	i;
 
-	tmp = malloc(ft_strclen(start, '\0') + ft_strclen(end, '\0') + 1);
-	if (tmp == NULL)
-		return (NULL);
+	if (s == NULL)
+		return (false);
 	i = 0;
-	while (start[i] != '\0')
+	while (s[i] != '\0')
 	{
-		tmp[i] = start[i];
+		if (s[i] == c)
+			return (true);
 		i++;
 	}
-	j = 0;
-	while (end[j] != '\0')
-	{
-		tmp[i] = end[j];
-		i++;
-		j++;
-	}
-	tmp[i] = '\0';
-	free(end);
-	return (tmp);
+	if (c == '\0')
+		return (false);
+	else
+		return (false);
 }

@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 16:23:35 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/20 19:20:25 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdbool.h>
+# include <readline/history.h> //history_add
+# include <readline/readline.h> //readline
+# include <unistd.h> //write
+# include <stdlib.h> //malloc, free
+# include <signal.h> //signal, sigaction
+# include <errno.h> //errno
+# include <string.h> //strrerror
+# include <stdbool.h> //bools
 # include <limits.h>
 
 typedef	struct		s_env
@@ -36,7 +38,13 @@ size_t	ft_strclen(const char *s, char c);
 int		ft_atoi(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(const char *s, char c);
+bool	ft_strchr(const char *s, int c);
+void	ft_write_error(char *command, char *arg, char *error);
 
-void	executer(char **envp, char **commands);
+void	executer(char **envp, char **commands, t_env *env);
+void	cd(char *path);
+
+void	get_env(t_env **env, char **envp);
+char	*get_value(t_env *env, char *name);
 
 #endif
