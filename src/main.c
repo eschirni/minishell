@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/20 21:23:53 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:19:51 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**input;
+	char	buf;
 	int		i;
 	t_env	*env;
 
@@ -39,11 +40,13 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	get_env(&env, envp);
-	while (1)
+	while (true)
 	{
 		line = readline("minishell$ ");
 		if (line != NULL)
 			add_history(line);
+		else
+			ft_exit(NULL);
 		//parser, etc
 		input = ft_split(line, ' ');
 		if (input[0] != '\0')
