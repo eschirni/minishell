@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/20 20:38:40 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/21 13:04:15 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,13 @@ void	free_env(t_env **env)
 	t_env	*tmp;
 	t_env	*next;
 
-	while (tmp != NULL)
+	while (*env != NULL)
 	{
-		printf("----\n");
-		next = tmp->next;
-		free(tmp->name);
-		free(tmp->value);
-		free(tmp);
-		tmp = next;
+		next = (*env)->next;
+		free((*env)->name);
+		free((*env)->value);
+		free(*env);
+		*env = next;
 	}
 	*env = NULL;
 }
