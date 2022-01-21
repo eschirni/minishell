@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/21 13:05:00 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:50:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <errno.h> //errno
 # include <string.h> //strrerror
 # include <stdbool.h> //bools
+# include <termios.h>
 # include <limits.h>
 
 typedef	struct		s_env
@@ -44,7 +45,7 @@ char	*ft_strdup(const char *s1);
 
 void	executer(char **envp, char **commands, t_env *env);
 void	cd(char *path);
-void	ft_exit(char *val);
+void	ft_exit(char **args);
 
 void	get_env(t_env **env, char **envp);
 char	*get_value(t_env *env, char *name);

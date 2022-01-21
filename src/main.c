@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/21 14:19:51 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:39:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**input;
-	char	buf;
 	int		i;
 	t_env	*env;
+	struct	termios term;
 
 	if (argc != 1)
 	{
