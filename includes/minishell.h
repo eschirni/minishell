@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/20 19:20:25 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:05:00 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(const char *s, char c);
 bool	ft_strchr(const char *s, int c);
 void	ft_write_error(char *command, char *arg, char *error);
+char	*ft_strdup(const char *s1);
 
 void	executer(char **envp, char **commands, t_env *env);
 void	cd(char *path);
+void	ft_exit(char *val);
 
 void	get_env(t_env **env, char **envp);
 char	*get_value(t_env *env, char *name);

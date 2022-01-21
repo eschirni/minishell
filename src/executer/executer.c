@@ -6,13 +6,11 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/21 12:56:37 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/21 13:07:41 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-#include <string.h>
 
 static int	fork_execute(char *path, char **args, char **envp)
 {
@@ -40,7 +38,7 @@ static void	exec_path(char **commands, char **envp, t_env *env)
 	path_vars = ft_split(get_value(env, "PATH"), ':');
 	while (error > 1 && path_vars[i] != NULL)
 	{
-		path = strdup(commands[0]); //TODO
+		path = ft_strdup(commands[0]);
 		path = ft_insert("/", path);
 		path = ft_insert(path_vars[i], path);
 		error = fork_execute(path, commands, envp);
@@ -62,10 +60,12 @@ static void	exec_functions(char *function, char **args)
 {
 	if (ft_strcmp(function, "cd") == 0)
 		cd(args[1]);
-	if (ft_strcmp(function, "export") == 0)
+	else if (ft_strcmp(function, "export") == 0)
+		return ;
+	else if (ft_strcmp(function, "unset") == 0)
 		return ;
 	else
-		return ;
+		ft_exit(args[1]);
 }
 
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
