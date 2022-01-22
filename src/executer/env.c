@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/21 13:04:15 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/22 15:09:19 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,47 @@ void	print_env(t_env *env)
 		env = env->next;
 	}
 }
+
+t_env	*sort_env(t_env *env)
+{
+	t_env	*current;
+	t_env	*index;
+	char	*name_tmp;
+	char	*value_tmp;
+
+	current = env;
+	index = NULL;
+	while (current != NULL)
+	{
+		index = current->next;
+		while (index != NULL)
+		{
+			if (ft_strcmp(current->name, index->name) > 0) //string a is smaller then string b
+			{
+				name_tmp = current->name;
+				value_tmp = current->value;
+				current->name = index->name;
+				current->value = index->value;
+				index->name = name_tmp;
+				index->value = value_tmp;
+			}
+			index = index->next;
+		}
+		current = current->next;
+	}
+	return (env);
+}
+
+void	print_export(t_env *env)
+{
+	env = sort_env(env);
+	while (env != NULL)
+	{
+		printf("declare -x %s=\"%s\"\n", env->name, env->value);
+		env = env->next;
+	}
+}
+
 
 void	add_env(t_env **env, char *name, char *value)
 {

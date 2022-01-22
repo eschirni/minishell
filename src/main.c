@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/21 13:06:39 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/22 15:10:28 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ int	main(int argc, char **argv, char **envp)
 	// del_env(&env, "TEST_ENV");
 	// printf("\n\n----- DEL ENV -----\n\n");
 	// print_env(env);
-
+	print_env(env);
+	printf("\n\n- - - - - \n\n");
+	print_export(env);
 	free_env(&env);
-	system("leaks minishell");
+	// system("leaks minishell");
 
 
 	// if (argc != 1)
