@@ -6,13 +6,14 @@
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/01/20 19:34:45 by eschirni         ###   ########.fr        #
+#    Updated: 2022/01/23 16:07:30 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # FLAGS
-CC = gcc
 CFLAGS = #-Wall -Wextra -Werror
+LDFLAGS = -lreadline -L$$HOME/.brew/opt/readline/lib
+CPPFLAGS = -I $$HOME/.brew/opt/readline/include
 
 # COLORS
 Y = "\033[33m"
@@ -52,13 +53,13 @@ all: $(NAME)
 $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 	@echo $(Y)Compiling [$@]...$(X)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -lreadline -c -o $@ $<
+	@gcc $(CFLAGS) -c -o $@ $<
 	@echo $(G)Finished [$@]$(X)
 
 $(NAME): $(OBJ)
 	@echo $(Y)Compiling [$(SRC)]
 	@echo into [$(NAME)]...$(X)
-	@$(CC) $(CFLAGS) -lreadline $(OBJ) -o $(NAME)
+	@gcc $(CFLAGS) $(LDFLAGS) $(OBJ) -o $(NAME) -lreadline
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:

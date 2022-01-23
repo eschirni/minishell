@@ -6,16 +6,21 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/21 15:51:21 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/23 16:14:59 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_exit(char **args)
+void	ft_exit(char **args, bool ctrl_d)
 {
+	if (ctrl_d == true)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
 	write(1, "exit\n", 5);
-	if (args[1] != NULL)
+	if (args != NULL && args[1] != NULL)
 	{
 		if (!(args[1][0] >= '0' && args[1][0] <= '9'))
 			ft_write_error("exit", args[1], "numeric argument required");

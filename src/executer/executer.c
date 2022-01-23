@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/21 15:50:30 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/23 16:02:35 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	exec_functions(char *function, char **args)
 	else if (ft_strcmp(function, "unset") == 0)
 		return ;
 	else
-		ft_exit(args);
+		ft_exit(args, false);
 }
 
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
