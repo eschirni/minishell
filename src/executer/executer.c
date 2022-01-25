@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/23 16:02:35 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:10:09 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	fork_execute(char *path, char **args, char **envp)
 {
-	int		pid;
+	pid_t	pid;
 	int		error;
 
 	pid = fork();

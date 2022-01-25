@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/23 15:44:57 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:47:59 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	**ft_split(const char *s, char c);
 bool	ft_strchr(const char *s, int c);
 void	ft_write_error(char *command, char *arg, char *error);
 char	*ft_strdup(const char *s1);
+bool	ft_isnum(char *s);
 
 void	executer(char **envp, char **commands, t_env *env);
 void	cd(char *path);
