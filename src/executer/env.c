@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 13:28:57 by tom               #+#    #+#             */
-/*   Updated: 2022/01/22 15:09:19 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/23 16:21:06 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	print_export(t_env *env)
 		env = env->next;
 	}
 }
-
 
 void	add_env(t_env **env, char *name, char *value)
 {
