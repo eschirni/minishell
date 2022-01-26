@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/01/26 14:29:34 by tom              ###   ########.fr       */
-=======
-/*   Updated: 2022/01/20 21:23:53 by eschirni         ###   ########.fr       */
->>>>>>> master
+/*   Created: 2022/01/26 18:12:54 by tom               #+#    #+#             */
+/*   Updated: 2022/01/26 18:12:57 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,42 +33,13 @@ int	main(int argc, char **argv, char **envp)
 	int		i;
 	t_env	*env;
 
-	t_env	*env;
-
-	/* init env */
+	if (argc != 1)
+	{
+		perror("Usage: ./minishell");
+		return (1);
+	}
 	init_env(&env, envp);
-	// printf("----- ORIGINAL ENV -----\n\n");
-	// print_env(env);
-
-	/* add env */
-	// add_env(&env, "TEST_NAME", "TEST_VALUE");
-	// printf("\n\n----- NEW ENV -----\n\n");
-	// print_env(env);
-
-	/* rep env */
-	// rep_env(&env, "TEST_NAME", "NEW_VALUE");
-	// printf("\n\n----- DEL ENV -----\n\n");
-	// print_env(env);
-
-	/* del env */
-	// del_env(&env, "TEST_NAME");
-	// printf("\n\n----- DEL ENV -----\n\n");
-	// print_env(env);
-
-	/* export*/
-	// print_export(env);
-	export(&env, "name=value");
 	export(&env, "name=new_value");
-	export(&env, "");
-	// print_env(env);
-	free_env(&env);
-	// system("leaks minishell");
-
-	// if (argc != 1)
-	// {
-	// 	perror("Usage: ./minishell");
-	// 	return (1);
-	// }
 	// while (1)
 	// {
 	// 	line = readline("minishell$ ");
