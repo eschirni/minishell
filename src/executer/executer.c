@@ -6,11 +6,22 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/25 18:10:09 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:00:47 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static bool	own_function(char *s)
+{
+	if (ft_strcmp(s, "cd") == 0 || ft_strcmp(s, "export") == 0)
+		return (true);
+	else if (ft_strcmp(s, "unset") == 0 || ft_strcmp(s, "exit") == 0)
+		return (true);
+	else if (ft_strcmp(s, "pwd") == 0 || ft_strcmp(s, "env") == 0)
+		return (true);
+	return (false);
+}
 
 static int	fork_execute(char *path, char **args, char **envp)
 {
@@ -60,7 +71,11 @@ static void	exec_functions(char *function, char **args)
 {
 	if (ft_strcmp(function, "cd") == 0)
 		cd(args[1]);
+	else if (ft_strcmp(function, "pwd") == 0)
+		return ;
 	else if (ft_strcmp(function, "export") == 0)
+		return ;
+	else if (ft_strcmp(function, "env") == 0)
 		return ;
 	else if (ft_strcmp(function, "unset") == 0)
 		return ;
@@ -71,7 +86,7 @@ static void	exec_functions(char *function, char **args)
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
 void	executer(char **envp, char **commands, t_env *env)
 {
-	if (ft_strcmp(commands[0], "cd") == 0 || ft_strcmp(commands[0], "export") == 0 || ft_strcmp(commands[0], "unset") == 0 || ft_strcmp(commands[0], "exit") == 0)
+	if (own_function(commands[0]) == true)
 		exec_functions(commands[0], commands);
 	else
 		exec_path(commands, envp, env);
