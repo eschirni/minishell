@@ -3,22 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/01/25 20:15:38 by tom              ###   ########.fr       */
+=======
+/*   Updated: 2022/01/20 19:20:25 by eschirni         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/history.h>
-# include <readline/readline.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdbool.h>
+# include <readline/history.h> //history_add
+# include <readline/readline.h> //readline
+# include <unistd.h> //write
+# include <stdlib.h> //malloc, free
+# include <signal.h> //signal, sigaction
+# include <errno.h> //errno
+# include <string.h> //strrerror
+# include <stdbool.h> //bools
 # include <limits.h>
 
 typedef	struct		s_env

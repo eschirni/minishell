@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_insert.c                                        :+:      :+:    :+:   */
+/*   ft_write_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:34:17 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 18:15:05 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/18 17:44:28 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/20 19:36:51 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_insert(char *start, char *end)
+void	ft_write_error(char *command, char *arg, char *error)
 {
-	size_t	i;
-	size_t	j;
-	char	*tmp;
-
-	tmp = malloc(ft_strclen(start, '\0') + ft_strclen(end, '\0') + 1);
-	if (tmp == NULL)
-		return (NULL);
-	i = 0;
-	while (start[i] != '\0')
+	write(2, "minishell: ", 11);
+	if (command != NULL)
 	{
-		tmp[i] = start[i];
-		i++;
+		write(2, command, ft_strclen(command, '\0'));
+		write(2, ": ", 2);
 	}
-	j = 0;
-	while (end[j] != '\0')
-	{
-		tmp[i] = end[j];
-		i++;
-		j++;
-	}
-	tmp[i] = '\0';
-	free(end);
-	return (tmp);
+	write(2, arg, ft_strclen(arg, '\0'));
+	write(2, ": ", 2);
+	write(2, error, ft_strclen(error, '\0'));
+	write(2, "\n", 1);
 }

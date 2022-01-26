@@ -3,20 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/01/26 14:29:34 by tom              ###   ########.fr       */
+=======
+/*   Updated: 2022/01/20 21:23:53 by eschirni         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	free_env(t_env **env)
+{
+	t_env	*tmp;
+
+	while (*env != NULL)
+	{
+		tmp = (*env)->next;
+		free((*env)->name);
+		free((*env)->value);
+		free(*env);
+		*env = tmp;
+	}
+}
 
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
 	char	**input;
 	int		i;
+	t_env	*env;
 
 	t_env	*env;
 
