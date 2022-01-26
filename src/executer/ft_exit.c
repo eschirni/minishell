@@ -6,13 +6,32 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/26 14:30:23 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/26 18:22:45 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_exit(char **args, bool ctrl_d)
+static int	free_arg(char **args)
+{
+	int	i;
+	int	atoi;
+
+	i = 0;
+	atoi = 0;
+	if (args != NULL && args[1] != NULL)
+		atoi = ft_atoi(args[1]);
+	while (args != NULL && args[i] != NULL)
+	{
+		free(args[i]);
+		i++;
+		if (args[i] == NULL)
+			free(args);
+	}
+	return (atoi);
+}
+
+void	ft_exit(char **args, bool ctrl_d) //needs to free envp also
 {
 	if(ctrl_d == true)
 	{
@@ -29,7 +48,7 @@ void	ft_exit(char **args, bool ctrl_d)
 			ft_write_error(NULL, "exit", "too many arguments");
 			return ;
 		}
-		exit(ft_atoi(args[1]));
+		exit(free_arg(args));
 	}
-	exit(0);
+	exit(free_arg(args));
 }
