@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/25 17:29:25 by tom               #+#    #+#             */
-/*   Updated: 2022/01/25 17:33:58 by tom              ###   ########.fr       */
+/*   Created: 2022/01/25 18:06:52 by tom               #+#    #+#             */
+/*   Updated: 2022/01/25 18:36:29 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	env(t_env *env, char *argument)
+int	ft_strchr(const char *s, int c)
 {
-	if (ft_strlen(argument) != 0)
-		return ;
-	print_env(env);
+	int		i;
+	char	*ptr;
+
+	i = 0;
+	ptr = (char *)s;
+	while (s[i])
+	{
+		if (s[i] == c)
+			return (i);
+		i++;
+	}
+	if (c == '\0')
+		return (i);
+	else
+		return (-1);
 }

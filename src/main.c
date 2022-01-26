@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/23 16:28:43 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/26 14:29:34 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,11 @@ int	main(int argc, char **argv, char **envp)
 	// print_env(env);
 
 	/* export*/
-	print_export(env);
-
+	// print_export(env);
+	export(&env, "name=value");
+	export(&env, "name=new_value");
+	export(&env, "");
+	// print_env(env);
 	free_env(&env);
 	// system("leaks minishell");
 
