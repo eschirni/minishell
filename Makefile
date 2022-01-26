@@ -6,14 +6,14 @@
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/01/23 16:07:30 by eschirni         ###   ########.fr        #
+#    Updated: 2022/01/26 13:46:46 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # FLAGS
 CFLAGS = #-Wall -Wextra -Werror
-LDFLAGS = -lreadline -L$$HOME/.brew/opt/readline/lib
-CPPFLAGS = -I $$HOME/.brew/opt/readline/include
+LFR= -L$$HOME/.brew/opt/readline/lib -lreadline
+LFRC = -I$$HOME/.brew/opt/readline/include
 
 # COLORS
 Y = "\033[33m"
@@ -59,7 +59,7 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 $(NAME): $(OBJ)
 	@echo $(Y)Compiling [$(SRC)]
 	@echo into [$(NAME)]...$(X)
-	@gcc $(CFLAGS) $(LDFLAGS) $(OBJ) -o $(NAME) -lreadline
+	@gcc $(CFLAGS) $(OBJ) $(LFR) $(LFRC) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:
@@ -84,5 +84,8 @@ norm:
 	@echo $(G)Checking Norminette...$(X)
 	@norminette | grep Error | egrep --color '.*Error!|$$' || true
 	@echo $(G)Done$(X)
+
+no:
+	@gcc -o $(NAME) $(SRC) $(LFR) $(LFRC)
 
 .PHONY: all, clean, fclean, re, norm

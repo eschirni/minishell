@@ -6,13 +6,14 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/25 18:47:59 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/26 13:47:13 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h> //for readline??
 # include <readline/history.h> //history_add
 # include <readline/readline.h> //readline
 # include <unistd.h> //write

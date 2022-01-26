@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/25 18:39:51 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/26 14:30:39 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ static void	handler(int signal)
 	if (signal == SIGINT)
 	{
 		rl_on_new_line();
-		write(1, "\n", 1);
+		rl_redisplay();
+		write(1, "  \b\b\n", 5);
+		rl_on_new_line();
 		rl_redisplay();
 	}
 }
