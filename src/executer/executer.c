@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 20:49:28 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:04:12 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,7 @@ static void	exec_path(char **commands, char **envp, t_env *env)
 		free(path);
 		i++;
 	}
-	i = 0;
-	while (path_vars[i] != NULL)
-	{
-		free(path_vars[i]);
-		i++;
-	}
-	free(path_vars);
+	ft_free_split(path_vars);
 	if (error > 1)
 		ft_write_error(NULL, commands[0], "command not found");
 }
