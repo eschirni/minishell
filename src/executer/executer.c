@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 21:04:12 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 22:11:26 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	fork_execute(char *path, char **args, char **envp)
 	return (error);
 }
 
-static void	exec_path(char **commands, char **envp, t_env *env)
+static void	exec_path(char **commands, char **envp, t_env *env_v)
 {
 	int		error;
 	int		i;
@@ -46,7 +46,7 @@ static void	exec_path(char **commands, char **envp, t_env *env)
 
 	i = 0;
 	error = fork_execute(commands[0], commands, envp);
-	path_vars = ft_split(get_value(env, "PATH"), ':');
+	path_vars = ft_split(get_value(env_v, "PATH"), ':');
 	while (error > 1 && path_vars[i] != NULL)
 	{
 		path = ft_strdup(commands[0]);
@@ -61,7 +61,7 @@ static void	exec_path(char **commands, char **envp, t_env *env)
 		ft_write_error(NULL, commands[0], "command not found");
 }
 
-static void	exec_functions(char **command, t_env *env)
+static void	exec_functions(char **command, t_env *env_v)
 {
 	if (ft_strcmp(command[0], "cd") == 0)
 		cd(command[1]);
@@ -70,18 +70,18 @@ static void	exec_functions(char **command, t_env *env)
 	else if (ft_strcmp(command[0], "export") == 0)
 		return ;
 	else if (ft_strcmp(command[0], "env") == 0)
-		return ;
+		env(env_v, command[1]);
 	else if (ft_strcmp(command[0], "unset") == 0)
 		return ;
 	else
-		ft_exit(command, false, env);
+		ft_exit(command, false, env_v);
 }
 
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
-void	executer(char **envp, char **commands, t_env *env)
+void	executer(char **envp, char **commands, t_env *env_v)
 {
 	if (own_function(commands[0]) == true)
-		exec_functions(commands, env);
+		exec_functions(commands, env_v);
 	else
-		exec_path(commands, envp, env);
+		exec_path(commands, envp, env_v);
 }

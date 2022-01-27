@@ -6,18 +6,18 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 17:50:09 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 22:12:04 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	free_arg(char **args, t_env *env)
+static int	free_arg(char **args, t_env *env_v)
 {
 	int	i;
 	int	atoi;
 
-	free_env(&env);
+	free_env(&env_v);
 	i = 0;
 	atoi = 0;
 	if (args != NULL && args[1] != NULL)
@@ -32,7 +32,7 @@ static int	free_arg(char **args, t_env *env)
 	return (atoi);
 }
 
-void	ft_exit(char **args, bool ctrl_d, t_env *env)
+void	ft_exit(char **args, bool ctrl_d, t_env *env_v)
 {
 	if(ctrl_d == true)
 	{
@@ -49,7 +49,7 @@ void	ft_exit(char **args, bool ctrl_d, t_env *env)
 			ft_write_error(NULL, "exit", "too many arguments");
 			return ;
 		}
-		exit(free_arg(args, env));
+		exit(free_arg(args, env_v));
 	}
-	exit(free_arg(args, env));
+	exit(free_arg(args, env_v));
 }

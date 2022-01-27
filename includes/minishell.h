@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 21:00:39 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 22:25:29 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef	struct		s_env
 {
 	char			*name;
 	char			*value;
+	bool			export;
 	struct s_env	*next;
 }					t_env;
 
@@ -50,9 +51,10 @@ void	executer(char **envp, char **commands, t_env *env);
 void	cd(char *path);
 void	pwd(void);
 void	ft_exit(char **args, bool ctrl_d, t_env *env);
+void	env(t_env *env, char *argument);
 
 //env struct
-void	get_env(t_env **env, char **envp);
+void	init_env(t_env **env, char **envp);
 char	*get_value(t_env *env, char *name);
 void	free_env(t_env **env);
 
