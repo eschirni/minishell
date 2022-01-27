@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/26 14:30:39 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:48:27 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 		if (line != NULL)
 			add_history(line);
 		else
-			ft_exit(NULL, true);
+			ft_exit(NULL, true, env);
 		//parser, etc
 		input = ft_split(line, ' ');
 		if (input[0] != '\0')
