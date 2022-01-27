@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 22:53:33 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 23:17:02 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void	export(t_env **env, char *arg);
 void	init_env(t_env **env, char **envp);
 char	*get_value(t_env *env, char *name);
 void	free_env(t_env **env);
+t_env	*new_node(void);
 
 #endif

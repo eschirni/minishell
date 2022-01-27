@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/01/27 23:00:16 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 23:47:28 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,33 @@ static void	*sort_env(t_env *env_v)
 	}
 }
 
+static void	dup_env(t_env **new, t_env *env_v)
+{
+	t_env	*tmp;
+	t_env	*envp_tmp;
+
+	*new = new_node();
+	tmp = *new;
+	envp_tmp = env_v;
+	while (envp_tmp != NULL)
+	{
+		(*new)->name = ft_strdup(envp_tmp->name);
+		(*new)->value = ft_strdup(envp_tmp->value);
+		(*new)->export = envp_tmp->export;
+		if (envp_tmp->next == NULL)
+			break ;
+		(*new)->next = new_node();
+		(*new) = (*new)->next;
+		envp_tmp = envp_tmp->next;
+	}
+	*new = tmp;
+}
+
 static void	print_export(t_env *env_v)
 {
 	t_env	*tmp;
 
-	tmp = env_v;
+	dup_env(&tmp, env_v);
 	sort_env(tmp);
 	while (tmp != NULL)
 	{
@@ -53,6 +75,7 @@ static void	print_export(t_env *env_v)
 			printf("declare -x %s=\"%s\"\n", tmp->name, tmp->value);
 		tmp = tmp->next;
 	}
+	free_env(&tmp);
 }
 
 void	export(t_env **env_v, char *arg)
@@ -73,7 +96,7 @@ void	export(t_env **env_v, char *arg)
 		}
 		printf("%s\n%s\n", name, value);
 		// if (pos == -1 && search_env(*env_v, name) == true)
-		// 	export_env(env_v, arg);
+		// 	export_env(env_v, arg); //replace arg with name and value (leaks)
 		// else if (pos >= 0 && search_env(*env_v, name) == false)
 		// 	add_env(env_v, name, value,true);
 		// else if (pos >= 0 && search_env(*env_v, name) == true)

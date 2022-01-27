@@ -6,13 +6,13 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 22:26:13 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 23:46:24 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static t_env	*new_node(void)
+t_env	*new_node(void)
 {
 	t_env *new;
 
@@ -25,6 +25,7 @@ static t_env	*new_node(void)
 
 void	free_env(t_env **env_v)
 {
+	t_env	*tmp;
 	t_env	*next;
 
 	while (*env_v != NULL)
@@ -35,6 +36,7 @@ void	free_env(t_env **env_v)
 		free(*env_v);
 		*env_v = next;
 	}
+	*env_v = NULL;
 }
 
 
@@ -52,7 +54,6 @@ char	*get_value(t_env *env_v, char *name)
 void	init_env(t_env **env_v, char **envp)
 {
 	t_env	*tmp;
-	t_env	*node;
 	int		i;
 	char	**split_string;
 
