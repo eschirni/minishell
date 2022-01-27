@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 22:11:26 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 22:54:58 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	exec_functions(char **command, t_env *env_v)
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		pwd();
 	else if (ft_strcmp(command[0], "export") == 0)
-		return ;
+		export(&env_v, command[1]);
 	else if (ft_strcmp(command[0], "env") == 0)
 		env(env_v, command[1]);
 	else if (ft_strcmp(command[0], "unset") == 0)
