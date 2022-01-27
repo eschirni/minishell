@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/26 18:12:54 by tom               #+#    #+#             */
-/*   Updated: 2022/01/26 18:12:57 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/27 11:53:55 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,23 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	init_env(&env, envp);
-	export(&env, "name=new_value");
-	// while (1)
-	// {
-	// 	line = readline("minishell$ ");
-	// 	if (line != NULL)
-	// 		add_history(line);
-	// 	//parser, etc
-	// 	input = ft_split(line, ' ');
-	// 	if (input[0] != '\0')
-	// 	{
-	// 		executer(envp, input);
-	// 		i = 0;
-	// 		while (input[i] != NULL)
-	// 		{
-	// 			free(input[i]);
-	// 			i++;
-	// 		}
-	// 		free(input);
-	// 	}
-	// 	free(line);
-	// }
+	get_env(&env, envp);
+	while (1)
+	{
+		line = readline("minishell$ ");
+		if (line != NULL)
+			add_history(line);
+		//parser, etc
+		input = ft_split(line, ' ');
+		if (input[0] != '\0')
+			executer(envp, input, env);
+		i = 0;
+		while (input[i] != NULL)
+		{
+			free(input[i]);
+			i++;
+		}
+		free(input);
+		free(line);
+	}
 }
