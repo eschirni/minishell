@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 21:00:59 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 21:30:22 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static void	handler(int signal)
 		write(1, "  \b\b\n", 5);
 		rl_on_new_line();
 		rl_redisplay();
+	}
+	else
+	{
+		rl_on_new_line();
+		rl_redisplay();
+		write(1, "  \b\b", 4);
 	}
 }
 
@@ -38,6 +44,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	get_env(&env, envp);
 	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
 	while (true)
 	{
 		line = readline("minishell$ ");
