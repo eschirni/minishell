@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/26 18:22:45 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:45:32 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ static int	free_arg(char **args)
 	return (atoi);
 }
 
-void	ft_exit(char **args, bool ctrl_d) //needs to free envp also
+void	ft_exit(char **args, bool ctrl_d, t_env *env)
 {
+	free_env(&env);
 	if(ctrl_d == true)
 	{
 		rl_on_new_line();

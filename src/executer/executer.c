@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/26 18:22:13 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:41:52 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	exec_path(char **commands, char **envp, t_env *env)
 		ft_write_error(NULL, commands[0], "command not found");
 }
 
-static void	exec_functions(char **command)
+static void	exec_functions(char **command, t_env *env)
 {
 	if (ft_strcmp(command[0], "cd") == 0)
 		cd(command[1]);
@@ -80,14 +80,14 @@ static void	exec_functions(char **command)
 	else if (ft_strcmp(command[0], "unset") == 0)
 		return ;
 	else
-		ft_exit(command, false);
+		ft_exit(command, false, env);
 }
 
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
 void	executer(char **envp, char **commands, t_env *env)
 {
 	if (own_function(commands[0]) == true)
-		exec_functions(commands);
+		exec_functions(commands, env);
 	else
 		exec_path(commands, envp, env);
 }

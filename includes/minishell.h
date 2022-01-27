@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/26 13:47:13 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 17:45:00 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ bool	ft_isnum(char *s);
 
 void	executer(char **envp, char **commands, t_env *env);
 void	cd(char *path);
-void	ft_exit(char **args, bool ctrl_d);
+void	ft_exit(char **args, bool ctrl_d, t_env *env);
 
 void	get_env(t_env **env, char **envp);
 char	*get_value(t_env *env, char *name);
+void	free_env(t_env **env);
 
 #endif
