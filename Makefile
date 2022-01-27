@@ -6,7 +6,7 @@
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/01/26 13:46:46 by eschirni         ###   ########.fr        #
+#    Updated: 2022/01/27 21:09:16 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,8 +84,5 @@ norm:
 	@echo $(G)Checking Norminette...$(X)
 	@norminette | grep Error | egrep --color '.*Error!|$$' || true
 	@echo $(G)Done$(X)
-
-no:
-	@gcc -o $(NAME) $(SRC) $(LFR) $(LFRC)
 
 .PHONY: all, clean, fclean, re, norm
