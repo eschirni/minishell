@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
 /*   Updated: 2022/01/27 22:54:58 by eschirni         ###   ########.fr       */

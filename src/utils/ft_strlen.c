@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/25 18:06:52 by tom               #+#    #+#             */
-/*   Updated: 2022/01/26 18:11:09 by tom              ###   ########.fr       */
+/*   Created: 2022/01/20 16:45:45 by tom               #+#    #+#             */
+/*   Updated: 2022/01/20 16:45:54 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_strchr(const char *s, int c)
+size_t	ft_strlen(const char *s)
 {
-	int		i;
-	char	*ptr;
+	int	i;
 
 	i = 0;
-	ptr = (char *)s;
 	while (s[i])
-	{
-		if (s[i] == c)
-			return (i);
 		i++;
-	}
-	if (c == '\0')
-		return (i);
-	else
-		return (-1);
+	return ((size_t)i);
 }
