@@ -6,17 +6,26 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/26 18:12:36 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/27 22:54:58 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-#include <string.h>
+static bool	own_function(char *s)
+{
+	if (ft_strcmp(s, "cd") == 0 || ft_strcmp(s, "export") == 0)
+		return (true);
+	else if (ft_strcmp(s, "unset") == 0 || ft_strcmp(s, "exit") == 0)
+		return (true);
+	else if (ft_strcmp(s, "pwd") == 0 || ft_strcmp(s, "env") == 0)
+		return (true);
+	return (false);
+}
 
 static int	fork_execute(char *path, char **args, char **envp)
 {
-	int		pid;
+	pid_t	pid;
 	int		error;
 
 	pid = fork();
@@ -28,7 +37,7 @@ static int	fork_execute(char *path, char **args, char **envp)
 	return (error);
 }
 
-static void	exec_path(char **commands, char **envp, t_env *env)
+static void	exec_path(char **commands, char **envp, t_env *env_v)
 {
 	int		error;
 	int		i;
@@ -37,42 +46,42 @@ static void	exec_path(char **commands, char **envp, t_env *env)
 
 	i = 0;
 	error = fork_execute(commands[0], commands, envp);
-	path_vars = ft_split(get_value(env, "PATH"), ':');
+	path_vars = ft_split(get_value(env_v, "PATH"), ':');
 	while (error > 1 && path_vars[i] != NULL)
 	{
-		path = strdup(commands[0]); //TODO
+		path = ft_strdup(commands[0]);
 		path = ft_insert("/", path);
 		path = ft_insert(path_vars[i], path);
 		error = fork_execute(path, commands, envp);
 		free(path);
 		i++;
 	}
-	i = 0;
-	while (path_vars[i] != NULL)
-	{
-		free(path_vars[i]);
-		i++;
-	}
-	free(path_vars);
+	ft_free_split(path_vars);
 	if (error > 1)
 		ft_write_error(NULL, commands[0], "command not found");
 }
 
-static void	exec_functions(char *function, char **args)
+static void	exec_functions(char **command, t_env *env_v)
 {
-	if (ft_strcmp(function, "cd") == 0)
-		cd(args[1]);
-	if (ft_strcmp(function, "export") == 0)
+	if (ft_strcmp(command[0], "cd") == 0)
+		cd(command[1]);
+	else if (ft_strcmp(command[0], "pwd") == 0)
+		pwd();
+	else if (ft_strcmp(command[0], "export") == 0)
+		export(&env_v, command[1]);
+	else if (ft_strcmp(command[0], "env") == 0)
+		env(env_v, command[1]);
+	else if (ft_strcmp(command[0], "unset") == 0)
 		return ;
 	else
-		return ;
+		ft_exit(command, false, env_v);
 }
 
 //TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
-void	executer(char **envp, char **commands, t_env *env)
+void	executer(char **envp, char **commands, t_env *env_v)
 {
-	if (ft_strcmp(commands[0], "cd") == 0 || ft_strcmp(commands[0], "export") == 0 || ft_strcmp(commands[0], "unset") == 0)
-		exec_functions(commands[0], commands);
+	if (own_function(commands[0]) == true)
+		exec_functions(commands, env_v);
 	else
-		exec_path(commands, envp, env);
+		exec_path(commands, envp, env_v);
 }

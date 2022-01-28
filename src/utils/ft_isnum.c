@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclen.c                                       :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:13:28 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/28 16:25:28 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/25 18:44:16 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/25 18:47:44 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-size_t	ft_strclen(const char *s, char c)
+bool	ft_isnum(char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (s[i] != c && s[i] != '\0')
+	if (s[0] == '-')
 		i++;
-	if (s[i] == '\0' && c != '\0')
-		i = -1;
-	return (i);
+	if (s[i] >= '0' && s[i] <= '9')
+		return (true);
+	return (false);
 }

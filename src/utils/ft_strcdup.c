@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclen.c                                       :+:      :+:    :+:   */
+/*   ft_strcdup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:13:28 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/28 16:25:28 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/27 22:49:15 by eschirni          #+#    #+#             */
+/*   Updated: 2022/01/27 22:50:03 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-size_t	ft_strclen(const char *s, char c)
+char	*ft_strcdup(char *s, char c, int start)
 {
-	size_t	i;
+	char	*ret;
+	int		i;
 
+	ret = ft_calloc(ft_strclen(s, c) - start + 1, 1);
+	if (ret == NULL)
+		return (NULL);
 	i = 0;
-	while (s[i] != c && s[i] != '\0')
+	while (s[start] != c)
+	{
+		ret[i] = s[start];
+		start ++;
 		i++;
-	if (s[i] == '\0' && c != '\0')
-		i = -1;
-	return (i);
+	}
+	ret[i] = s[start];
+	ret[i + 1] = '\0';
+	return (ret);
 }

@@ -6,16 +6,16 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:09:22 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/18 17:53:38 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/27 20:03:22 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	set_home(char *ret, int	*j)
+static void	set_home(char *ret, size_t *j)
 {
 	char	*home;
-	int		i;
+	size_t	i;
 
 	home = getenv("HOME");
 	i = 0;
@@ -30,8 +30,8 @@ static void	set_home(char *ret, int	*j)
 
 static char	*replace_home(char *path)
 {
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 	char	*ret;
 
 	ret = malloc(ft_strclen(path, '\0') + ft_strclen(getenv("HOME"), '\0'));

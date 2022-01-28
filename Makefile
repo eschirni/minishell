@@ -6,13 +6,14 @@
 #    By: tom <tom@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/01/26 18:11:34 by tom              ###   ########.fr        #
+#    Updated: 2022/01/28 16:33:26 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # FLAGS
-CC = gcc
-CFLAGS = -g #-Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
+LFR= -L$$HOME/.brew/opt/readline/lib -lreadline
+LFRC = -I$$HOME/.brew/opt/readline/include
 
 # COLORS
 Y = "\033[33m"
@@ -34,7 +35,7 @@ OBJ_PATH = ./obj/
 # SOURCES
 SRC =	$(SRC_PATH)main.c \
 		src/executer/*.c src/utils/*.c	\
-		$(SRC_PATH)/handle_env.c
+		$(SRC_PATH)/env/*c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
@@ -52,13 +53,13 @@ all: $(NAME)
 $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 	@echo $(Y)Compiling [$@]...$(X)
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -lreadline -c -o $@ $<
+	@gcc $(CFLAGS) -c -o $@ $<
 	@echo $(G)Finished [$@]$(X)
 
 $(NAME): $(OBJ)
 	@echo $(Y)Compiling [$(SRC)]
 	@echo into [$(NAME)]...$(X)
-	@$(CC) $(CFLAGS) -lreadline $(OBJ) -o $(NAME)
+	@gcc $(CFLAGS) $(OBJ) $(LFR) $(LFRC) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 clean:

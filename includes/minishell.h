@@ -6,13 +6,14 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/26 18:13:07 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/28 16:48:27 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h> //for readline??
 # include <readline/history.h> //history_add
 # include <readline/readline.h> //readline
 # include <unistd.h> //write
@@ -39,23 +40,32 @@ size_t	ft_strclen(const char *s, char c);
 int		ft_atoi(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(const char *s, char c);
+bool	ft_strchr(const char *s, int c);
+void	ft_write_error(char *command, char *arg, char *error);
 char	*ft_strdup(const char *s1);
-size_t	ft_strlen(const char *s);
-void	ft_lstadd_back(t_env **env, t_env *new);
-int	ft_strchr(const char *s, int c);
+bool	ft_isnum(char *s);
+void	ft_free_split(char **s);
+char	*ft_strcdup(char *s, char c, int start);
 char	*ft_strndup(const char *s1, int n);
+void	ft_lstadd_back(t_env **env, t_env *new);
 
-void	executer(char **envp, char **commands);
+//executer
+void	executer(char **envp, char **commands, t_env *env);
+void	cd(char *path);
+void	pwd(void);
+void	ft_exit(char **args, bool ctrl_d, t_env *env);
+void	env(t_env *env, char *argument);
+void	export(t_env **env, char *arg);
+
+//env handler
 void	init_env(t_env **env, char **envp);
-void	print_env(t_env *env);
-void	add_env(t_env **env, char *name, char *value, bool export);
-void	del_env(t_env **env, char *name);
-void	rep_env(t_env **env, char *name, char *value, bool export);
 char	*get_value(t_env *env, char *name);
 void	free_env(t_env **env);
-void	print_export(t_env *env);
-void	export_env(t_env **env, char *name);
+t_env	*new_node(void);
 bool	search_env(t_env *env, char *name);
-void	export(t_env **env, char *argument);
+
+//env utils
+void	add_env(t_env **env, char *name, char *value, bool export);
+void	rep_env(t_env **env, char *name, char *value, bool export);
 
 #endif
