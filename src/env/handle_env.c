@@ -6,11 +6,11 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 23:46:24 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:33:42 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 t_env	*new_node(void)
 {
@@ -37,6 +37,17 @@ void	free_env(t_env **env_v)
 		*env_v = next;
 	}
 	*env_v = NULL;
+}
+
+bool	search_env(t_env *env, char *name)
+{
+	while (env != NULL)
+	{
+		if (ft_strcmp(name, env->name) == 0)
+			return (true);
+		env = env->next;
+	}
+	return (false);
 }
 
 

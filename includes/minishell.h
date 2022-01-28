@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 23:17:02 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/28 16:48:27 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*ft_strdup(const char *s1);
 bool	ft_isnum(char *s);
 void	ft_free_split(char **s);
 char	*ft_strcdup(char *s, char c, int start);
+char	*ft_strndup(const char *s1, int n);
+void	ft_lstadd_back(t_env **env, t_env *new);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env);
@@ -55,10 +57,15 @@ void	ft_exit(char **args, bool ctrl_d, t_env *env);
 void	env(t_env *env, char *argument);
 void	export(t_env **env, char *arg);
 
-//env struct
+//env handler
 void	init_env(t_env **env, char **envp);
 char	*get_value(t_env *env, char *name);
 void	free_env(t_env **env);
 t_env	*new_node(void);
+bool	search_env(t_env *env, char *name);
+
+//env utils
+void	add_env(t_env **env, char *name, char *value, bool export);
+void	rep_env(t_env **env, char *name, char *value, bool export);
 
 #endif

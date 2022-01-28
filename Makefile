@@ -6,7 +6,7 @@
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/01/27 21:09:16 by eschirni         ###   ########.fr        #
+#    Updated: 2022/01/28 16:33:26 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ OBJ_PATH = ./obj/
 # SOURCES
 SRC =	$(SRC_PATH)main.c \
 		src/executer/*.c src/utils/*.c	\
-		$(SRC_PATH)/handle_env.c
+		$(SRC_PATH)/env/*c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclen.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/15 14:13:28 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/28 16:25:28 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/20 17:17:19 by tom               #+#    #+#             */
+/*   Updated: 2022/01/28 16:38:42 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-size_t	ft_strclen(const char *s, char c)
+void	ft_lstadd_back(t_env **env, t_env *new)
 {
-	size_t	i;
+	t_env	*tmp;
 
-	i = 0;
-	while (s[i] != c && s[i] != '\0')
-		i++;
-	if (s[i] == '\0' && c != '\0')
-		i = -1;
-	return (i);
+	if (env && new)
+	{
+		tmp = *env;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
 }
