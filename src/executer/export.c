@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/01/31 01:28:41 by tom              ###   ########.fr       */
+/*   Updated: 2022/01/31 18:09:52 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,6 @@ static void	sort_env(t_env *env_v)
 		current = current->next;
 	}
 }
-
-// static void	dup_env(t_env **new, t_env *env_v)
-// {
-// 	t_env	*tmp;
-// 	t_env	*envp_tmp;
-
-// 	*new = new_node();
-// 	tmp = *new;
-// 	envp_tmp = env_v;
-// 	while (envp_tmp != NULL)
-// 	{
-// 		(*new)->name = ft_strdup(envp_tmp->name);
-// 		(*new)->value = ft_strdup(envp_tmp->value);
-// 		(*new)->export = envp_tmp->export;
-// 		if (envp_tmp->next == NULL)
-// 			break ;
-// 		(*new)->next = new_node();
-// 		(*new) = (*new)->next;
-// 		envp_tmp = envp_tmp->next;
-// 	}
-// 	*new = tmp;
-// }
 
 static void	print_export(t_env env_v)
 {

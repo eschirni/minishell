@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/28 17:10:40 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/28 19:03:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ typedef	struct		s_env
 	bool			export;
 	struct s_env	*next;
 }					t_env;
+
+typedef	struct		s_lex
+{
+	char			*category;
+	char			*value;
+	struct s_lex	*next;
+}					t_lex;
 
 //utils
 void	*ft_calloc(size_t count, size_t size);
