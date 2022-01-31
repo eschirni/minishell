@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/28 16:53:58 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/31 01:33:20 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	main(int argc, char **argv, char **envp)
 			executer(envp, input, env_v);
 		ft_free_split(input);
 		free(line);
-		//system("leaks minishell");
+		system("leaks minishell");
 	}
 }

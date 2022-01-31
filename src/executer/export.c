@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/01/28 16:47:01 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/01/31 01:28:41 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ static void	sort_env(t_env *env_v)
 // 	*new = tmp;
 // }
 
-static void	print_export(t_env *env_v)
+static void	print_export(t_env env_v)
 {
 	t_env	*tmp;
 
-	sort_env(env_v);
-	tmp = env_v;
+	tmp = &env_v;
+	sort_env(tmp);
 	while (tmp != NULL)
 	{
-		if (env_v->export == true)
+		if (tmp->export == true)
 			printf("declare -x %s=\"%s\"\n", tmp->name, tmp->value);
 		tmp = tmp->next;
 	}
@@ -103,7 +103,7 @@ void	export(t_env **env_v, char *arg)
 	char	*value;
 
 	if (arg == NULL)
-		print_export(*env_v);
+		print_export(**env_v);
 	else
 	{
 		pos = ft_strclen(arg, '=');
