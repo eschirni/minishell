@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/01 21:01:55 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/01 21:22:49 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static bool	own_function(char *s)
 	else if (ft_strcmp(s, "unset") == 0 || ft_strcmp(s, "exit") == 0)
 		return (true);
 	else if (ft_strcmp(s, "pwd") == 0 || ft_strcmp(s, "env") == 0)
+		return (true);
+	else if (ft_strcmp(s, "echo") == 0)
 		return (true);
 	return (false);
 }
@@ -73,6 +75,8 @@ static void	exec_functions(char **command, t_env *env_v)
 		env(env_v, command[1]);
 	else if (ft_strcmp(command[0], "unset") == 0)
 		unset(&env_v, command[1]);
+	else if (ft_strcmp(command[0], "echo") == 0)
+		echo(command[1]);
 	else
 		ft_exit(command, false, env_v);
 }
