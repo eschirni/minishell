@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/28 16:33:42 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/01 21:04:53 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ bool	search_env(t_env *env, char *name)
 	}
 	return (false);
 }
-
 
 char	*get_value(t_env *env_v, char *name)
 {
