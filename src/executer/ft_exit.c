@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/02 19:28:32 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:07:54 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_exit(char **args, bool ctrl_d, t_env *env_v)
 		rl_redisplay();
 	}
 	write(1, "exit\n", 5);
+	rl_clear_history();
 	if (args != NULL && args[1] != NULL)
 	{
 		if (ft_isnum(args[1]) == false)

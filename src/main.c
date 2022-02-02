@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/31 21:59:12 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:46:31 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ int	main(int argc, char **argv, char **envp)
 			add_history(line);
 		else
 			ft_exit(NULL, true, env_v);
-		//parser, etc
-		input = ft_split(line, ' ');
-		if (input[0] != '\0')
-			executer(envp, input, env_v);
-		ft_free_split(input);
-		free(line);
-		//system("leaks minishell");
+		parser(line, envp, env_v);
 	}
 }

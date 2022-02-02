@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/01 21:22:49 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/02 20:06:16 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 
 	i = 0;
 	error = fork_execute(commands[0], commands, envp);
+	if (get_value(env_v, "PATH") == NULL)
+	{
+		ft_write_error(NULL, commands[0], "No such file or directory");
+		return ;
+	}
 	path_vars = ft_split(get_value(env_v, "PATH"), ':'); //segfault (remove search_name from header)
 	while (error > 1 && path_vars[i] != NULL)
 	{
