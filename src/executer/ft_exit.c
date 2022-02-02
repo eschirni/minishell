@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/02 17:17:48 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/02 19:28:32 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_exit(char **args, bool ctrl_d, t_env *env_v)
 {
 	if(ctrl_d == true)
 	{
-		printf("\x1b[A");
+		printf("\33[1A");
 		rl_on_new_line();
 		rl_redisplay();
 	}
