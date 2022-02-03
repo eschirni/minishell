@@ -6,22 +6,48 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/02 21:59:58 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/03 20:43:27 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static bool	translate(char *s, int pos, t_env *env_v)
+static char	*get_var(char *s, int pos)
 {
-	t_env	*tmp;
+	char	*ret;
+	int		size;
 
-	tmp = env_v;
-	while (tmp != NULL)
+	size = 0;
+	while (s[pos] != ' ' && s[pos] != '\0')
 	{
-		
-		tmp = tmp->next;
+		size++;
+		pos++;
 	}
+	ret = malloc(size + 1);
+	ret[size] = '\0';
+	while (s[pos] != '$')
+	{
+		size--;
+		pos--;
+		ret[size] = s[pos];
+	}
+	return (ret);
+}
+
+static void	translate(char *s, int pos, t_env *env_v)
+{
+	char	*var;
+	// t_env	*tmp;
+
+	// tmp = env_v;
+	// while (tmp != NULL)
+	// {
+		
+	// 	tmp = tmp->next;
+	// }
+	var = get_var(s, pos);
+	printf("%s\n", var);
+	free(var);
 }
 
 static bool	in_quotes(char *s, int pos)
@@ -33,7 +59,7 @@ static bool	in_quotes(char *s, int pos)
 	i = 0;
 	while (i < pos)
 	{
-		if (s[i] == 39)
+		if (s[i] == 39) //test with replacing into '\'' later
 			quotes++;
 		i++;
 	}
@@ -49,12 +75,13 @@ void	replace_env_vars(char *s, t_env *env_v)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == '$')
+		if (s[i] == '$' && s[i + 1] != '\0')
 		{
 			if (in_quotes(s, i) == true)
 				return ;
-			
-		}	
+			translate(s, i + 1, env_v);
+			i++;
+		}
 		i++;
 	}
 }
