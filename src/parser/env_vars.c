@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/03 20:43:27 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:52:03 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,9 @@ static char	*get_var(char *s, int pos)
 static void	translate(char *s, int pos, t_env *env_v)
 {
 	char	*var;
-	// t_env	*tmp;
-
-	// tmp = env_v;
-	// while (tmp != NULL)
-	// {
-		
-	// 	tmp = tmp->next;
-	// }
-	var = get_var(s, pos);
-	printf("%s\n", var);
+	var = get_var(s, pos + 1);
+	s = ft_replace_word(s, get_value(env_v, var), pos);
+	printf("%s\n", s);
 	free(var);
 }
 
@@ -79,7 +72,7 @@ void	replace_env_vars(char *s, t_env *env_v)
 		{
 			if (in_quotes(s, i) == true)
 				return ;
-			translate(s, i + 1, env_v);
+			translate(s, i, env_v);
 			i++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/02 20:06:16 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/03 21:10:57 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static bool	own_function(char *s)
 		return (true);
 	else if (ft_strcmp(s, "pwd") == 0 || ft_strcmp(s, "env") == 0)
 		return (true);
-	else if (ft_strcmp(s, "echo") == 0)
-		return (true);
+	// else if (ft_strcmp(s, "echo") == 0)
+	// 	return (true);
 	return (false);
 }
 
