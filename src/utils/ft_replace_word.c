@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 20:43:44 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/04 15:26:04 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/04 18:07:06 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*ft_replace_word(char *s, char *replace, int pos)
 
 	if (replace == NULL)
 		replace = "\0";
+	printf("%d\n", pos);
 	if (pos != 0)
 	{
 		ret = ft_strndup(s, pos);
