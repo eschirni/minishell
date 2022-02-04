@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/01 21:09:31 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/02 09:32:07 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ static int	free_arg(char **args, t_env *env_v)
 	atoi = 0;
 	if (args != NULL && args[1] != NULL)
 		atoi = ft_atoi(args[1]);
-	args = NULL;
-	// while (args != NULL && args[i] != NULL)
-	// {
-		// free(args[i]);
-		// i++;
-		// if (args[i] == NULL)
+	while (args != NULL && args[i] != NULL)
+	{
+		free(args[i]);
+		i++;
+		// if (args[i] == NULL) makes no sense bro
 		// 	free(args);
-	// }
+	}
 	system("leaks minishell");
 	return (atoi);
 }

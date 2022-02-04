@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/01 19:14:59 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/04 13:54:47 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static bool	own_function(char *s)
 	else if (ft_strcmp(s, "unset") == 0 || ft_strcmp(s, "exit") == 0)
 		return (true);
 	else if (ft_strcmp(s, "pwd") == 0 || ft_strcmp(s, "env") == 0)
+		return (true);
+	else if (ft_strcmp(s, "echo") == 0)
 		return (true);
 	return (false);
 }
@@ -46,7 +48,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 
 	i = 0;
 	error = fork_execute(commands[0], commands, envp);
-	path_vars = ft_split(get_value(env_v, "PATH"), ':');
+	path_vars = ft_split(get_value(env_v, "PATH"), ':'); //segfault (remove search_name from header)
 	while (error > 1 && path_vars[i] != NULL)
 	{
 		path = ft_strdup(commands[0]);
@@ -72,7 +74,9 @@ static void	exec_functions(char **command, t_env *env_v)
 	else if (ft_strcmp(command[0], "env") == 0)
 		env(env_v, command[1]);
 	else if (ft_strcmp(command[0], "unset") == 0)
-		return ;
+		unset(&env_v, command[1]);
+	else if (ft_strcmp(command[0], "echo") == 0)
+		echo(command);
 	else
 		ft_exit(command, false, env_v);
 }
