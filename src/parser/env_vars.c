@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/04 15:21:38 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/04 17:19:18 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static bool	in_quotes(char *s, int pos)
 	i = 0;
 	while (i < pos)
 	{
-		if (s[i] == 39) //test with replacing into '\'' later
+		if (s[i] == '\'')
 			quotes++;
 		i++;
 	}
@@ -69,17 +69,23 @@ char	*replace_env_vars(char *s, t_env *env_v)
 	char	*ret;
 
 	i = 0;
+	ret = NULL;
 	while (s[i] != '\0')
 	{
 		if (s[i] == '$' && s[i + 1] != '\0')
 		{
 			if (in_quotes(s, i) == true)
 				return (s);
-			ret = translate(s, i, env_v);
+			if (ret == NULL)
+				ret = translate(s, i, env_v);
+			else
+				ret = translate(ret, i, env_v);
 			i++;
 		}
 		i++;
 	}
+	if (ret == NULL)
+		return (s);
 	free(s);
 	return (ret);
 }

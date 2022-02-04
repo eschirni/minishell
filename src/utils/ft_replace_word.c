@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 20:43:44 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/04 14:51:50 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:26:04 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 char	*ft_replace_word(char *s, char *replace, int pos)
 {
 	char	*ret;
-	int		size;
-	int		j;
 
+	if (replace == NULL)
+		replace = "\0";
 	if (pos != 0)
 	{
 		ret = ft_strndup(s, pos);
@@ -33,6 +33,5 @@ char	*ft_replace_word(char *s, char *replace, int pos)
 			pos++;
 		ret = ft_append(ret, &s[pos]);
 	}
-	//free(s);
 	return (ret);
 }
