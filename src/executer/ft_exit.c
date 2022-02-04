@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/02 20:07:54 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:04:22 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	free_arg(char **args, t_env *env_v)
 		// if (args[i] == NULL) makes no sense bro, malloc error on tom pc
 		// 	free(args);
 	}
-	//system("leaks minishell");
+	system("leaks minishell");
 	return (atoi);
 }
 

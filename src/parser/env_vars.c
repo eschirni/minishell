@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/03 21:52:03 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/04 15:21:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ static char	*get_var(char *s, int pos)
 	return (ret);
 }
 
-static void	translate(char *s, int pos, t_env *env_v)
+static char	*translate(char *s, int pos, t_env *env_v)
 {
 	char	*var;
+	char	*ret;
+
 	var = get_var(s, pos + 1);
 	s = ft_replace_word(s, get_value(env_v, var), pos);
-	printf("%s\n", s);
 	free(var);
+	return(s);
 }
 
 static bool	in_quotes(char *s, int pos)
@@ -61,9 +63,10 @@ static bool	in_quotes(char *s, int pos)
 	return (true);
 }
 
-void	replace_env_vars(char *s, t_env *env_v)
+char	*replace_env_vars(char *s, t_env *env_v)
 {
-	int	i;
+	int		i;
+	char	*ret;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -71,10 +74,12 @@ void	replace_env_vars(char *s, t_env *env_v)
 		if (s[i] == '$' && s[i + 1] != '\0')
 		{
 			if (in_quotes(s, i) == true)
-				return ;
-			translate(s, i, env_v);
+				return (s);
+			ret = translate(s, i, env_v);
 			i++;
 		}
 		i++;
 	}
+	free(s);
+	return (ret);
 }

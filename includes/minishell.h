@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/03 21:13:36 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/04 14:52:37 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	rep_env(t_env **env, char *name, char *value, bool export);
 
 //parser
 void	parser(char *line, char **envp, t_env *env_v);
-void	replace_env_vars(char *s, t_env *env_v);
+char	*replace_env_vars(char *s, t_env *env_v);
 
 #endif
