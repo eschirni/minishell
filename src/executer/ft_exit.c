@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/02 09:32:07 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/04 15:50:41 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static int	free_arg(char **args, t_env *env_v)
 	{
 		free(args[i]);
 		i++;
-		// if (args[i] == NULL) makes no sense bro
+		// if (args[i] == NULL) makes no sense bro, malloc error on tom pc
 		// 	free(args);
 	}
-	system("leaks minishell");
+	//system("leaks minishell");
 	return (atoi);
 }
 
@@ -37,6 +37,7 @@ void	ft_exit(char **args, bool ctrl_d, t_env *env_v)
 {
 	if(ctrl_d == true)
 	{
+		printf("\33[1A");
 		rl_on_new_line();
 		rl_redisplay();
 	}
