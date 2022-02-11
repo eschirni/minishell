@@ -6,43 +6,21 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/10 15:54:05 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/11 20:10:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*get_var(char *s, int pos)
-{
-	char	*ret;
-	int		size;
-
-	size = 0;
-	while (s[pos] != ' ' && s[pos] != '\0')
-	{
-		size++;
-		pos++;
-	}
-	ret = malloc(size + 1);
-	ret[size] = '\0';
-	while (s[pos] != '$')
-	{
-		size--;
-		pos--;
-		ret[size] = s[pos];
-	}
-	return (ret);
-}
-
-static char	*translate(char *s, int pos, t_env *env_v)
+static char	*translate(char *s, t_env *env_v)
 {
 	char	*var;
 	char	*ret;
 
-	var = get_var(s, pos + 1);
-	s = ft_replace_word(s, get_value(env_v, var), pos);
+	var = ft_strcdup(s, ' ', 0);
+	ret = ft_replace_word(s, get_value(env_v, var));
 	free(var);
-	return(s);
+	return(ret);
 }
 
 static bool	in_quotes(char *s, int pos)
@@ -63,25 +41,16 @@ static bool	in_quotes(char *s, int pos)
 	return (true);
 }
 
-char	*replace_env_vars(char *s, t_env *env_v)
+static char	*replace_env_vars(char *s, t_env *env_v)
 {
-	int		i;
 	char	*ret;
 
-	i = 0;
 	ret = NULL;
-	while (s[i] != '\0')
+	if (s[1] != '\0' && s[1] != ' ')
 	{
-		if (s[i] == '$' && s[i + 1] != '\0')
-		{
-			if (in_quotes(s, i) == true)
-				return (s);
-			ret = translate(s, i, env_v);
-			free(s);
-			s = ft_strdup(ret);
-			i++;
-		}
-		i++;
+		// if (in_quotes(s, i) == true)
+		// 	return (s);
+		ret = translate(s, env_v);
 	}
 	if (ret == NULL)
 		return (s);
@@ -92,13 +61,27 @@ char	*replace_env_vars(char *s, t_env *env_v)
 char	*split_env_vars(char *s, t_env *env_v)
 {
 	char	**split;
+	char	*ret;
 	int		i;
 
 	split = ft_split(s, '$');
+	if (split == NULL) 
+		return (s);
 	i = 0;
 	while(split[i] != NULL)
 	{
-		
+		split[i] = replace_env_vars(split[i], env_v);
 		i++;
 	}
+	i = 1;
+	ret = ft_strdup(split[0]);
+	printf("%s\n", ret);
+	while(split[i] != NULL)
+	{
+		ret = ft_append(ret, split[i]);
+		i++;
+	}
+	ft_free_split(split);
+	printf("%s\n", ret);
+	return(ret);
 }

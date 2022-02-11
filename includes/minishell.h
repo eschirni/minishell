@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/04 14:52:37 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/11 19:44:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_free_split(char **s);
 char	*ft_strcdup(char *s, char c, int start);
 char	*ft_strndup(const char *s1, int n);
 void	ft_lstadd_back(t_env **env, t_env *new);
-char	*ft_replace_word(char *s, char *replace, int pos);
+char	*ft_replace_word(char *s, char *replace);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env);
@@ -73,6 +73,6 @@ void	rep_env(t_env **env, char *name, char *value, bool export);
 
 //parser
 void	parser(char *line, char **envp, t_env *env_v);
-char	*replace_env_vars(char *s, t_env *env_v);
+char	*split_env_vars(char *s, t_env *env_v);
 
 #endif

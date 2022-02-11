@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/04 17:16:53 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/11 20:07:46 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	parser(char *line, char **envp, t_env *env_v)
 {
 	char	**input;
 
-	line = replace_env_vars(line, env_v);
+	line = split_env_vars(line, env_v);
+	printf("%s\n", line);
 	input = ft_split(line, ' ');
 	if (input[0] != '\0')
 		executer(envp, input, env_v);
