@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/07 19:31:38 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:54:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,18 @@ char	*replace_env_vars(char *s, t_env *env_v)
 		return (s);
 	free(s);
 	return (ret);
+}
+
+char	*split_env_vars(char *s, t_env *env_v)
+{
+	char	**split;
+	int		i;
+
+	split = ft_split(s, '$');
+	i = 0;
+	while(split[i] != NULL)
+	{
+		
+		i++;
+	}
 }
