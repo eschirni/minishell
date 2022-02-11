@@ -6,7 +6,7 @@
 #    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/02/02 19:47:43 by eschirni         ###   ########.fr        #
+#    Updated: 2022/02/11 21:43:50 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC =	$(SRC_PATH)main.c \
 		src/executer/*.c	\
 		src/utils/*.c	\
 		src/parser/*.c	\
-		$(SRC_PATH)/env/*c
+		$(SRC_PATH)/env_struct/*c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))
