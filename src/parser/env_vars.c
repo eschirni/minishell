@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/13 17:54:09 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 18:12:21 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,49 @@ static char	*translate(char *s, t_env *env_v)
 	return (ret);
 }
 
-static bool	in_quotes(char *s, int pos)
+static bool	in_quotes(char **split, int pos)
 {
 	int	quotes;
 	int	i;
 
 	quotes = 0;
-	i = 0;
-	while (i < pos)
+	pos--;
+	while (pos >= 0)
 	{
-		if (s[i] == '\'')
-			quotes++;
-		i++;
+		i = 0;
+		while (split[pos][i] != '\0')
+		{
+			if (split[pos][i] == '\'')
+				quotes++;
+			i++;
+		}
+		pos--;
 	}
 	if (quotes % 2 == 0)
 		return (false);
 	return (true);
 }
 
-static char	*replace_env_var(char *s, t_env *env_v)
+static char	*replace_env_var(char **split, t_env *env_v, int pos)
 {
 	char	*ret;
 
 	ret = NULL;
-	if (s[0] != ' ')
+	if (split[pos][0] != ' ')
 	{
-		// if (in_quotes(s, i) == true)
-		// 	return (s);
-		ret = translate(s, env_v);
+		if (in_quotes(split, pos) == true)
+		{
+			split[pos] = ft_insert("$", split[pos]);
+			return (split[pos]);
+		}
+		ret = translate(split[pos], env_v);
 	}
 	else
 	{
-		ret = ft_strdup(s);
+		ret = ft_strdup(split[pos]);
 		ret = ft_insert("$", ret);
 	}
-	free(s);
+	free(split[pos]);
 	return (ret);
 }
 
@@ -90,7 +98,7 @@ static char	*split_env_vars(char *s, bool dol_at_end, t_env *env_v)
 		ret = ft_strdup(split[0]);
 	while (split[i] != NULL)
 	{
-		split[i] = replace_env_var(split[i], env_v);
+		split[i] = replace_env_var(split, env_v, i);
 		if (i == 0)
 			ret = ft_strdup(split[0]);
 		else
