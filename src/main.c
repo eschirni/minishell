@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/31 21:59:12 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 19:02:45 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv, char **envp)
 			ft_exit(NULL, true, env_v);
 		//parser, etc
 		input = ft_split(line, ' ');
-		if (input[0] != '\0')
+		if (input[0] != NULL)
 			executer(envp, input, env_v);
 		ft_free_split(input);
 		free(line);
