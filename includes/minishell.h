@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
 /*   Updated: 2022/02/13 17:33:15 by eschirni         ###   ########.fr       */
@@ -58,7 +58,7 @@ void	ft_exit(char **args, bool ctrl_d, t_env *env);
 void	env(t_env *env, char *argument);
 void	export(t_env *env_v, char *arg);
 void	unset(t_env **env_v, char *arg);
-void	echo(char *input);
+void	echo(char **input);
 
 //env handler
 void	init_env(t_env **env, char **envp);
