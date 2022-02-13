@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/02/01 20:25:14 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 18:57:51 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,12 @@ void	export(t_env *env_v, char *arg)
 	else
 	{
 		pos = ft_strclen(arg, '=');
-		if (pos >= 0)
+		if (pos == 0)
+        {
+            ft_write_error("export", arg, "not a valid identifier");
+            return ;
+		}
+		else if (pos >= 0)
 		{
 			name = ft_strndup(arg, pos);
 			value = ft_strcdup(arg, '\0', pos + 1);
