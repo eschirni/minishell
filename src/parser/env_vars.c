@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/13 17:17:38 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 17:25:22 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,16 @@ static	int	first_is_var(char *s)
 
 char	*split_env_vars(char *s, t_env *env_v)
 {
+	bool	dol_at_end;
 	char	**split;
 	char	*ret;
 	int		i;
 
 	if (ft_strchr(s, '$') < 0)
 		return (s);
+	dol_at_end = false;
+	if (s[ft_strclen(s, '\0') - 1] == '$')
+		dol_at_end = true;
 	split = ft_split(s, '$');
 	if (split == NULL) 
 		return (s);
@@ -107,6 +111,8 @@ char	*split_env_vars(char *s, t_env *env_v)
 		ret = ft_append(ret, split[i]);
 		i++;
 	}
+	if (dol_at_end == true)
+		ret = ft_append(ret, "$");
 	ft_free_split(split);
 	free(s);
 	return(ret);
