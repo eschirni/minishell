@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/13 19:20:08 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 21:34:15 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ static bool	in_quotes(char **split, int pos)
 static char	*replace_env_var(char **split, t_env *env_v, int pos)
 {
 	char	*ret;
-
 	ret = NULL;
 
 	if (split[pos][0] != ' ')
