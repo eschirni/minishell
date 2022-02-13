@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/04 13:54:47 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/03 21:10:57 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static bool	own_function(char *s)
 		return (true);
 	else if (ft_strcmp(s, "pwd") == 0 || ft_strcmp(s, "env") == 0)
 		return (true);
-	else if (ft_strcmp(s, "echo") == 0)
-		return (true);
+	// else if (ft_strcmp(s, "echo") == 0)
+	// 	return (true);
 	return (false);
 }
 
@@ -48,6 +48,11 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 
 	i = 0;
 	error = fork_execute(commands[0], commands, envp);
+	if (get_value(env_v, "PATH") == NULL)
+	{
+		ft_write_error(NULL, commands[0], "No such file or directory");
+		return ;
+	}
 	path_vars = ft_split(get_value(env_v, "PATH"), ':'); //segfault (remove search_name from header)
 	while (error > 1 && path_vars[i] != NULL)
 	{

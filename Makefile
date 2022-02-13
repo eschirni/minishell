@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tom <tom@student.42.fr>                    +#+  +:+       +#+         #
+#    By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/02/01 21:04:34 by tom              ###   ########.fr        #
+#    Updated: 2022/02/11 21:43:50 by eschirni         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,10 @@ OBJ_PATH = ./obj/
 
 # SOURCES
 SRC =	$(SRC_PATH)main.c \
-		src/executer/*.c src/utils/*.c	\
-		$(SRC_PATH)/env/*c
+		src/executer/*.c	\
+		src/utils/*.c	\
+		src/parser/*.c	\
+		$(SRC_PATH)/env_struct/*c
 
 # OBJECTS
 OBJ = $(patsubst $(SRC_PATH)%.c, $(OBJ_PATH)%.o, $(SRC))

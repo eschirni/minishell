@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/04 14:58:03 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/13 17:33:15 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ typedef	struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef	struct		s_lex
-{
-	char			*category;
-	char			*value;
-	struct s_lex	*next;
-}					t_lex;
-
 //utils
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_append(char *start, char *end);
@@ -55,6 +48,7 @@ void	ft_free_split(char **s);
 char	*ft_strcdup(char *s, char c, int start);
 char	*ft_strndup(const char *s1, int n);
 void	ft_lstadd_back(t_env **env, t_env *new);
+char	*ft_replace_word(char *s, char *replace);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env);
@@ -76,5 +70,9 @@ bool	search_env(t_env *env, char *name);
 //env utils
 void	add_env(t_env **env, char *name, char *value, bool export);
 void	rep_env(t_env **env, char *name, char *value, bool export);
+
+//parser
+void	parser(char *line, char **envp, t_env *env_v);
+char	*env_vars(char *s, t_env *env_v);
 
 #endif

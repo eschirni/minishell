@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcdup.c                                       :+:      :+:    :+:   */
+/*   ft_replace_word.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/27 22:49:15 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/11 21:09:21 by eschirni         ###   ########.fr       */
+/*   Created: 2022/02/03 20:43:44 by eschirni          #+#    #+#             */
+/*   Updated: 2022/02/13 19:19:27 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_strcdup(char *s, char c, int start)
+char	*ft_replace_word(char *s, char *replace)
 {
 	char	*ret;
-	int		i;
+	int		pos;
 
-	ret = ft_calloc(ft_strclen(s, c) - start + 1, 1);
-	if (ret == NULL)
-		return (NULL);
-	i = 0;
-	while (s[start] != c)
-	{
-		ret[i] = s[start];
-		start ++;
-		i++;
-	}
-	ret[i] = s[start];
-	ret[i + 1] = '\0';
+	if (replace == NULL)
+		replace = "\0";
+	ret = ft_strcdup(replace, '\0', 0);
+	pos = 0;
+	while (s[pos] != ' ' && s[pos] != '\0' && s[pos] != '\'' && s[pos] != '"')
+		pos++;
+	ret = ft_append(ret, &s[pos]);
 	return (ret);
 }
