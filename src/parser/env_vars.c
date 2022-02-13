@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/11 22:02:55 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 17:17:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,19 @@ static char	*replace_env_vars(char *s, t_env *env_v)
 	char	*ret;
 
 	ret = NULL;
-	if (s [1] != '\0' && s[1] != ' ')
+	if (s[0] != ' ')
 	{
 		// if (in_quotes(s, i) == true)
 		// 	return (s);
 		ret = translate(s, env_v);
 	}
-	if (ret == NULL)
-		return (s);
+	else
+	{
+		ret = ft_strdup(s);
+		ret = ft_insert("$", ret);
+	}
+	// if (ret == NULL)
+	// 	return (s);
 	free(s);
 	return (ret);
 }
