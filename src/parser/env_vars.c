@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/13 17:25:22 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 17:54:09 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*translate(char *s, t_env *env_v)
 	}
 	ret = ft_replace_word(s, get_value(env_v, var));
 	free(var);
-	return(ret);
+	return (ret);
 }
 
 static bool	in_quotes(char *s, int pos)
@@ -54,7 +54,7 @@ static bool	in_quotes(char *s, int pos)
 	return (true);
 }
 
-static char	*replace_env_vars(char *s, t_env *env_v)
+static char	*replace_env_var(char *s, t_env *env_v)
 {
 	char	*ret;
 
@@ -70,50 +70,54 @@ static char	*replace_env_vars(char *s, t_env *env_v)
 		ret = ft_strdup(s);
 		ret = ft_insert("$", ret);
 	}
-	// if (ret == NULL)
-	// 	return (s);
 	free(s);
 	return (ret);
 }
 
-static	int	first_is_var(char *s)
+static char	*split_env_vars(char *s, bool dol_at_end, t_env *env_v)
 {
-	if (s[0] == '$')
-		return (0);
-	return (1);
-}
-
-char	*split_env_vars(char *s, t_env *env_v)
-{
-	bool	dol_at_end;
-	char	**split;
 	char	*ret;
+	char	**split;
 	int		i;
 
-	if (ft_strchr(s, '$') < 0)
-		return (s);
-	dol_at_end = false;
-	if (s[ft_strclen(s, '\0') - 1] == '$')
-		dol_at_end = true;
 	split = ft_split(s, '$');
-	if (split == NULL) 
-		return (s);
-	i = first_is_var(s);
-	while(split[i] != NULL)
-	{
-		split[i] = replace_env_vars(split[i], env_v);
-		i++;
-	}
+	if (split == NULL)
+		return (NULL);
 	i = 1;
-	ret = ft_strdup(split[0]);
-	while(split[i] != NULL)
+	if (s[0] == '$')
+		i = 0;
+	else
+		ret = ft_strdup(split[0]);
+	while (split[i] != NULL)
 	{
-		ret = ft_append(ret, split[i]);
+		split[i] = replace_env_var(split[i], env_v);
+		if (i == 0)
+			ret = ft_strdup(split[0]);
+		else
+			ret = ft_append(ret, split[i]);
 		i++;
 	}
 	if (dol_at_end == true)
 		ret = ft_append(ret, "$");
 	ft_free_split(split);
+	return (ret);
+}
+
+char	*env_vars(char *s, t_env *env_v)
+{
+	bool	dol_at_end;
+	char	*ret;
+	int		len;
+
+	if (ft_strchr(s, '$') < 0)
+		return (s);
+	dol_at_end = false;
+	len = ft_strclen(s, '\0');
+	if (len >= 2 && s[len - 1] == '$' && s[len - 2] != '$')
+		dol_at_end = true;
+	ret = split_env_vars(s, dol_at_end, env_v);
+	if (ret == NULL)
+		return (s);
 	free(s);
-	return(ret);
+	return (ret);
 }
