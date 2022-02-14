@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 16:52:33 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:49:45 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static void	handler(int signal)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*line;
-	int		i;
 	t_env	*env_v;
 
 	if (argc != 1)
