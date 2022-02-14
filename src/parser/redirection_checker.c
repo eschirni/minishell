@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_count.c                                :+:      :+:    :+:   */
+/*   redirection_checker.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/14 17:54:34 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 19:35:07 by eschirni         ###   ########.fr       */
+/*   Created: 2022/02/14 19:38:17 by eschirni          #+#    #+#             */
+/*   Updated: 2022/02/14 20:10:25 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,61 @@ static bool	check_pipes(char *s)
 	return (true);
 }
 
+static bool	check_arrows(char *s, char arrow)
+{
+	int	i;
+
+	i = 0;
+	while (s[i + 1] != '\0')
+	{
+		if (s[i] == arrow && s[i + 1] != arrow)
+		{
+			i++;
+			while (s[i] == ' ')
+				i++;
+			if (is_name(s[i]) == true)
+				continue ;
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+static bool	check_double_arrows(char *s, char arrow)
+{
+	int	i;
+
+	i = 0;
+	while (s[i + 1] != '\0')
+	{
+		if (s[i] == arrow && s[i + 1] == arrow)
+		{
+			i += 2;
+			while (s[i] == ' ')
+				i++;
+			if (is_name(s[i]) == true)
+				continue ;
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
 bool	check_redirections(char *s)
 {
 	if (check_pipes(s) == false)
+	{
+		ft_write_error(NULL, NULL, "parse error");
+		return (false);
+	}
+	if (check_arrows(s, '<') == false || check_arrows(s, '>') == false)
+	{
+		ft_write_error(NULL, NULL, "parse error");
+		return (false);
+	}
+	if (check_double_arrows(s, '<') == false || check_double_arrows(s, '>') == false)
 	{
 		ft_write_error(NULL, NULL, "parse error");
 		return (false);
