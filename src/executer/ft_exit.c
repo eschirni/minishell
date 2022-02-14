@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/13 18:50:26 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/13 22:23:26 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	free_arg(char **args, t_env *env_v)
 		// if (args[i] == NULL) makes no sense bro, malloc error on tom pc
 		// 	free(args);
 	}
-	//system("leaks minishell");
+	system("leaks minishell");
 	return (atoi);
 }
 
