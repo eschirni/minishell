@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/13 17:44:35 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:17:59 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ void	parser(char *line, char **envp, t_env *env_v)
 	char	**input;
 
 	line = env_vars(line, env_v);
-	input = ft_split(line, ' ');
-	if (input[0] != '\0')
-		executer(envp, input, env_v);
-	ft_free_split(input);
+	//remove leftover spaces
+	//remove " and '
+	if (check_pipes(line) == true)
+	{
+		input = ft_split(line, ' ');
+		if (input[0] != '\0')
+			executer(envp, input, env_v);
+		ft_free_split(input);
+	}
 	free(line);
 }
