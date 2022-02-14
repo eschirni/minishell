@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 17:54:34 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 19:15:54 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:35:07 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	is_name(char c)
 	return (false);
 }
 
-bool	check_pipes(char *s)
+static bool	check_pipes(char *s)
 {
 	int	i;
 
@@ -48,6 +48,16 @@ bool	check_pipes(char *s)
 			return (false);
 		}
 		i++;
+	}
+	return (true);
+}
+
+bool	check_redirections(char *s)
+{
+	if (check_pipes(s) == false)
+	{
+		ft_write_error(NULL, NULL, "parse error");
+		return (false);
 	}
 	return (true);
 }
