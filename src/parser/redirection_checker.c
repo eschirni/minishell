@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:38:17 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 20:10:25 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:15:51 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool	check_arrows(char *s, char arrow)
 	int	i;
 
 	i = 0;
-	while (s[i + 1] != '\0')
+	while (s[i] != '\0')
 	{
 		if (s[i] == arrow && s[i + 1] != arrow)
 		{
