@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/13 22:34:53 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/14 17:43:59 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static char	*translate(char *s, t_env *env_v)
 		var[i] = s[i];
 		i--;
 	}
-	printf("%s\n", s);
 	ret = ft_replace_word(s, get_value(env_v, var));
 	free(var);
 	return (ret);
@@ -66,7 +65,6 @@ static char	*replace_env_var(char **split, t_env *env_v, int pos)
 {
 	char	*ret;
 
-	printf("%s\n", split[pos]);
 	ret = NULL;
 	if (split[pos][0] != ' ' && split[pos][0] != '\'' && split[pos][0] != '"')
 	{
