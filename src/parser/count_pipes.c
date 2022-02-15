@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   count_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/15 20:54:03 by eschirni         ###   ########.fr       */
+/*   Created: 2022/02/15 20:30:21 by eschirni          #+#    #+#             */
+/*   Updated: 2022/02/15 20:48:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	parser(char *line, char **envp, t_env *env_v)
+int	count_pipes(char *s)
 {
-	char	**input;
+	int	count;
+	int	i;
 
-	line = env_vars(line, env_v);
-	//remove leftover spaces
-	//remove " and '
-	if (check_redirections(line) == true)
+	i = 0;
+	count = 0;
+	while (s[i] != '\0')
 	{
-		input = ft_split(line, ' ');
-		if (input[0] != '\0' && count_pipes(line) == 0)
-			executer(envp, input, env_v);
-		else if (input[0] != '\0' && count_pipes(line) > 0)
-			 printf("AAA\n");
-		ft_free_split(input);
+		if (s[i] == '|')
+			count++;
+		i++;
 	}
-	free(line);
+	return (count);
 }
