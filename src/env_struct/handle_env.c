@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/01 21:04:53 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:32:03 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	free_env(t_env **env_v)
 
 bool	search_env(t_env *env, char *name)
 {
+	if (name == NULL)
+		return (false);
 	while (env != NULL)
 	{
 		if (ft_strcmp(name, env->name) == 0)
