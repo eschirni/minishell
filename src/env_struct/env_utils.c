@@ -6,13 +6,13 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:29:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/28 16:51:42 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 22:34:45 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_env(t_env **env, char *name, char *value, bool export)
+void	add_env(t_env **env_v, char *name, char *value, bool export)
 {
 	t_env	*new;
 
@@ -20,14 +20,14 @@ void	add_env(t_env **env, char *name, char *value, bool export)
 	new->name = name;
 	new->value = value;
 	new->export = export;
-	ft_lstadd_back(env, new);
+	ft_lstadd_back(env_v, new);
 }
 
-void	rep_env(t_env **env, char *name, char *value, bool export)
+void	rep_env(t_env **env_v, char *name, char *value, bool export)
 {
 	t_env	*tmp;
 
-	tmp = *env;
+	tmp = *env_v;
 	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)
 	{
 		free(tmp->value);

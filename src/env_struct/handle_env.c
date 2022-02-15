@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/01 21:04:53 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 22:34:12 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ void	free_env(t_env **env_v)
 	*env_v = NULL;
 }
 
-bool	search_env(t_env *env, char *name)
+bool	search_env(t_env *env_v, char *name)
 {
-	while (env != NULL)
+	while (env_v != NULL)
 	{
-		if (ft_strcmp(name, env->name) == 0)
+		if (ft_strcmp(name, env_v->name) == 0)
 			return (true);
-		env = env->next;
+		env_v = env_v->next;
 	}
 	return (false);
 }

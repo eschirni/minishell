@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/15 21:02:09 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 22:33:41 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@
 # include <errno.h> //errno
 # include <string.h> //strrerror
 # include <stdbool.h> //bools
+#include <fcntl.h>	//open
 # include <limits.h>
+
+# define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
 
 typedef	struct		s_env
 {
@@ -47,29 +50,29 @@ bool	ft_isnum(char *s);
 void	ft_free_split(char **s);
 char	*ft_strcdup(char *s, char c, int start);
 char	*ft_strndup(const char *s1, int n);
-void	ft_lstadd_back(t_env **env, t_env *new);
+void	ft_lstadd_back(t_env **env_v, t_env *new);
 char	*ft_replace_word(char *s, char *replace);
 
 //executer
-void	executer(char **envp, char **commands, t_env *env);
+void	executer(char **envp, char **commands, t_env *env_v);
 void	cd(char *path);
 void	pwd(void);
-void	ft_exit(char **args, bool ctrl_d, t_env *env);
-void	env(t_env *env, char *argument);
+void	ft_exit(char **args, bool ctrl_d, t_env *env_v);
+void	env(t_env *env_v, char *argument);
 void	export(t_env *env_v, char *arg);
 void	unset(t_env **env_v, char *arg);
 void	echo(char **input);
 
 //env handler
-void	init_env(t_env **env, char **envp);
-char	*get_value(t_env *env, char *name);
-void	free_env(t_env **env);
+void	init_env(t_env **env_v, char **envp);
+char	*get_value(t_env *env_v, char *name);
+void	free_env(t_env **env_v);
 t_env	*new_node(void);
-bool	search_env(t_env *env, char *name);
+bool	search_env(t_env *env_v, char *name);
 
 //env utils
-void	add_env(t_env **env, char *name, char *value, bool export);
-void	rep_env(t_env **env, char *name, char *value, bool export);
+void	add_env(t_env **env_v, char *name, char *value, bool export);
+void	rep_env(t_env **env_v, char *name, char *value, bool export);
 
 //parser
 void	parser(char *line, char **envp, t_env *env_v);
