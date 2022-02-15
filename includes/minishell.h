@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/15 20:48:25 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 21:02:09 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	parser(char *line, char **envp, t_env *env_v);
 char	*env_vars(char *s, t_env *env_v);
 bool	check_redirections(char *s);
 int		count_pipes(char *s);
+void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v);
 
 #endif
