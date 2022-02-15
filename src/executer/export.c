@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/02/14 16:52:19 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:23:17 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	export(t_env *env_v, char *arg)
 	{
 		pos = ft_strclen(arg, '=');
 		if (pos == 0)
-        {
-            ft_write_error("export", arg, "not a valid identifier");
-            return ;
+		{
+			ft_write_error("export", arg, "not a valid identifier");
+			return ;
 		}
 		else if (pos >= 0)
 		{

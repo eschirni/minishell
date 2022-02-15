@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 01:39:46 by tom               #+#    #+#             */
-/*   Updated: 2022/02/01 21:13:37 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:46:10 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	unset(t_env **env_v, char *arg)
 	char	*name;
 	
 	name = arg;
+	if (ft_strcmp(name, "$?") == 0)
+		return ;
 	if (search_env(*env_v, name) == true)
 		del_env(env_v, name);
 }
