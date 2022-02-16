@@ -6,11 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/15 20:19:47 by tom              ###   ########.fr       */
-=======
-/*   Updated: 2022/02/15 22:33:41 by eschirni         ###   ########.fr       */
->>>>>>> e6392d04b82d127e54b401b9165f587f829c36d2
+/*   Updated: 2022/02/16 14:33:26 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +24,6 @@
 # include <stdbool.h> //bools
 #include <fcntl.h>	//open
 # include <limits.h>
-# include <fcntl.h> //open
-
-# define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
 
 # define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
 
