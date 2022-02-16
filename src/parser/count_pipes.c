@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_write_error.c                                   :+:      :+:    :+:   */
+/*   count_pipes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 17:44:28 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 19:23:22 by eschirni         ###   ########.fr       */
+/*   Created: 2022/02/15 20:30:21 by eschirni          #+#    #+#             */
+/*   Updated: 2022/02/15 20:48:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_write_error(char *command, char *arg, char *error)
+int	count_pipes(char *s)
 {
-	write(2, "minishell: ", 11);
-	if (command != NULL)
+	int	count;
+	int	i;
+
+	i = 0;
+	count = 0;
+	while (s[i] != '\0')
 	{
-		write(2, command, ft_strclen(command, '\0'));
-		write(2, ": ", 2);
+		if (s[i] == '|')
+			count++;
+		i++;
 	}
-	if (arg != NULL)
-	{
-		write(2, arg, ft_strclen(arg, '\0'));
-		write(2, ": ", 2);
-	}
-	write(2, error, ft_strclen(error, '\0'));
-	write(2, "\n", 1);
+	return (count);
 }

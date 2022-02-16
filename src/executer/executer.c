@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 17:44:26 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/15 22:02:34 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 		return ;
 	}
 	path_vars = ft_split(get_value(env_v, "PATH"), ':'); //segfault (remove search_name from header)
-	while (error > 1 && path_vars[i] != NULL)
+	while (error == 256 && path_vars[i] != NULL)
 	{
 		path = ft_strdup(commands[0]);
 		path = ft_insert("/", path);
@@ -64,7 +64,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 		i++;
 	}
 	ft_free_split(path_vars);
-	if (error > 1)
+	if (error == 256)
 		ft_write_error(NULL, commands[0], "command not found");
 }
 

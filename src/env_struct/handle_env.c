@@ -6,7 +6,11 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/15 20:51:21 by tom              ###   ########.fr       */
+=======
+/*   Updated: 2022/02/15 22:34:12 by eschirni         ###   ########.fr       */
+>>>>>>> e6392d04b82d127e54b401b9165f587f829c36d2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +43,19 @@ void	free_env(t_env **env_v)
 	*env_v = NULL;
 }
 
-bool	search_env(t_env *env, char *name)
+bool	search_env(t_env *env_v, char *name)
 {
+<<<<<<< HEAD
 	if (name == NULL)
 		return (false);
 	while (env != NULL)
+=======
+	while (env_v != NULL)
+>>>>>>> e6392d04b82d127e54b401b9165f587f829c36d2
 	{
-		if (ft_strcmp(name, env->name) == 0)
+		if (ft_strcmp(name, env_v->name) == 0)
 			return (true);
-		env = env->next;
+		env_v = env_v->next;
 	}
 	return (false);
 }
