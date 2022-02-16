@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/15 21:43:12 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/16 14:37:29 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void	parser(char *line, char **envp, t_env *env_v)
 		if (count_pipes(line) == 0)
 		{
 			input = ft_split(line, ' ');
-			if (input[0] != '\0')
+			if (input[0] != NULL) // changed to NULL to silence warnings
 				executer(envp, input, env_v);
 		}
 		else
 		{
 			input = ft_split(line, '|');
-			if (input[0] != '\0')
+			if (input[0] != NULL) // changed to NULL to silence warnings
 				ft_pipe(input, count_pipes(line), envp, env_v);
 		}
 		ft_free_split(input);
