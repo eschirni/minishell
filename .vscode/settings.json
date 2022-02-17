@@ -1,9 +1,0 @@
-{
-	"files.associations": {
-		"stdlib.h": "c",
-		"unistd.h": "c",
-		"readline.h": "c",
-		"stdio.h": "c",
-		"history.h": "c"
-	}
-}
