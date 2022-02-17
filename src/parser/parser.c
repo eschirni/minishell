@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 15:14:14 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 16:36:40 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ void	parser(char *line, char **envp, t_env *env_v)
 
 	line = env_vars(line, env_v);
 	line = remove_spaces(line);
-	printf("%s\n", line);
+	//validate that every ' and " is closed"
+	//split depending on if it's in quotes
 	//remove " and '
-	if (check_redirections(line) == true)
+	if (check_redirections(line) == true && check_quotes(line) == true)
 	{
 		if (count_pipes(line) > 0)
 		{
