@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 13:45:20 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 15:13:40 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ int		count_redirections(char *s);
 int		redirections(char *left, char *right, char *operator);
 void	reset_fd(int og_fd, char *operator);
 void	exec_redirections(char **split, char **envp, t_env *env_v);
+char	*remove_spaces(char *s);
 
 #endif

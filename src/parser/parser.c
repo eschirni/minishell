@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 13:46:24 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 15:14:14 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	parser(char *line, char **envp, t_env *env_v)
 	char	**input;
 
 	line = env_vars(line, env_v);
-	//remove leftover spaces
+	line = remove_spaces(line);
+	printf("%s\n", line);
 	//remove " and '
 	if (check_redirections(line) == true)
 	{
