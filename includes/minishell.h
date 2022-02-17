@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 19:31:59 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 20:26:54 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <errno.h> //errno
 # include <string.h> //strrerror
 # include <stdbool.h> //bools
-#include <fcntl.h>	//open
+# include <fcntl.h>	//open
 # include <limits.h>
 
 # define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))

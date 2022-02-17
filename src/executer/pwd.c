@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:32:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/01/27 20:51:49 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 20:38:14 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	pwd(void)
 {
 	char	*cwd;
 
-	cwd = ft_calloc(138052520, 1); //138052520 because it's not too slow but handles still a really long pwd
+	cwd = ft_calloc(18052520, 1); //18052520 because it's not too slow but handles still a really long pwd
 	if (cwd == NULL)
 		return ;
-	getcwd(cwd, 138052520);
+	getcwd(cwd, 18052520);
 	if (cwd[0] =='\0')
 	{
 		ft_write_error(NULL, "pwd", "path too long");
