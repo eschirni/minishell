@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 15:31:05 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 18:35:57 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ static bool	in_quotes(char *s, int pos, char c)
 	if (quotes % 2 == 0)
 		return (false);
 	return (true);
+}
+
+bool	check_quotes(char *s)
+{
+	if (in_quotes(s, ft_strclen(s, '\0'), '\'') == false)
+		return (true);
+	ft_write_error(NULL, NULL, "parse error");
+	return (false);
 }
 
 static bool	remove_space(char *s, int i)
