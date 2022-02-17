@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/16 14:33:26 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/17 13:26:27 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ char	*env_vars(char *s, t_env *env_v);
 bool	check_redirections(char *s);
 int		count_pipes(char *s);
 void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v);
+int		count_redirections(char *s);
 
 #endif
