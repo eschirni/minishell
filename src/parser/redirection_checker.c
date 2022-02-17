@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:38:17 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 20:15:51 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 20:50:14 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	check_pipes(char *s)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == '|')
+		if (s[i] == '|' && in_quotes(s, i, '\'') == false)
 		{
 			i++;
 			while (s[i] == ' ')
@@ -59,7 +59,7 @@ static bool	check_arrows(char *s, char arrow)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == arrow && s[i + 1] != arrow)
+		if (!in_quotes(s, i, '\'') && s[i] == arrow && s[i + 1] != arrow)
 		{
 			i++;
 			while (s[i] == ' ')
