@@ -6,18 +6,18 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 18:35:57 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 19:54:02 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static bool	in_quotes(char *s, int pos, char c)
+bool	in_quotes(char *s, int pos, char c)
 {
 	int	quotes;
 
 	if (c == '\'' && in_quotes(s, pos, '"') == true)
-		return (true);		
+		return (false);		
 	quotes = 0;
 	pos--;
 	while (pos >= 0)

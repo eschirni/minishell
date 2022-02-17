@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 15:14:48 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/17 20:13:59 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static char	*translate(char *s, t_env *env_v)
 	return (ret);
 }
 
-static bool	in_quotes(char **split, int pos, char c)
+static bool	in_split_quotes(char **split, int pos, char c)
 {
 	int	quotes;
 	int	i;
 
-	if (c == '\'' && in_quotes(split, pos, '"') == true)
+	if (c == '\'' && in_split_quotes(split, pos, '"') == true)
 		return (false);		
 	quotes = 0;
 	pos--;
@@ -68,7 +68,7 @@ static char	*replace_env_var(char **split, t_env *env_v, int pos)
 	ret = NULL;
 	if (split[pos][0] != ' ' && split[pos][0] != '\'' && split[pos][0] != '"')
 	{
-		if (in_quotes(split, pos, '\'') == true)
+		if (in_split_quotes(split, pos, '\'') == true)
 		{
 			split[pos] = ft_insert("$", split[pos]);
 			return (split[pos]);
