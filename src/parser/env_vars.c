@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 20:13:59 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/18 21:22:48 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,26 @@ static char	*translate(char *s, t_env *env_v)
 	return (ret);
 }
 
-static bool	in_split_quotes(char **split, int pos, char c)
+static bool	in_split_quotes(char **split, int pos, char c, char c2, int i)
 {
-	int	quotes;
-	int	i;
+	int		quotes;
 
-	if (c == '\'' && in_split_quotes(split, pos, '"') == true)
-		return (false);		
 	quotes = 0;
-	pos--;
 	while (pos >= 0)
 	{
-		i = 0;
+		if (split[pos][i] == '\0')
+		{
+			i = 0;
+			pos--;
+			continue ;
+		}
 		while (split[pos][i] != '\0')
 		{
 			if (split[pos][i] == c)
-				quotes++;
+			{
+				if (in_split_quotes(split, pos, c2, c, i) == false)
+					quotes++;
+			}
 			i++;
 		}
 		pos--;
@@ -68,7 +72,7 @@ static char	*replace_env_var(char **split, t_env *env_v, int pos)
 	ret = NULL;
 	if (split[pos][0] != ' ' && split[pos][0] != '\'' && split[pos][0] != '"')
 	{
-		if (in_split_quotes(split, pos, '\'') == true)
+		if (in_split_quotes(split, pos, '\'', '"', 0) == true)
 		{
 			split[pos] = ft_insert("$", split[pos]);
 			return (split[pos]);
