@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/15 22:02:34 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:12:02 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,21 @@ static bool	own_function(char *s)
 	return (false);
 }
 
-static int	fork_execute(char *path, char **args, char **envp)
+static int	fork_execute(char *path, char **args, char **envp, t_env *env_v)
 {
 	pid_t	pid;
 	int		error;
 
 	pid = fork();
 	if (pid == 0)
-		exit(execve(path, args, envp));
+	{
+		error = execve(path, args, envp);
+		exit(error);
+	}
 	else
 		wait(&error); //catching signal sent by exit of(child)
 	error /= 255;
+	rep_env(&env_v, ft_strdup("?"), ft_itoa(error), false);
 	return (error);
 }
 
@@ -47,7 +51,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 	char	**path_vars;
 
 	i = 0;
-	error = fork_execute(commands[0], commands, envp);
+	error = fork_execute(commands[0], commands, envp, env_v);
 	if (get_value(env_v, "PATH") == NULL)
 	{
 		ft_write_error(NULL, commands[0], "No such file or directory");
@@ -59,7 +63,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 		path = ft_strdup(commands[0]);
 		path = ft_insert("/", path);
 		path = ft_insert(path_vars[i], path);
-		error = fork_execute(path, commands, envp);
+		error = fork_execute(path, commands, envp, env_v);
 		free(path);
 		i++;
 	}

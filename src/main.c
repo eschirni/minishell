@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/16 13:27:32 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/19 12:55:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	init_env(&env_v, envp);
-	add_env(&env_v, ft_strdup("$?"), ft_strdup("0"), false); // maybe move later
+	add_env(&env_v, ft_strdup("?"), ft_strdup("0"), false); // maybe move later
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	while (true)
