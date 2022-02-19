@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 14:02:39 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:08:12 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_itoa(int n);
 //executer
 void	executer(char **envp, char **commands, t_env *env_v);
 void	cd(char *path);
-void	pwd(void);
+void	pwd(t_env *env_v);
 void	ft_exit(char **args, bool ctrl_d, t_env *env_v);
 void	env(t_env *env_v, char *argument);
 void	export(t_env *env_v, char *arg);

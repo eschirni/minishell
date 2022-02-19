@@ -6,13 +6,13 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:32:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 20:38:14 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:08:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	pwd(void)
+void	pwd(t_env *env_v)
 {
 	char	*cwd;
 
@@ -28,4 +28,5 @@ void	pwd(void)
 	cwd = ft_append(cwd, "\n");
 	write(1, cwd, ft_strclen(cwd, '\0'));
 	free(cwd);
+	rep_env(&env_v, ft_strdup("?"), ft_strdup("0"), false);
 }
