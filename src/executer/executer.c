@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 14:08:25 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:37:40 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 static void	exec_functions(char **command, t_env *env_v)
 {
 	if (ft_strcmp(command[0], "cd") == 0)
-		cd(command[1]);
+		cd(command[1], env_v);
 	else if (ft_strcmp(command[0], "pwd") == 0)
 		pwd(env_v);
 	else if (ft_strcmp(command[0], "export") == 0)
