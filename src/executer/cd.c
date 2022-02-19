@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:09:22 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 14:37:21 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 15:36:18 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*replace_home(char *path)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while(path[i] != '\0')
+	while (path[i] != '\0')
 	{
 		if (path[i] != '~')
 			ret[j] = path[i];
@@ -49,7 +49,7 @@ static char	*replace_home(char *path)
 		j++;
 	}
 	ret[j] = '\0';
-	return(ret);
+	return (ret);
 }
 
 void	cd(char *path, t_env *env_v)

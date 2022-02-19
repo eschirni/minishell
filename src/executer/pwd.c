@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:32:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 14:08:05 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 15:37:54 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	pwd(t_env *env_v)
 	if (cwd == NULL)
 		return ;
 	getcwd(cwd, 18052520);
-	if (cwd[0] =='\0')
+	if (cwd[0] == '\0')
 	{
 		ft_write_error(NULL, "pwd", "path too long");
 		return ;

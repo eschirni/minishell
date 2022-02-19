@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 14:37:40 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 15:36:56 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	fork_execute(char *path, char **args, char **envp, t_env *env_v)
 		wait(&error); //catching signal sent by exit of(child)
 	error /= 255;
 	if (error == 256)
-		error = 127;	//because in bash 127 says the command doesn't exist
+		error = 127; //because in bash 127 says the command doesn't exist
 	rep_env(&env_v, ft_strdup("?"), ft_itoa(error), false);
 	return (error);
 }

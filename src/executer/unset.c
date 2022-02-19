@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 01:39:46 by tom               #+#    #+#             */
-/*   Updated: 2022/02/19 15:30:34 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 15:35:23 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	del_env(t_env **env, char *name)
 void	unset(t_env **env_v, char *arg)
 {
 	char	*name;
-	
+
 	name = arg;
 	if (arg == NULL || ft_strcmp(name, "?") == 0)
 	{
