@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 13:12:02 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 13:57:16 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int	fork_execute(char *path, char **args, char **envp, t_env *env_v)
 	else
 		wait(&error); //catching signal sent by exit of(child)
 	error /= 255;
+	if (error == 256)
+		error = 127;	//because in bash 127 says the command doesn't exist
 	rep_env(&env_v, ft_strdup("?"), ft_itoa(error), false);
 	return (error);
 }
@@ -58,7 +60,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 		return ;
 	}
 	path_vars = ft_split(get_value(env_v, "PATH"), ':'); //segfault (remove search_name from header)
-	while (error == 256 && path_vars[i] != NULL)
+	while (error == 127 && path_vars[i] != NULL)
 	{
 		path = ft_strdup(commands[0]);
 		path = ft_insert("/", path);
@@ -68,7 +70,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 		i++;
 	}
 	ft_free_split(path_vars);
-	if (error == 256)
+	if (error == 127)
 		ft_write_error(NULL, commands[0], "command not found");
 }
 
