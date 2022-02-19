@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 13:05:48 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:02:39 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_exit(char **args, bool ctrl_d, t_env *env_v);
 void	env(t_env *env_v, char *argument);
 void	export(t_env *env_v, char *arg);
 void	unset(t_env **env_v, char *arg);
-void	echo(char **input);
+void	echo(char **input, t_env *env_v);
 
 //env handler
 void	init_env(t_env **env_v, char **envp);

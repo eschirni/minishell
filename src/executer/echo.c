@@ -6,13 +6,23 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:07:45 by tom               #+#    #+#             */
-/*   Updated: 2022/02/17 19:29:35 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:05:02 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	echo(char **input)
+static int	check_n(int i, int j, char **input, bool *flag)
+{
+	if (input[j][i] == '-' && input[j][i + 1] == 'n' && input[j][i + 2] == '\0')
+	{
+		*flag = true;
+		j++;
+	}
+	return (j);
+}
+
+void	echo(char **input, t_env *env_v)
 {
 	bool	flag;
 	int		i;
@@ -23,11 +33,7 @@ void	echo(char **input)
 		return ;
 	flag = false;
 	i = 0;
-	if (input[j][i] == '-' && input[j][i + 1] == 'n' && input[j][i + 2] == '\0')
-	{
-		flag = true;
-		j++;
-	}
+	j = check_n(i, j, input, &flag);
 	while (input[j] != NULL)
 	{
 		i = 0;
@@ -42,4 +48,5 @@ void	echo(char **input)
 	}
 	if (flag == false)
 		write(1, "\n", 1);
+	rep_env(&env_v, ft_strdup("?"), ft_strdup("0"), false);
 }
