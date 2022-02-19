@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/02/15 20:23:17 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/19 15:06:49 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,46 +71,49 @@ static char	*sort_env(t_env *env_v, char *last)
 	return (low->name);
 }
 
-static void	print_export(t_env *env_v)
-{
-	t_env	*tmp;
-	char	*last;
-
-	last = NULL;
-	tmp = env_v;
-	while (tmp != NULL)
-	{
-		last = sort_env(env_v, last);
-		tmp = tmp->next;
-	}
-}
-
-void	export(t_env *env_v, char *arg)
+static void	export_var(t_env *env_v, char *arg)
 {
 	int		pos;
 	char	*name;
 	char	*value;
 
-	if (arg == NULL)
-		print_export(env_v);
-	else
+	pos = ft_strclen(arg, '=');
+	if (pos == 0 || arg[0] == '$')
 	{
-		pos = ft_strclen(arg, '=');
-		if (pos == 0)
-		{
-			ft_write_error("export", arg, "not a valid identifier");
-			return ;
-		}
-		else if (pos >= 0)
-		{
-			name = ft_strndup(arg, pos);
-			value = ft_strcdup(arg, '\0', pos + 1);
-		}
-		if (pos == -1 && search_env(env_v, name) == true)
-			export_env(&env_v, arg);
-		else if (pos >= 0 && search_env(env_v, name) == false)
-			add_env(&env_v, name, value, true);
-		else if (pos >= 0 && search_env(env_v, name) == true)
-			rep_env(&env_v, name, value, true);
+		ft_write_error("export", arg, "not a valid identifier");
+		rep_env(&env_v, ft_strdup("?"), ft_strdup("1"), false);
+		return ;
 	}
+	else if (pos >= 0)
+	{
+		name = ft_strndup(arg, pos);
+		value = ft_strcdup(arg, '\0', pos + 1);
+	}
+	if (pos == -1 && search_env(env_v, name) == true)
+		export_env(&env_v, arg);
+	else if (pos >= 0 && search_env(env_v, name) == false)
+		add_env(&env_v, name, value, true);
+	else if (pos >= 0 && search_env(env_v, name) == true)
+		rep_env(&env_v, name, value, true);
+	rep_env(&env_v, ft_strdup("?"), ft_strdup("0"), false);
+}
+
+void	export(t_env *env_v, char *arg)
+{
+	t_env	*tmp;
+	char	*last;
+
+	if (arg == NULL)
+	{
+		last = NULL;
+		tmp = env_v;
+		while (tmp != NULL)
+		{
+			last = sort_env(env_v, last);
+			tmp = tmp->next;
+		}
+		rep_env(&env_v, ft_strdup("?"), ft_strdup("0"), false);
+	}
+	else
+		export_var(env_v, arg);
 }
