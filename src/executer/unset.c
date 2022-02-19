@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 01:39:46 by tom               #+#    #+#             */
-/*   Updated: 2022/02/15 20:46:10 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/19 15:30:34 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,18 @@ void	unset(t_env **env_v, char *arg)
 	char	*name;
 	
 	name = arg;
-	if (ft_strcmp(name, "$?") == 0)
+	if (arg == NULL || ft_strcmp(name, "?") == 0)
+	{
+		rep_env(env_v, ft_strdup("?"), ft_strdup("0"), false);
 		return ;
-	if (search_env(*env_v, name) == true)
+	}
+	else if (ft_strchr(arg, '$') >= 0 || ft_strchr(arg, '/') >= 0)
+	{
+		ft_write_error("unset", arg, "not a valid identifier");
+		rep_env(env_v, ft_strdup("?"), ft_strdup("1"), false);
+		return ;
+	}
+	else if (search_env(*env_v, name) == true)
 		del_env(env_v, name);
+	rep_env(env_v, ft_strdup("?"), ft_strdup("0"), false);
 }
