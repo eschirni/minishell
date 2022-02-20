@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
+/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             *
 /*   Updated: 2022/02/20 20:18:34 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -23,7 +23,7 @@
 # include <errno.h> //errno
 # include <string.h> //strrerror
 # include <stdbool.h> //bools
-#include <fcntl.h>	//open
+# include <fcntl.h>	//open
 # include <limits.h>
 
 # define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
@@ -73,18 +73,19 @@ char	*ft_strcdup(char *s, char c, int start);
 char	*ft_strndup(const char *s1, int n);
 void	ft_lstadd_back(t_env **env_v, t_env *new);
 char	*ft_replace_word(char *s, char *replace);
+char	*ft_itoa(int n);
 int		ft_isalnum(int c);
 void	ft_free_tokens(t_token *tokens);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env_v);
-void	cd(char *path);
-void	pwd(void);
+void	cd(char *path, t_env *env_v);
+void	pwd(t_env *env_v);
 void	ft_exit(char **args, bool ctrl_d, t_env *env_v);
 void	env(t_env *env_v, char *argument);
 void	export(t_env *env_v, char *arg);
 void	unset(t_env **env_v, char *arg);
-void	echo(char **input);
+void	echo(char **input, t_env *env_v);
 
 //env handler
 void	init_env(t_env **env_v, char **envp);
@@ -108,7 +109,8 @@ int		redirections(char *left, char *right, char *operator);
 void	reset_fd(int og_fd, char *operator);
 void	exec_redirections(char **split, char **envp, t_env *env_v);
 char	*remove_spaces(char *s);
-bool 	check_quotes(char *s);
+bool	check_quotes(char *s);
+bool	in_quotes(char *s, int pos, char c, char c2);
 t_token	*lexer(char **line);
 
 #endif

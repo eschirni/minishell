@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:29:25 by tom               #+#    #+#             */
-/*   Updated: 2022/01/27 22:17:13 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 14:42:50 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	env(t_env *env_v, char *arg)
 			printf("%s=%s\n", tmp->name, tmp->value);
 		tmp = tmp->next;
 	}
+	rep_env(&env_v, ft_strdup("?"), ft_strdup("0"), false);
 }
