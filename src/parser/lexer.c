@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 14:02:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/20 19:25:19 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/20 23:11:33 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,9 @@ static void	get_tokens(t_token *tokens, char **line)
 	{
 		j = 0;
 		tokens->index = i;
-		if ((line[i][j + 1] == '\0' && ft_isalnum(line[i][j]) == 0)
-			|| ft_strcmp(line[i], "<<") == 0 || ft_strcmp(line[i], ">>") == 0)
-			input_token_data(tokens, line, i, j);
-		else
-		{
-			tokens->type = NONE;
+		input_token_data(tokens, line, i, j);
+		if (tokens->type == NONE)
 			tokens->value = line[i];
-		}
 		if (line[i + 1] != NULL)
 		{
 			new = init_tokens();
