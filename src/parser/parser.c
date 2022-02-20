@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 18:23:24 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:31:32 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 void	parser(char *line, char **envp, t_env *env_v)
 {
 	char	**input;
+	t_token	*tokens;
 
 	line = env_vars(line, env_v);
 	line = remove_spaces(line);
+	tokens = lexer(ft_split(line, ' '));
+	// ft_free_tokens(tokens); /*not sure where to put it yet*/
 	//remove " and '
 	if (check_redirections(line) == true)
 	{
