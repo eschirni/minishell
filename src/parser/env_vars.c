@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/18 21:22:48 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:05:43 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,32 @@ static char	*translate(char *s, t_env *env_v)
 	return (ret);
 }
 
-static bool	in_split_quotes(char **split, int pos, char c, char c2, int i)
+static bool	in_split_quotes(char **split, int pos)
 {
-	int		quotes;
+	int		i;
+	char	*tmp;
+	bool	b;
 
-	quotes = 0;
-	while (pos >= 0)
+	tmp = ft_strdup(split[0]);
+	if (tmp == NULL)
 	{
-		if (split[pos][i] == '\0')
-		{
-			i = 0;
-			pos--;
-			continue ;
-		}
-		while (split[pos][i] != '\0')
-		{
-			if (split[pos][i] == c)
-			{
-				if (in_split_quotes(split, pos, c2, c, i) == false)
-					quotes++;
-			}
-			i++;
-		}
-		pos--;
+		ft_write_error(NULL, NULL, "allocation error");
+		exit(1);
 	}
-	if (quotes % 2 == 0)
-		return (false);
-	return (true);
+	i = 1;
+	while (i < pos)
+	{
+		tmp = ft_append(tmp, split[i]);
+		if (tmp == NULL)
+		{
+			ft_write_error(NULL, NULL, "allocation error");
+			exit(1);
+		}
+		i++;
+	}
+	b = in_quotes(tmp, ft_strclen(tmp, '\0'), '\'', '"');
+	free(tmp);
+	return(b);
 }
 
 static char	*replace_env_var(char **split, t_env *env_v, int pos)
@@ -72,7 +71,7 @@ static char	*replace_env_var(char **split, t_env *env_v, int pos)
 	ret = NULL;
 	if (split[pos][0] != ' ' && split[pos][0] != '\'' && split[pos][0] != '"')
 	{
-		if (in_split_quotes(split, pos, '\'', '"', 0) == true)
+		if (in_split_quotes(split, pos) == true)
 		{
 			split[pos] = ft_insert("$", split[pos]);
 			return (split[pos]);

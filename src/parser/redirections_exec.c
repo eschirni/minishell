@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:31:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/18 22:02:47 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:10:04 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	count_redirections(char *s)
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if ((s[i] == '>' || s[i] == '<') && in_quotes(s, i, '\'', '"') == false)
+		if ((s[i] == '>' || s[i] == '<') && in_quotes(s, i, '"', '\'') == false)
 			count++;
 		i++;
 	}

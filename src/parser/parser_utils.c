@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 19:47:00 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:08:55 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	in_quotes(char *s, int pos, char quote, char other)
 	int	count_other;
 	int	i;
 
-	if (quote  == '\'' && in_quotes(s, pos, '"', '\'') == true)
+	if (quote  == '"' && in_quotes(s, pos, '\'', '"') == true)
 		return (true);
 	count = 0;
 	count_other = 0;
@@ -38,7 +38,7 @@ bool	in_quotes(char *s, int pos, char quote, char other)
 
 bool	check_quotes(char *s)
 {
-	if (in_quotes(s, ft_strclen(s, '\0'), '\'', '"') == false)
+	if (in_quotes(s, ft_strclen(s, '\0'), '"', '\'') == false)
 		return (true);
 	ft_write_error(NULL, NULL, "parse error");
 	return (false);
@@ -48,7 +48,7 @@ static bool	remove_space(char *s, int i)
 {
 	if (s[i] != ' ' || (s[i] == ' ' && s[i + 1] != ' '))
 		return (false);
-	else if ((s[i] == ' ' && in_quotes(s, i, '\'', '"') == true))
+	else if ((s[i] == ' ' && in_quotes(s, i, '"', '\'') == true))
 		return (false);
 	return (true);
 }
@@ -91,7 +91,7 @@ int	count_pipes(char *s)
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == '|' && !in_quotes(s, i, '\'', '"'))
+		if (s[i] == '|' && !in_quotes(s, i, '"', '\''))
 			count++;
 		i++;
 	}
