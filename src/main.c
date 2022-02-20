@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 12:55:05 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:46:20 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, handler);
 	while (true)
 	{
-		line = readline("minishell$ ");
+		line = readline(BLUE"minishell$ "RESETCOLOR);
 		if (line != NULL)
 			add_history(line);
 		else

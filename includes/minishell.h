@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 14:37:32 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             *
+/*   Updated: 2022/02/20 20:18:34 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -26,6 +27,8 @@
 # include <limits.h>
 
 # define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
+# define BLUE "\033[38;5;36m"
+# define RESETCOLOR "\033[0m"
 
 typedef	struct		s_env
 {
@@ -34,6 +37,24 @@ typedef	struct		s_env
 	bool			export;
 	struct s_env	*next;
 }					t_env;
+
+typedef enum e_token_type{
+	NONE,
+	ARG,
+	TRUNC,
+	INPUT,
+	APPEND,
+	PIPE,
+	HEREDOC
+}			t_token_type;
+
+typedef struct s_token
+{
+	int				index;
+	t_token_type	type;
+	char			*value;
+	struct s_token	*next;
+}				t_token;
 
 //utils
 void	*ft_calloc(size_t count, size_t size);
@@ -53,6 +74,8 @@ char	*ft_strndup(const char *s1, int n);
 void	ft_lstadd_back(t_env **env_v, t_env *new);
 char	*ft_replace_word(char *s, char *replace);
 char	*ft_itoa(int n);
+int		ft_isalnum(int c);
+void	ft_free_tokens(t_token *tokens);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env_v);
@@ -88,5 +111,6 @@ void	exec_redirections(char **split, char **envp, t_env *env_v);
 char	*remove_spaces(char *s);
 bool	check_quotes(char *s);
 bool	in_quotes(char *s, int pos, char c, char c2);
+t_token	*lexer(char **line);
 
 #endif

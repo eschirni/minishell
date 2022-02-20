@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 22:17:12 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 20:24:37 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 void	parser(char *line, char **envp, t_env *env_v)
 {
 	char	**input;
+	t_token	*tokens;
 
 	line = env_vars(line, env_v);
 	line = remove_spaces(line);
-	printf("%s\n", line);
+	tokens = lexer(ft_split(line, ' '));
 	//remove " and '
 	if (check_redirections(line) == true && check_quotes(line) == true)
 	{
@@ -38,5 +39,6 @@ void	parser(char *line, char **envp, t_env *env_v)
 		}
 		ft_free_split(input);
 	}
+	ft_free_tokens(tokens);
 	free(line);
 }
