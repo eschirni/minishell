@@ -6,27 +6,32 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 12:59:16 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 19:47:00 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	in_quotes(char *s, int pos, char c, char c2)
+bool	in_quotes(char *s, int pos, char quote, char other)
 {
-	int	quotes;
-		
-	quotes = 0;
-	while (pos >= 0)
+	int	count;
+	int	count_other;
+	int	i;
+
+	if (quote  == '\'' && in_quotes(s, pos, '"', '\'') == true)
+		return (true);
+	count = 0;
+	count_other = 0;
+	i = 0;
+	while (i < pos)
 	{
-		if (s[pos] == c)
-		{
-			if (in_quotes(s, pos, c2, c) == false)
-				quotes++;
-		}
-		pos--;
+		if (s[i] == other && count % 2 == 0)
+			count_other++;
+		else if (s[i] == quote && count_other % 2 == 0)
+			count++;
+		i++;
 	}
-	if (quotes % 2 == 0)
+	if (count % 2 == 0)
 		return (false);
 	return (true);
 }
