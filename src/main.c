@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 19:46:20 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/20 23:53:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1)
 	{
-		perror("Usage: ./minishell");
+		perror(RED"Usage: ./minishell");
 		return (1);
 	}
 	init_env(&env_v, envp);

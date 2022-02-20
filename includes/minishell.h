@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 23:20:33 by eschirni         ###   ########.fr       */
+/*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
+/*   Updated: 2022/02/20 23:51:36 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 # define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
 # define BLUE "\033[38;5;36m"
+# define RED "\033[0;31m"
 # define RESETCOLOR "\033[0m"
 
 typedef	struct		s_env

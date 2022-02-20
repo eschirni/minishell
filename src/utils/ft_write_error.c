@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:44:28 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 19:23:22 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 00:11:24 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 void	ft_write_error(char *command, char *arg, char *error)
 {
-	write(2, "minishell: ", 11);
-	if (command != NULL)
+	pid_t	fd;
+
+	fd = fork();
+	if (fd == 0)
 	{
-		write(2, command, ft_strclen(command, '\0'));
-		write(2, ": ", 2);
+		dup2(STDERR_FILENO, STDOUT_FILENO);
+		printf(RED "minishell: ");
+		if (command != NULL)
+			printf("%s: ", command);
+		if (arg != NULL)
+			printf("%s: ", arg);
+		printf("%s\n", error);
+		exit(0);
 	}
-	if (arg != NULL)
-	{
-		write(2, arg, ft_strclen(arg, '\0'));
-		write(2, ": ", 2);
-	}
-	write(2, error, ft_strclen(error, '\0'));
-	write(2, "\n", 1);
+	else
+		wait(NULL);
 }
