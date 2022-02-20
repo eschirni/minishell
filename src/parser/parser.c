@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 19:31:32 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/20 20:24:37 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ void	parser(char *line, char **envp, t_env *env_v)
 	line = env_vars(line, env_v);
 	line = remove_spaces(line);
 	tokens = lexer(ft_split(line, ' '));
-	// ft_free_tokens(tokens); /*not sure where to put it yet*/
 	//remove " and '
-	if (check_redirections(line) == true)
+	if (check_redirections(line) == true && check_quotes(line) == true)
 	{
 		if (count_pipes(line) > 0)
 		{
@@ -40,5 +39,6 @@ void	parser(char *line, char **envp, t_env *env_v)
 		}
 		ft_free_split(input);
 	}
+	ft_free_tokens(tokens);
 	free(line);
 }

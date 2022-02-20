@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/14 19:07:37 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/19 15:37:30 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ static int	free_arg(char **args, t_env *env_v)
 
 void	ft_exit(char **args, bool ctrl_d, t_env *env_v)
 {
-	if(ctrl_d == true)
+	if (ctrl_d == true)
 	{
+		rl_replace_line("", 0);
 		printf("\33[1A");
 		rl_on_new_line();
 		rl_redisplay();

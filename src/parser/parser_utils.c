@@ -6,36 +6,49 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/17 15:31:05 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/20 22:22:46 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static bool	in_quotes(char *s, int pos, char c)
+bool	in_quotes(char *s, int pos, char quote, char other)
 {
-	int	quotes;
+	int	count;
+	int	count_other;
+	int	i;
 
-	if (c == '\'' && in_quotes(s, pos, '"') == true)
-		return (true);		
-	quotes = 0;
-	pos--;
-	while (pos >= 0)
+	if (quote  == '"' && in_quotes(s, pos, '\'', '"') == true)
+		return (true);
+	count = 0;
+	count_other = 0;
+	i = 0;
+	while (i < pos)
 	{
-	if (s[pos] == c)
-		quotes++;
-		pos--;
+		if (s[i] == other && count % 2 == 0)
+			count_other++;
+		else if (s[i] == quote && count_other % 2 == 0)
+			count++;
+		i++;
 	}
-	if (quotes % 2 == 0)
+	if (count % 2 == 0)
 		return (false);
 	return (true);
 }
 
+bool	check_quotes(char *s)
+{
+	if (in_quotes(s, ft_strclen(s, '\0'), '"', '\'') == false)
+		return (true);
+	ft_write_error(NULL, NULL, "parse error");
+	return (false);
+}
+
 static bool	remove_space(char *s, int i)
 {
-	if (s[i] != ' ' || (s[i] == ' ' && s[i + 1] != ' '))
+	if (s[i] != ' ' || (i > 0 && s[i] == ' ' && s[i - 1] != ' '))
 		return (false);
-	else if ((s[i] == ' ' && in_quotes(s, i, '\'') == true))
+	else if ((s[i] == ' ' && in_quotes(s, i, '"', '\'') == true))
 		return (false);
 	return (true);
 }
@@ -78,7 +91,7 @@ int	count_pipes(char *s)
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == '|')
+		if (s[i] == '|' && !in_quotes(s, i, '"', '\''))
 			count++;
 		i++;
 	}
