@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             *
-/*   Updated: 2022/02/20 20:18:34 by eschirni         ###   ########.fr       */
+/*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
+/*   Updated: 2022/02/20 23:20:33 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
