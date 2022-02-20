@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 17:07:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 19:30:21 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/20 19:59:05 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # include <limits.h>
 
 # define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
+# define BLUE "\033[38;5;36m"
+# define RESETCOLOR "\033[0m"
 
 typedef	struct		s_env
 {
