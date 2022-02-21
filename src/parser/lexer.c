@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 14:02:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/20 23:11:33 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/21 04:55:13 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,27 @@ void	input_token_data(t_token *tokens, char **line, int i, int j)
 	if (ft_strcmp(&line[i][j], "|") == 0)
 	{
 		tokens->type = PIPE;
-		tokens->value = line[i];
+		tokens->value = ft_strdup(line[i]);
 	}
 	else if (ft_strcmp(&line[i][j], "<") == 0)
 	{
 		tokens->type = INPUT;
-		tokens->value = line[i];
+		tokens->value = ft_strdup(line[i]);
 	}
 	else if (ft_strcmp(&line[i][j], ">") == 0)
 	{
 		tokens->type = TRUNC;
-		tokens->value = line[i];
+		tokens->value = ft_strdup(line[i]);
 	}
 	else if (ft_strcmp(line[i], ">>") == 0)
 	{
 		tokens->type = APPEND;
-		tokens->value = line[i];
+		tokens->value = ft_strdup(line[i]);
 	}
 	else if (ft_strcmp(line[i], "<<") == 0)
 	{
 		tokens->type = HEREDOC;
-		tokens->value = line[i];
+		tokens->value = ft_strdup(line[i]);
 	}
 }
 
@@ -69,7 +69,7 @@ static void	get_tokens(t_token *tokens, char **line)
 		tokens->index = i;
 		input_token_data(tokens, line, i, j);
 		if (tokens->type == NONE)
-			tokens->value = line[i];
+			tokens->value = ft_strdup(line[i]);
 		if (line[i + 1] != NULL)
 		{
 			new = init_tokens();
