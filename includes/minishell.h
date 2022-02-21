@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 11:00:30 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:13:27 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_insert(char *start, char *end);
 size_t	ft_strclen(const char *s, char c);
 int		ft_atoi(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
-char	**ft_split(char *s, char c);
+char	**ft_split(const char *s, char c);
 int		ft_strchr(const char *s, int c);
 void	ft_write_error(char *command, char *arg, char *error);
 char	*ft_strdup(const char *s1);
@@ -77,6 +77,7 @@ char	*ft_itoa(int n);
 int		ft_isalnum(int c);
 void	ft_free_tokens(t_token *tokens);
 char	**ft_split_env(const char *s, char c);
+char	**ft_split_tokens(t_token *tokens, char c, int type);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env_v);
