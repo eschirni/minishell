@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 13:30:14 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:49:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*ft_itoa(int n);
 int		ft_isalnum(int c);
 void	ft_free_tokens(t_token *tokens);
 char	**ft_split_env(const char *s, char c);
+char	**ft_split_tokens(t_token *tokens, int type);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env_v);
