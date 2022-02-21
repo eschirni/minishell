@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 13:24:23 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/21 14:04:25 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@
 # include <fcntl.h>	//open
 # include <limits.h>
 
-# define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
+//# define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
 # define BLUE "\033[38;5;36m"
 # define RED "\033[0;31m"
 # define RESETCOLOR "\033[0m"
 
-typedef	struct		s_env
+typedef struct s_env
 {
 	char			*name;
 	char			*value;
