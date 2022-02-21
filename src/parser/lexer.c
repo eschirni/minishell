@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 14:02:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 05:42:36 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 12:24:17 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ t_token	*lexer(char **line)
 {
 	t_token	*tokens;
 
+	if (line == NULL)
+		return (NULL);
 	tokens = NULL;
 	tokens = init_tokens();
 	get_tokens(tokens, line);

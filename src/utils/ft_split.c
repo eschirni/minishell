@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:55:13 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 11:58:23 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 12:22:33 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char	**ft_split(char *s, char c)
 	if (s == NULL)
 		return (NULL);
 	string_count = ft_count_string(s, c);
+	if (string_count == 0)
+		return (NULL);
 	split = ft_calloc(string_count + 1, sizeof(char *));
 	if (split == NULL)
 		return (NULL);
