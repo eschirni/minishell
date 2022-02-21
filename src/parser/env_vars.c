@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 20:05:43 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 12:15:33 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static char	*split_env_vars(char *s, bool dol_at_end, t_env *env_v)
 	char	**split;
 	int		i;
 
-	split = ft_split(s, '$');
+	split = ft_split_env(s, '$');
 	if (split == NULL)
 		return (NULL);
 	i = 1;

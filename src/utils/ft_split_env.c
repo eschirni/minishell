@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/17 17:55:13 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 11:58:23 by eschirni         ###   ########.fr       */
+/*   Created: 2022/02/21 10:56:42 by eschirni          #+#    #+#             */
+/*   Updated: 2022/02/21 12:14:22 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*ft_create_array(size_t start, char *s, size_t chars)
+static char	*ft_create_array(size_t start, const char *s, size_t chars)
 {
 	char	*dst;
 	size_t	i;
@@ -29,7 +29,7 @@ static char	*ft_create_array(size_t start, char *s, size_t chars)
 	return (dst);
 }
 
-static char	*ft_inner_string(size_t *start, char *s, char c)
+static char	*ft_inner_string(size_t *start, const char *s, char c)
 {
 	size_t	chars;
 	size_t	i;
@@ -38,10 +38,10 @@ static char	*ft_inner_string(size_t *start, char *s, char c)
 	chars = 0;
 	while (*start < ft_strclen(s, '\0'))
 	{
-		if (s[*start] != c || in_quotes(s, i, '"', '\''))
+		if (s[*start] != c)
 		{
 			i = *start;
-			while (s[i] != '\0' && (s[i] != c || in_quotes(s, i, '"', '\'')))
+			while (i < ft_strclen(s, '\0') && s[i] != c)
 			{
 				chars++;
 				i++;
@@ -55,7 +55,7 @@ static char	*ft_inner_string(size_t *start, char *s, char c)
 	return (dst);
 }
 
-static int	ft_count_string(char *s, char c)
+static int	ft_count_string(const char *s, char c)
 {
 	size_t	i;
 	int		string_count;
@@ -64,10 +64,12 @@ static int	ft_count_string(char *s, char c)
 	string_count = 0;
 	while (i < ft_strclen(s, '\0'))
 	{
-		if (s[i] != c && !in_quotes(s, i, '"', '\''))
+		if (s[i] != c)
 		{
 			string_count++;
 			while (i < ft_strclen(s, '\0') && s[i] != c)
+				i++;
+			if (s[i] != '\0' && s[i + 1] == c)
 				i++;
 		}
 		i++;
@@ -75,7 +77,7 @@ static int	ft_count_string(char *s, char c)
 	return (string_count);
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split_env(const char *s, char c)
 {
 	int		string_count;
 	size_t	i;
@@ -85,6 +87,8 @@ char	**ft_split(char *s, char c)
 	if (s == NULL)
 		return (NULL);
 	string_count = ft_count_string(s, c);
+	if (string_count == 0)
+		return (NULL);
 	split = ft_calloc(string_count + 1, sizeof(char *));
 	if (split == NULL)
 		return (NULL);
