@@ -6,13 +6,13 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 04:47:40 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 04:57:29 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 05:08:16 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	replace_quotes(t_token *tokens)
+void	remove_quotes(t_token *tokens)
 {
 	t_token	*tmp;
 	char	*rep;
@@ -25,11 +25,11 @@ void	replace_quotes(t_token *tokens)
 		{
 			if (ft_strclen(tmp->value, '\0') >= 2)
 			{
-				i = 1;
-				rep = malloc(ft_strclen(tmp->value[0], '\0') - 1);
-				while (tmp->value[i + 1] != '\0')
+				i = 0;
+				rep = malloc(ft_strclen(tmp->value, '\0') - 1);
+				while (tmp->value[i + 2] != '\0')
 				{
-					rep[i] = tmp->value[i];
+					rep[i] = tmp->value[i + 1];
 					i++;
 				}
 				rep[i] = '\0';
@@ -51,9 +51,12 @@ void	replace_grep(t_token *tokens)
 	{		
 		if (ft_strcmp(tmp->value, "grep") == 0)
 		{
-			rep = ft_replace_word(tmp->value, "grep -a");
-			free(tmp->value);
-			tmp->value = rep;
+			if (tmp->next != NULL && ft_strcmp(tmp->next->value, "grep") != 0)
+			{
+				rep = ft_replace_word(tmp->value, "grep -a");
+				free(tmp->value);
+				tmp->value = rep;
+			}
 		}
 		tmp = tmp->next;
 	}

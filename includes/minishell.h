@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 04:58:36 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 05:06:09 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,6 @@ bool	check_quotes(char *s);
 bool	in_quotes(char *s, int pos, char c, char c2);
 t_token	*lexer(char **line);
 void	replace_grep(t_token *tokens);
-void	replace_quotes(t_token *tokens);
+void	remove_quotes(t_token *tokens);
 
 #endif
