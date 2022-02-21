@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/20 23:51:36 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 04:58:36 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	rep_env(t_env **env_v, char *name, char *value, bool export);
 void	parser(char *line, char **envp, t_env *env_v);
 char	*env_vars(char *s, t_env *env_v);
 bool	check_redirections(char *s);
-int		count_pipes(char *s);
+int		count_pipes(t_token *tokens);
 void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v);
 int		count_redirections(char *s);
 int		redirections(char *left, char *right, char *operator);
@@ -112,5 +112,7 @@ char	*remove_spaces(char *s);
 bool	check_quotes(char *s);
 bool	in_quotes(char *s, int pos, char c, char c2);
 t_token	*lexer(char **line);
+void	replace_grep(t_token *tokens);
+void	replace_quotes(t_token *tokens);
 
 #endif

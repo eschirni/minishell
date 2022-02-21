@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 20:24:37 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 04:58:52 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,30 @@ void	parser(char *line, char **envp, t_env *env_v)
 	line = env_vars(line, env_v);
 	line = remove_spaces(line);
 	tokens = lexer(ft_split(line, ' '));
+	replace_grep(tokens);
+	replace_quotes(tokens);
+	t_token	*tmp;
+	tmp = tokens;
+	while (tmp != NULL)
+	{
+		printf("%s\n", tmp->value);
+		tmp = tmp->next;
+	}
 	//remove " and '
 	if (check_redirections(line) == true && check_quotes(line) == true)
 	{
-		if (count_pipes(line) > 0)
+		if (count_pipes(tokens) > 0)
 		{
 			input = ft_split(line, '|');
-			if (input[0] != NULL) // changed to NULL to silence warnings
-				ft_pipe(input, count_pipes(line), envp, env_v);
+			if (input[0] != NULL)
+				ft_pipe(input, count_pipes(tokens), envp, env_v);
 		}
 		else
 		{
 			input = ft_split(line, ' ');
 			if (count_redirections(line) > 0)
 				exec_redirections(input, envp, env_v);
-			else if (input[0] != NULL) // changed to NULL to silence warnings
+			else if (input[0] != NULL)
 				executer(envp, input, env_v);
 		}
 		ft_free_split(input);

@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 22:22:46 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 04:21:51 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,18 @@ char	*remove_spaces(char *s)
 	return (ret);
 }
 
-int	count_pipes(char *s)
+int	count_pipes(t_token *tokens)
 {
-	int	count;
-	int	i;
+	int		count;
+	t_token	*tmp;
 
-	i = 0;
+	tmp = tokens;
 	count = 0;
-	while (s[i] != '\0')
+	while (tmp != NULL)
 	{
-		if (s[i] == '|' && !in_quotes(s, i, '"', '\''))
+		if (tmp->type == PIPE)
 			count++;
-		i++;
+		tmp = tmp->next;
 	}
 	return (count);
 }
