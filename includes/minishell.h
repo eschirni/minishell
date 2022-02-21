@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 11:00:30 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 13:23:27 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int		count_redirections(char *s);
 int		redirections(char *left, char *right, char *operator);
 void	reset_fd(int og_fd, char *operator);
 void	exec_redirections(char **split, char **envp, t_env *env_v);
+char	*exec_heredoc(char *delimiter);
 char	*remove_spaces(char *s);
 bool	check_quotes(char *s);
 bool	in_quotes(char *s, int pos, char c, char c2);
