@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 14:02:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 04:55:13 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/21 05:42:36 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ t_token	*init_tokens(void)
 	return (new);
 }
 
-void	input_token_data(t_token *tokens, char **line, int i, int j)
+void	input_token_data(t_token *tokens, char **line, int i)
 {
-	if (ft_strcmp(&line[i][j], "|") == 0)
+	if (ft_strcmp(line[i], "|") == 0)
 	{
 		tokens->type = PIPE;
 		tokens->value = ft_strdup(line[i]);
 	}
-	else if (ft_strcmp(&line[i][j], "<") == 0)
+	else if (ft_strcmp(line[i], "<") == 0)
 	{
 		tokens->type = INPUT;
 		tokens->value = ft_strdup(line[i]);
 	}
-	else if (ft_strcmp(&line[i][j], ">") == 0)
+	else if (ft_strcmp(line[i], ">") == 0)
 	{
 		tokens->type = TRUNC;
 		tokens->value = ft_strdup(line[i]);
@@ -60,14 +60,12 @@ static void	get_tokens(t_token *tokens, char **line)
 {
 	t_token	*new;
 	int		i;
-	int		j;
 
 	i = 0;
 	while (line[i] != NULL)
 	{
-		j = 0;
 		tokens->index = i;
-		input_token_data(tokens, line, i, j);
+		input_token_data(tokens, line, i);
 		if (tokens->type == NONE)
 			tokens->value = ft_strdup(line[i]);
 		if (line[i + 1] != NULL)

@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 05:06:09 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 05:49:03 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ void	parser(char *line, char **envp, t_env *env_v)
 	tokens = lexer(ft_split(line, ' '));
 	replace_grep(tokens);
 	remove_quotes(tokens);
-	t_token	*tmp;
-	tmp = tokens;
-	while (tmp != NULL)
-	{
-		printf("%s\n", tmp->value);
-		tmp = tmp->next;
-	}
-	//remove " and '
 	if (check_redirections(line) == true && check_quotes(line) == true)
 	{
 		if (count_pipes(tokens) > 0)
