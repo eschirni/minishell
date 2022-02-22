@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 14:04:25 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/22 16:52:38 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,25 @@
 # include <fcntl.h>	//open
 # include <limits.h>
 
-//# define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
+# define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
 # define BLUE "\033[38;5;36m"
 # define RED "\033[0;31m"
 # define RESETCOLOR "\033[0m"
+
+typedef struct s_command
+{
+	char			*cmd;
+	char			*arguments;
+	bool			redirection;
+	pid_t			fd;
+	struct s_cmd	*next;
+}					t_command;
+
+typedef struct s_cmd_table
+{
+	int				count;
+	struct s_cmd	*command;
+}					t_cmd_table;
 
 typedef struct s_env
 {
