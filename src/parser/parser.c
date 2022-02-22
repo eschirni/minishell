@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 14:13:23 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/22 16:52:49 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	parser(char *line, char **envp, t_env *env_v)
 	{
 		if (count_pipes(tokens) > 0)
 		{
-			input = ft_split_tokens(tokens, PIPE);
-			PRINT_HERE();
+			input = ft_split(line, '|');
 			if (input[0] != NULL)
 				ft_pipe(input, count_pipes(tokens), envp, env_v);
 		}
