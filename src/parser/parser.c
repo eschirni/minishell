@@ -6,16 +6,39 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/22 16:52:49 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:37:48 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	parser(char *line, char **envp, t_env *env_v)
+static void	parse_redirections(char *line, char **envp, t_env *env_v)
 {
 	char	**input;
+	int		pid;
+	int		fd;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		int df;
+		fd = redirections("cat Makefile", "test", ">");
+		input = ft_split(line, ' ');
+		if (input[0] != NULL)
+			executer(envp, input, env_v);
+		close(fd);
+		ft_free_split(input);
+		ft_free_split(input);
+		exit(0);
+	}
+	else
+		wait (NULL);
+}
+
+void	parser(char *line, char **envp, t_env *env_v)
+{
 	t_token	*tokens;
+	char	**input;
 
 	line = env_vars(line, env_v);
 	line = remove_spaces(line);
@@ -24,21 +47,15 @@ void	parser(char *line, char **envp, t_env *env_v)
 	remove_quotes(tokens);
 	if (tokens != NULL && check_redirections(line) && check_quotes(line))
 	{
-		if (count_pipes(tokens) > 0)
-		{
-			input = ft_split(line, '|');
-			if (input[0] != NULL)
-				ft_pipe(input, count_pipes(tokens), envp, env_v);
-		}
+		if (has_redirections(tokens) == true)
+			parse_redirections(line, envp, env_v);
 		else
 		{
 			input = ft_split(line, ' ');
-			if (count_redirections(line) > 0)
-				exec_redirections(input, envp, env_v);
-			else if (input[0] != NULL)
-				executer(envp, input, env_v);
+			executer(envp, input, env_v);
+			ft_free_split(input);
 		}
-		ft_free_split(input);
+			
 	}
 	ft_free_tokens(tokens);
 	free(line);

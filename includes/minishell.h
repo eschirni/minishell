@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/23 13:55:56 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:15:36 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,13 +116,12 @@ void	add_env(t_env **env_v, char *name, char *value, bool export);
 void	rep_env(t_env **env_v, char *name, char *value, bool export);
 
 //parser
-int		count_redirections(char *s);
+bool	has_redirections(t_token *tokens);
 int		count_pipes(t_token *tokens);
 int		redirections(char *left, char *right, char *operator);
 void	parser(char *line, char **envp, t_env *env_v);
 void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v);
 void	reset_fd(int og_fd, char *operator);
-void	exec_redirections(char **split, char **envp, t_env *env_v);
 void	replace_grep(t_token *tokens);
 void	remove_quotes(t_token *tokens);
 char	*env_vars(char *s, t_env *env_v);

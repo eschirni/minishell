@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 17:52:08 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 14:10:32 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/23 17:23:47 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	re_input(char *right, int fd)
 		return (-1); // error message
 	tmp_in = dup(STDIN_FILENO);
 	dup2(fd, STDIN_FILENO);
-	return (tmp_in);
+	return (fd);
 }
 
 static int	re_output(char *right, int fd)
@@ -41,7 +41,7 @@ static int	re_output(char *right, int fd)
 		return (-1); // error message
 	tmp_out = dup(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
-	return (tmp_out);
+	return (fd);
 }
 
 int	redirections(char *left, char *right, char *operator)
@@ -60,7 +60,7 @@ int	redirections(char *left, char *right, char *operator)
 			return (-1); // error message
 		tmp_out = dup(STDOUT_FILENO);
 		dup2(fd, STDOUT_FILENO);
-		return (tmp_out);
+		return (fd);
 	}
 	return (-1);
 }
