@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 04:47:40 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/23 20:49:33 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 22:40:59 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,37 @@ void	remove_quotes(t_token *tokens)
 	}
 }
 
-void	replace_grep(t_token *tokens)
+static bool	is_grep(char *s, int pos)
 {
-	t_token	*tmp;
-	char	*rep;
+	pos--;
+	if (pos < 2 || in_quotes(s, pos, '"', '\'') == true)
+		return (false);
+	if (s[pos] == 'e' && s[pos - 1] == 'r' && s[pos - 2] == 'g')
+		return (true);
+	return (false);
+}
 
-	tmp = tokens;
-	while (tmp != NULL)
-	{		
-		if (ft_strcmp(tmp->value, "grep") == 0)
+char	*replace_grep(char *s)
+{
+	char	*ret;
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	ret = NULL;
+	while (s[i] != '\0')
+	{
+		if (s[i] == 'p' && is_grep(s, i) == true)
 		{
-			if (tmp->next != NULL && ft_strcmp(tmp->next->value, "grep") != 0)
-			{
-				rep = ft_replace_word(tmp->value, "grep -a");
-				free(tmp->value);
-				tmp->value = rep;
-			}
+			tmp = ft_strndup(s, i - 3);
+			ret = ft_replace_word(&s[i], "grep -a");
+			ret = ft_insert(tmp, ret);
+			free(tmp);
 		}
-		tmp = tmp->next;
+		i++;
 	}
+	if (ret == NULL)
+		return (s);
+	free(s);
+	return (ret);
 }
