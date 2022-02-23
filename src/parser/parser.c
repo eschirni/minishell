@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/23 17:37:48 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:34:08 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	parse_redirections(char *line, char **envp, t_env *env_v)
 	pid = fork();
 	if (pid == 0)
 	{
-		int df;
 		fd = redirections("cat Makefile", "test", ">");
 		input = ft_split(line, ' ');
 		if (input[0] != NULL)
@@ -43,19 +42,20 @@ void	parser(char *line, char **envp, t_env *env_v)
 	line = env_vars(line, env_v);
 	line = remove_spaces(line);
 	tokens = lexer(ft_split(line, ' '));
-	replace_grep(tokens);
-	remove_quotes(tokens);
-	if (tokens != NULL && check_redirections(line) && check_quotes(line))
+	if (line[0] != '\0' && check_redirections(line) && check_quotes(line))
 	{
+		replace_grep(tokens);
+		remove_quotes(tokens);
 		if (has_redirections(tokens) == true)
 			parse_redirections(line, envp, env_v);
 		else
 		{
-			input = ft_split(line, ' ');
-			executer(envp, input, env_v);
-			ft_free_split(input);
+			input = convert_tokens(tokens);
+			if (input != NULL && input[0] != NULL)
+				executer(envp, input, env_v);
+			if (input != NULL)
+				ft_free_split(input);
 		}
-			
 	}
 	ft_free_tokens(tokens);
 	free(line);

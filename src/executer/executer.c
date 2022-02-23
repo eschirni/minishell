@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 15:36:56 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:35:24 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 		ft_write_error(NULL, commands[0], "No such file or directory");
 		return ;
 	}
-	path_vars = ft_split(get_value(env_v, "PATH"), ':'); //segfault (remove search_name from header)
+	path_vars = ft_split(get_value(env_v, "PATH"), ':');
 	while (error == 127 && path_vars[i] != NULL)
 	{
 		path = ft_strdup(commands[0]);

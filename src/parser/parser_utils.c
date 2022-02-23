@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 04:21:51 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 21:33:18 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,30 @@ char	*remove_spaces(char *s)
 	return (ret);
 }
 
-int	count_pipes(t_token *tokens)
+char	**convert_tokens(t_token *tokens)
 {
-	int		count;
+	char	**ret;
 	t_token	*tmp;
+	int		i;
 
 	tmp = tokens;
-	count = 0;
-	while (tmp != NULL)
+	i = 0;
+	while (tmp != NULL && tmp->type == NONE) //add smth for pipes
 	{
-		if (tmp->type == PIPE)
-			count++;
 		tmp = tmp->next;
+		i++;
 	}
-	return (count);
+	ret = ft_calloc(i + 1, sizeof(char *));
+	if (ret == NULL)
+		return (NULL);
+	tmp = tokens;
+	i = 0;
+	while (tmp != NULL && tmp->type == NONE) //add smth for pipes
+	{
+		ret[i] = ft_strdup(tmp->value);
+		tmp = tmp->next;
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
 }

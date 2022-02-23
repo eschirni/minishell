@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:09:22 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/19 15:36:18 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 18:02:50 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	cd(char *path, t_env *env_v)
 	int		ret;
 	char	*home;
 
+	if (path == NULL)
+		return ;
 	if (ft_strchr(path, '~') == -1)
 		ret = chdir(path);
 	else

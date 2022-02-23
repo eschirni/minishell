@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/23 17:15:36 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 19:40:40 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_lstadd_back(t_env **env_v, t_env *new);
 void	ft_free_tokens(t_token *tokens);
 char	*ft_append(char *start, char *end);
 char	*ft_insert(char *start, char *end);
-char	**ft_split(const char *s, char c);
+char	**ft_split(char *s, char c);
 char	*ft_strdup(const char *s1);
 char	*ft_strcdup(char *s, char c, int start);
 char	*ft_strndup(const char *s1, int n);
@@ -117,7 +117,6 @@ void	rep_env(t_env **env_v, char *name, char *value, bool export);
 
 //parser
 bool	has_redirections(t_token *tokens);
-int		count_pipes(t_token *tokens);
 int		redirections(char *left, char *right, char *operator);
 void	parser(char *line, char **envp, t_env *env_v);
 void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v);
@@ -127,6 +126,7 @@ void	remove_quotes(t_token *tokens);
 char	*env_vars(char *s, t_env *env_v);
 char	*exec_heredoc(char *delimiter);
 char	*remove_spaces(char *s);
+char	**convert_tokens(t_token *tokens);
 bool	check_quotes(char *s);
 bool	check_redirections(char *s);
 bool	in_quotes(char *s, int pos, char c, char c2);
