@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:31:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/22 17:14:37 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/23 13:55:29 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,18 @@ void	exec_redirections(char **split, char **envp, t_env *env_v)
 	}
 }
 
-int	count_redirections(t_token *tokens)
+int	count_redirections(char *s)
 {
-	int		count;
-	t_token	*tmp;
+	int	count;
+	int	i;
 
-	tmp = tokens;
+	i = 0;
 	count = 0;
-	while (tmp != NULL)
+	while (s[i] != '\0')
 	{
-		if (tmp->type == TRUNC || tmp->type == INPUT || tmp->type == APPEND)
-		tmp = tmp->next;
+		if ((s[i] == '>' || s[i] == '<') && in_quotes(s, i, '"', '\'') == false)
+			count++;
+		i++;
 	}
 	return (count);
 }
