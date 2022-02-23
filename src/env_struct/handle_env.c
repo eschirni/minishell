@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/16 14:31:19 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/21 14:03:20 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_env	*new_node(void)
 {
-	t_env *new;
+	t_env	*new;
 
 	new = malloc(sizeof(t_env));
 	new->name = NULL;

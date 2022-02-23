@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 14:11:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 14:05:17 by tom              ###   ########.fr       */
+/*   Created: 2022/02/21 13:23:10 by tom               #+#    #+#             */
+/*   Updated: 2022/02/21 13:25:51 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_isdigit(int c)
+char	*exec_heredoc(char *delimiter)
 {
-	if (c < 48 || c > 57)
-		return (0);
-	else
-		return (1);
-}
+	char	*input;
+	char	*tmp;
 
-static int	ft_isalpha(int c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	else
-		return (0);
-}
-
-int	ft_isalnum(int c)
-{
-	if (ft_isalpha(c) || ft_isdigit(c))
-		return (1);
-	else
-		return (0);
+	input = malloc(1);
+	if (input == NULL)
+		return (NULL);
+	while (1)
+	{
+		tmp = readline("> ");
+		if (ft_strcmp(tmp, delimiter) == 0)
+			break ;
+		tmp = ft_append(tmp, "\n");
+		input = ft_append(input, tmp);
+		free(tmp);
+	}
+	return (input);
 }

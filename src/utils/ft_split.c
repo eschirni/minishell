@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static char	*ft_create_array(size_t start, char *s, size_t chars)
+static char	*ft_create_array(size_t start, const char *s, size_t chars)
 {
 	char	*dst;
 	size_t	i;
@@ -29,7 +29,7 @@ static char	*ft_create_array(size_t start, char *s, size_t chars)
 	return (dst);
 }
 
-static char	*ft_inner_string(size_t *start, char *s, char c)
+static char	*ft_inner_string(size_t *start, const char *s, char c)
 {
 	size_t	chars;
 	size_t	i;
@@ -38,10 +38,10 @@ static char	*ft_inner_string(size_t *start, char *s, char c)
 	chars = 0;
 	while (*start < ft_strclen(s, '\0'))
 	{
-		if (s[*start] != c || in_quotes(s, i, '"', '\''))
+		if (s[*start] != c)
 		{
 			i = *start;
-			while (s[i] != '\0' && (s[i] != c || in_quotes(s, i, '"', '\'')))
+			while (i < ft_strclen(s, '\0') && s[i] != c)
 			{
 				chars++;
 				i++;
@@ -55,7 +55,7 @@ static char	*ft_inner_string(size_t *start, char *s, char c)
 	return (dst);
 }
 
-static int	ft_count_string(char *s, char c)
+static int	ft_count_string(const char *s, char c)
 {
 	size_t	i;
 	int		string_count;
@@ -64,7 +64,7 @@ static int	ft_count_string(char *s, char c)
 	string_count = 0;
 	while (i < ft_strclen(s, '\0'))
 	{
-		if (s[i] != c && !in_quotes(s, i, '"', '\''))
+		if (s[i] != c)
 		{
 			string_count++;
 			while (i < ft_strclen(s, '\0') && s[i] != c)
@@ -75,18 +75,14 @@ static int	ft_count_string(char *s, char c)
 	return (string_count);
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	int		string_count;
 	size_t	i;
 	size_t	start;
 	char	**split;
 
-	if (s == NULL)
-		return (NULL);
 	string_count = ft_count_string(s, c);
-	if (string_count == 0)
-		return (NULL);
 	split = ft_calloc(string_count + 1, sizeof(char *));
 	if (split == NULL)
 		return (NULL);

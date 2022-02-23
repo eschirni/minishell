@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
 /*   Updated: 2022/02/23 13:55:56 by eschirni         ###   ########.fr       */
@@ -30,7 +30,22 @@
 # define RED "\033[0;31m"
 # define RESETCOLOR "\033[0m"
 
-typedef	struct		s_env
+typedef struct s_command
+{
+	char				*cmd;
+	char				*arguments;
+	bool				redirection;
+	pid_t				fd;
+	struct s_command	*next;
+}						t_command;
+
+typedef struct s_cmd_table
+{
+	int				count;
+	struct s_cmd	*command;
+}					t_cmd_table;
+
+typedef struct s_env
 {
 	char			*name;
 	char			*value;
@@ -57,27 +72,27 @@ typedef struct s_token
 }				t_token;
 
 //utils
-void	*ft_calloc(size_t count, size_t size);
-char	*ft_append(char *start, char *end);
-char	*ft_insert(char *start, char *end);
-size_t	ft_strclen(const char *s, char c);
 int		ft_atoi(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
-char	**ft_split(char *s, char c);
 int		ft_strchr(const char *s, int c);
+int		ft_isalnum(int c);
+void	*ft_calloc(size_t count, size_t size);
 void	ft_write_error(char *command, char *arg, char *error);
-char	*ft_strdup(const char *s1);
-bool	ft_isnum(char *s);
 void	ft_free_split(char **s);
+void	ft_lstadd_back(t_env **env_v, t_env *new);
+void	ft_free_tokens(t_token *tokens);
+char	*ft_append(char *start, char *end);
+char	*ft_insert(char *start, char *end);
+char	**ft_split(const char *s, char c);
+char	*ft_strdup(const char *s1);
 char	*ft_strcdup(char *s, char c, int start);
 char	*ft_strndup(const char *s1, int n);
-void	ft_lstadd_back(t_env **env_v, t_env *new);
 char	*ft_replace_word(char *s, char *replace);
 char	*ft_itoa(int n);
-int		ft_isalnum(int c);
-void	ft_free_tokens(t_token *tokens);
 char	**ft_split_env(const char *s, char c);
 char	**ft_split_tokens(t_token *tokens, int type);
+bool	ft_isnum(char *s);
+size_t	ft_strclen(const char *s, char c);
 
 //executer
 void	executer(char **envp, char **commands, t_env *env_v);
@@ -91,30 +106,31 @@ void	echo(char **input, t_env *env_v);
 
 //env handler
 void	init_env(t_env **env_v, char **envp);
-char	*get_value(t_env *env_v, char *name);
 void	free_env(t_env **env_v);
-t_env	*new_node(void);
+char	*get_value(t_env *env_v, char *name);
 bool	search_env(t_env *env_v, char *name);
+t_env	*new_node(void);
 
 //env utils
 void	add_env(t_env **env_v, char *name, char *value, bool export);
 void	rep_env(t_env **env_v, char *name, char *value, bool export);
 
 //parser
-void	parser(char *line, char **envp, t_env *env_v);
-char	*env_vars(char *s, t_env *env_v);
-bool	check_redirections(char *s);
-int		count_pipes(t_token *tokens);
-void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v);
 int		count_redirections(char *s);
+int		count_pipes(t_token *tokens);
 int		redirections(char *left, char *right, char *operator);
+void	parser(char *line, char **envp, t_env *env_v);
+void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v);
 void	reset_fd(int og_fd, char *operator);
 void	exec_redirections(char **split, char **envp, t_env *env_v);
-char	*remove_spaces(char *s);
-bool	check_quotes(char *s);
-bool	in_quotes(char *s, int pos, char c, char c2);
-t_token	*lexer(char **line);
 void	replace_grep(t_token *tokens);
 void	remove_quotes(t_token *tokens);
+char	*env_vars(char *s, t_env *env_v);
+char	*exec_heredoc(char *delimiter);
+char	*remove_spaces(char *s);
+bool	check_quotes(char *s);
+bool	check_redirections(char *s);
+bool	in_quotes(char *s, int pos, char c, char c2);
+t_token	*lexer(char **line);
 
 #endif

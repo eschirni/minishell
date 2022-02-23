@@ -69,11 +69,5 @@ char	**ft_split_tokens(t_token *tokens, int type)
 		size++;
 		tmp = tmp->next;
 	}
-	// i = 0;
-	// while (split[i] != NULL)
-	// {
-	// 	printf("%s\n", split[i]);
-	// 	i++;
-	// }
 	return (split);
 }
