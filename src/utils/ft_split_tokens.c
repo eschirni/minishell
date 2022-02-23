@@ -6,13 +6,13 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:38:32 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 13:04:09 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/21 14:13:16 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*inner_string(int pos, t_token *tokens)
+static char	*inner_string(int end, t_token *tokens)
 {
 	char	*ret;
 	int		i;
@@ -21,7 +21,7 @@ static char	*inner_string(int pos, t_token *tokens)
 	i = 1;
 	tmp = tokens->next;
 	ret = ft_strdup(tokens->value);
-	while (i < pos)
+	while (i < end)
 	{
 		ret = ft_append(ret, tmp->value);
 		tmp = tmp->next;
@@ -30,7 +30,7 @@ static char	*inner_string(int pos, t_token *tokens)
 	return (ret);
 }
 
-static int	ft_count_string(t_token *tokens, char c, int type)
+static int	ft_count_string(t_token *tokens, int type)
 {
 	t_token	*tmp;
 	int		i;
@@ -39,32 +39,34 @@ static int	ft_count_string(t_token *tokens, char c, int type)
 	i = 1;
 	while (tmp != NULL)
 	{
-		if (tmp->value == &c && type == tmp->type)
+		if (type == tmp->type)
 			i++;
 		tmp = tmp->next;
 	}
 	return (i);
 }
 
-char	**ft_split_tokens(t_token *tokens, char c, int type)
+char	**ft_split_tokens(t_token *tokens, int type)
 {
 	t_token	*tmp;
 	char	**split;
 	int		size;
 	int		i;
 
-	size = ft_count_string(tokens, c, type);
-	split = malloc(size + 1);
+	size = ft_count_string(tokens, type);
+	split = malloc(size + 1 * sizeof(char *));
 	split[size] = NULL;
 	i = 0;
+	size = 0;
 	tmp = tokens;
 	while (tmp != NULL)
 	{
-		if (tmp->value == &c && type == tmp->type)
+		if (type != tmp->type)
 		{
-			split[i] = inner_string(i, tokens);
+			split[i] = inner_string(size, tokens);
 			i++;
 		}
+		size++;
 		tmp = tmp->next;
 	}
 	return (split);

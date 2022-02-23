@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/22 16:56:20 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/23 13:55:56 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*ft_strndup(const char *s1, int n);
 char	*ft_replace_word(char *s, char *replace);
 char	*ft_itoa(int n);
 char	**ft_split_env(const char *s, char c);
-char	**ft_split_tokens(t_token *tokens, char c, int type);
+char	**ft_split_tokens(t_token *tokens, int type);
 bool	ft_isnum(char *s);
 size_t	ft_strclen(const char *s, char c);
 
