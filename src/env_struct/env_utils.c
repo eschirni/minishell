@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:29:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/15 22:34:45 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/24 22:20:53 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	rep_env(t_env **env_v, char *name, char *value, bool export)
 		return ;
 	}
 	while (tmp != NULL && ft_strcmp(tmp->name, name) != 0)
-	{
 		tmp = tmp->next;
-	}
 	if (tmp == NULL)
 		return ;
 	free(tmp->value);
