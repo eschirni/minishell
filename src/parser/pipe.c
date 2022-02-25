@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:20:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/25 21:47:30 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/25 21:55:05 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
 	i = 0;
 	tmp = 0;
 	input = ft_calloc(3, sizeof(char *));
-	input[0] = "cat Makefile";
-	input[1] = "grep #";
+	input[0] = ft_strdup("cat Makefile");
+	input[1] = ft_strdup("grep #");
 	input[2] = NULL;
 	while (input[i] != NULL)
 	{
