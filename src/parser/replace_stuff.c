@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 04:47:40 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/23 22:40:59 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/25 18:08:29 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,39 +39,4 @@ void	remove_quotes(t_token *tokens)
 		}
 		tmp = tmp->next;
 	}
-}
-
-static bool	is_grep(char *s, int pos)
-{
-	pos--;
-	if (pos < 2 || in_quotes(s, pos, '"', '\'') == true)
-		return (false);
-	if (s[pos] == 'e' && s[pos - 1] == 'r' && s[pos - 2] == 'g')
-		return (true);
-	return (false);
-}
-
-char	*replace_grep(char *s)
-{
-	char	*ret;
-	char	*tmp;
-	int		i;
-
-	i = 0;
-	ret = NULL;
-	while (s[i] != '\0')
-	{
-		if (s[i] == 'p' && is_grep(s, i) == true)
-		{
-			tmp = ft_strndup(s, i - 3);
-			ret = ft_replace_word(&s[i], "grep -a");
-			ret = ft_insert(tmp, ret);
-			free(tmp);
-		}
-		i++;
-	}
-	if (ret == NULL)
-		return (s);
-	free(s);
-	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/25 17:56:14 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/25 18:08:35 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ static void	remove_heredoc(char ** envp, t_env *env_v)
 	}
 }
 
-static void	parse_redirections(char *line, char **envp, t_env *env_v, t_token *tokens)
+static void	parse_redirections(char **envp, t_env *env_v, t_token *tokens)
 {
 	char	**input;
 	int		pid;
@@ -139,9 +139,7 @@ static void	parse_redirections(char *line, char **envp, t_env *env_v, t_token *t
 			dup2(fd_in, STDIN_FILENO);
 		if (fd_out != -1)
 			dup2(fd_out, STDOUT_FILENO);
-		input = ft_calloc(2, sizeof(char *));
-		input[0] = ft_strdup("cat");
-		input[1] = NULL;
+		input = convert_tokens(tokens);
 		if (input[0] != NULL)
 			executer(envp, input, env_v);
 		ft_free_split(input);
@@ -165,14 +163,13 @@ void	parser(char *line, char **envp, t_env *env_v)
 	char	**input;
 
 	line = env_vars(line, env_v);
-	line = replace_grep(line);
 	line = remove_spaces(line);
 	tokens = lexer(ft_split(line, ' '));
 	if (line[0] != '\0' && check_redirections(line) && check_quotes(line))
 	{
 		remove_quotes(tokens);
 		if (has_redirections(tokens) == true)
-			parse_redirections(line, envp, env_v, tokens);
+			parse_redirections(envp, env_v, tokens);
 		else
 		{
 			input = convert_tokens(tokens);
