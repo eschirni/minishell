@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:20:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/21 14:12:34 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/25 21:47:30 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +44,75 @@ static void	pipe_last(char *input, int *fd, char **envp, t_env *env_v, int *tmp)
 	exit(1);
 }
 
-void	ft_pipe(char **input, int pipe_count, char **envp, t_env *env_v)
+static char	**split_tokens(t_token *tokens)
+{
+	char	**ret;
+	t_token	*tmp;
+	int		i;
+
+	tmp = tokens;
+	i = 1;
+	while (tmp != NULL && tmp->type == NONE) //add smth for pipes
+	{
+		if (tmp->type == PIPE)
+			i++;
+		tmp = tmp->next;
+	}
+	ret = ft_calloc(i + 1, sizeof(char *));
+	if (ret == NULL)
+		return (NULL);
+	tmp = tokens;
+	i = 0;
+	while (tmp != NULL) //add smth for pipes
+	{
+		if (tmp->type == PIPE)
+			tmp = tmp->next;
+		ret[i] = ft_strdup(tmp->value);
+		tmp = tmp->next;
+		while (tmp != NULL && tmp->type != PIPE)
+		{
+			ret[i] = ft_append(ret[i], " ");
+			ret[i] = ft_append(ret[i], tmp->value);
+			tmp = tmp->next;
+		}
+		i++;
+	}
+	ret[i] = NULL;
+	return (ret);
+}
+
+void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
 {
 	int		fd[2];
 	int		i;
-	int		cmd;
 	int		tmp;
 	pid_t	pid;
+	char	**input;
 
-	cmd = 0;
-	i = pipe_count;
-	while (i >= 0)
+	i = 0;
+	tmp = 0;
+	input = ft_calloc(3, sizeof(char *));
+	input[0] = "cat Makefile";
+	input[1] = "grep #";
+	input[2] = NULL;
+	while (input[i] != NULL)
 	{
 		if (pipe(fd) == -1)
 			exit(1);
 		pid = fork();
 		if (pid == 0)
 		{
-			if (i == 0)
-				pipe_last(input[cmd], fd, envp, env_v, &tmp);
+			write(1, "", 0);
+			if (input[i + 1] == NULL)
+				pipe_last(input[i], fd, envp, env_v, &tmp);
 			else
-				pipe_middle(input[cmd], fd, envp, env_v, &tmp);
+				pipe_middle(input[i], fd, envp, env_v, &tmp);
 		}
 		else
 			parent_process(fd, &tmp);
-		i--;
-		cmd++;
+		i++;
 	}
 	close(fd[0]);
 	close(fd[1]);
+	ft_free_split(input);
 }

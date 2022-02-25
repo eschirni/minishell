@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/25 18:08:35 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/25 21:27:45 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,9 @@ void	parser(char *line, char **envp, t_env *env_v)
 	if (line[0] != '\0' && check_redirections(line) && check_quotes(line))
 	{
 		remove_quotes(tokens);
-		if (has_redirections(tokens) == true)
+		if (has_pipes(tokens) == true)
+			ft_pipe(tokens, envp, env_v);
+		else if (has_redirections(tokens) == true)
 			parse_redirections(envp, env_v, tokens);
 		else
 		{
