@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/24 22:32:02 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/25 17:29:09 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ static int	count_redirections(t_token *tokens, int type, int type1)
 static bool	safe_redirections(t_token *tokens, int type, int type1, int *arr)
 {
 	int		i;
+	int		fd;
 	t_token	*tmp;
+	char	*heredoc;
 
 	tmp = tokens;
 	i = 0;
@@ -39,7 +41,17 @@ static bool	safe_redirections(t_token *tokens, int type, int type1, int *arr)
 	{
 		if (tmp->type == type || tmp->type == type1)
 		{
-			arr[i] = redirections(tmp->next->value, tmp->type);
+			if (tmp->type == HEREDOC)
+			{
+				heredoc = exec_heredoc(tmp->next->value);
+				fd = open("heredoc", O_RDWR | O_CREAT | O_TRUNC, 0777); // remove trunc later, there bc file doesnt get deleted
+				write (fd, heredoc, ft_strclen(heredoc, '\0'));
+				close(fd);
+				free(heredoc);
+				arr[i] = redirections("heredoc", HEREDOC);
+			}
+			else
+				arr[i] = redirections(tmp->next->value, tmp->type);
 			if (arr[i] == -1)
 				return (false);
 			i++;
@@ -109,8 +121,6 @@ static void	parse_redirections(char *line, char **envp, t_env *env_v, t_token *t
 	pid = fork();
 	if (pid == 0)
 	{
-		// call dup2 with in/out if arr not empty
-		// convert tokens till redirection
 		if (fd_in != -1)
 			dup2(fd_in, STDIN_FILENO);
 		if (fd_out != -1)
@@ -151,8 +161,10 @@ void	parser(char *line, char **envp, t_env *env_v)
 		else
 		{
 			input = convert_tokens(tokens);
+			PRINT_HERE();
 			if (input != NULL && input[0] != NULL)
 				executer(envp, input, env_v);
+			PRINT_HERE();
 			if (input != NULL)
 				ft_free_split(input);
 		}

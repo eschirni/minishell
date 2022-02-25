@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 17:52:08 by tom               #+#    #+#             */
-/*   Updated: 2022/02/24 22:42:50 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/25 16:42:37 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	redirections(char *right, int type)
 {
 	int	fd;
 
-	if (type == INPUT)
+	if (type == INPUT || type == HEREDOC)
 		return (re_input(right, fd));
 	else if (type == TRUNC)
 		return (re_output(right, fd));
