@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/25 17:29:09 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/25 20:07:40 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,10 +161,8 @@ void	parser(char *line, char **envp, t_env *env_v)
 		else
 		{
 			input = convert_tokens(tokens);
-			PRINT_HERE();
 			if (input != NULL && input[0] != NULL)
 				executer(envp, input, env_v);
-			PRINT_HERE();
 			if (input != NULL)
 				ft_free_split(input);
 		}
