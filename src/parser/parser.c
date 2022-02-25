@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/25 17:29:09 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/25 17:56:14 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,20 @@ static int	get_fd(int	*arr)
 	return (-1);
 }
 
+static void	remove_heredoc(char ** envp, t_env *env_v)
+{
+	char	**tmp;
+	if (access("heredoc", F_OK) == 0)
+	{
+		tmp = ft_calloc(3, sizeof(char *));
+		tmp[2] = NULL;
+		tmp[0] = ft_strdup("rm");
+		tmp[1] = ft_strdup("heredoc");
+		executer(envp, tmp, env_v);
+		ft_free_split(tmp);
+	}
+}
+
 static void	parse_redirections(char *line, char **envp, t_env *env_v, t_token *tokens)
 {
 	char	**input;
@@ -142,6 +156,7 @@ static void	parse_redirections(char *line, char **envp, t_env *env_v, t_token *t
 	free(arr[0]);
 	free(arr[1]);
 	free(arr);
+	remove_heredoc(envp, env_v);
 }
 
 void	parser(char *line, char **envp, t_env *env_v)
@@ -161,10 +176,8 @@ void	parser(char *line, char **envp, t_env *env_v)
 		else
 		{
 			input = convert_tokens(tokens);
-			PRINT_HERE();
 			if (input != NULL && input[0] != NULL)
 				executer(envp, input, env_v);
-			PRINT_HERE();
 			if (input != NULL)
 				ft_free_split(input);
 		}
