@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 19:58:29 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:27:22 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static int	get_fd(int	*arr)
 	return (-1);
 }
 
-static void	remove_heredoc(char **envp, t_env *env_v)
+static void	remove_heredoc(t_env *env)
 {
 	char	**tmp;
 
@@ -115,12 +115,12 @@ static void	remove_heredoc(char **envp, t_env *env_v)
 		tmp[2] = NULL;
 		tmp[0] = ft_strdup("rm");
 		tmp[1] = ft_strdup("heredoc");
-		executer(envp, tmp, env_v);
+		executer(tmp, env);
 		ft_free_split(tmp);
 	}
 }
 
-void	parse_redirections(char **envp, t_env *env_v, t_token *tokens)
+void	parse_redirections(t_env *env, t_token *tokens)
 {
 	char	**input;
 	int		pid;
@@ -142,7 +142,7 @@ void	parse_redirections(char **envp, t_env *env_v, t_token *tokens)
 			dup2(fd_out, STDOUT_FILENO);
 		input = convert_tokens(tokens);
 		if (input[0] != NULL)
-			executer(envp, input, env_v);
+			executer(input, env);
 		ft_free_split(input);
 		exit(0);
 	}
@@ -155,29 +155,29 @@ void	parse_redirections(char **envp, t_env *env_v, t_token *tokens)
 	free(arr[0]);
 	free(arr[1]);
 	free(arr);
-	remove_heredoc(envp, env_v);
+	remove_heredoc(env);
 }
 
-void	parser(char *line, char **envp, t_env *env_v)
+void	parser(char *line, t_env *env)
 {
 	t_token	*tokens;
 	char	**input;
 
-	line = env_vars(line, env_v);
+	line = env_vars(line, env->env_v);
 	line = remove_spaces(line);
 	tokens = lexer(ft_split(line, ' '));
 	if (line[0] != '\0' && check_redirections(line) && check_quotes(line))
 	{
 		remove_quotes(tokens);
 		if (has_pipes(tokens) == true)
-			ft_pipe(tokens, envp, env_v);
+			ft_pipe(tokens, env);
 		else if (has_redirections(tokens) == true)
-			parse_redirections(envp, env_v, tokens);
+			parse_redirections(env, tokens);
 		else
 		{
 			input = convert_tokens(tokens);
 			if (input != NULL && input[0] != NULL)
-				executer(envp, input, env_v);
+				executer(input, env);
 			if (input != NULL)
 				ft_free_split(input);
 		}

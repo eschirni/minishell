@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 19:51:11 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	free_arg(char **args, t_env *env_v)
+static int	free_arg(char **args, t_env_v *env_v)
 {
 	int	i;
 	int	atoi;
@@ -32,7 +32,7 @@ static int	free_arg(char **args, t_env *env_v)
 	return (atoi);
 }
 
-void	ft_exit(char **args, bool ctrl_d, t_env *env_v)
+void	ft_exit(char **args, bool ctrl_d, t_env_v *env_v)
 {
 	if (ctrl_d == true)
 	{

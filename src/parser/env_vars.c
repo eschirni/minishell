@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 19:55:30 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*translate(char *s, t_env *env_v)
+static char	*translate(char *s, t_env_v *env_v)
 {
 	char	*var;
 	char	*ret;
@@ -64,7 +64,7 @@ static bool	in_split_quotes(char **split, int pos)
 	return (b);
 }
 
-static char	*replace_env_var(char **split, t_env *env_v, int pos)
+static char	*replace_env_var(char **split, t_env_v *env_v, int pos)
 {
 	char	*ret;
 
@@ -87,7 +87,7 @@ static char	*replace_env_var(char **split, t_env *env_v, int pos)
 	return (ret);
 }
 
-static char	*split_env_vars(char *s, bool dol_at_end, t_env *env_v)
+static char	*split_env_vars(char *s, bool dol_at_end, t_env_v *env_v)
 {
 	char	*ret;
 	char	**split;
@@ -116,7 +116,7 @@ static char	*split_env_vars(char *s, bool dol_at_end, t_env *env_v)
 	return (ret);
 }
 
-char	*env_vars(char *s, t_env *env_v)
+char	*env_vars(char *s, t_env_v *env_v)
 {
 	bool	dol_at_end;
 	char	*ret;

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 01:39:46 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 19:50:48 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	del_env(t_env **env, char *name)
+static void	del_env(t_env_v **env, char *name)
 {
-	t_env	*tmp;
-	t_env	*prev;
+	t_env_v	*tmp;
+	t_env_v	*prev;
 
 	tmp = *env;
 	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)
@@ -39,7 +39,7 @@ static void	del_env(t_env **env, char *name)
 	free(tmp);
 }
 
-void	unset(t_env **env_v, char *arg)
+void	unset(t_env_v **env_v, char *arg)
 {
 	char	*name;
 

@@ -6,15 +6,15 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 16:29:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/24 22:20:53 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	add_env(t_env **env_v, char *name, char *value, bool export)
+void	add_env(t_env_v **env_v, char *name, char *value, bool export)
 {
-	t_env	*new;
+	t_env_v	*new;
 
 	new = new_node();
 	new->name = name;
@@ -23,9 +23,9 @@ void	add_env(t_env **env_v, char *name, char *value, bool export)
 	ft_lstadd_back(env_v, new);
 }
 
-void	rep_env(t_env **env_v, char *name, char *value, bool export)
+void	rep_env(t_env_v **env_v, char *name, char *value, bool export)
 {
-	t_env	*tmp;
+	t_env_v	*tmp;
 
 	tmp = *env_v;
 	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)

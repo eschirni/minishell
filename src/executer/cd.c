@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:09:22 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/23 18:02:50 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char	*replace_home(char *path)
 	return (ret);
 }
 
-void	cd(char *path, t_env *env_v)
+void	cd(char *path, t_env_v *env_v)
 {
 	int		ret;
 	char	*home;

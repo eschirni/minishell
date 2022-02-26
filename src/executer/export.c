@@ -6,15 +6,15 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/02/19 15:06:49 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	export_env(t_env **env, char *name)
+static void	export_env(t_env_v **env, char *name)
 {
-	t_env	*tmp;
+	t_env_v	*tmp;
 
 	tmp = *env;
 	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)
@@ -31,10 +31,10 @@ static void	export_env(t_env **env, char *name)
 	tmp->export = true;
 }
 
-static t_env	*biggest_name(t_env *env_v)
+static t_env_v	*biggest_name(t_env_v *env_v)
 {
-	t_env	*tmp;
-	t_env	*ret;
+	t_env_v	*tmp;
+	t_env_v	*ret;
 
 	ret = NULL;
 	tmp = env_v;
@@ -49,10 +49,10 @@ static t_env	*biggest_name(t_env *env_v)
 	return (ret);
 }
 
-static char	*sort_env(t_env *env_v, char *last)
+static char	*sort_env(t_env_v *env_v, char *last)
 {
-	t_env	*tmp;
-	t_env	*low;
+	t_env_v	*tmp;
+	t_env_v	*low;
 	int		i;
 
 	tmp = env_v;
@@ -71,7 +71,7 @@ static char	*sort_env(t_env *env_v, char *last)
 	return (low->name);
 }
 
-static void	export_var(t_env *env_v, char *arg)
+static void	export_var(t_env_v *env_v, char *arg)
 {
 	int		pos;
 	char	*name;
@@ -98,9 +98,9 @@ static void	export_var(t_env *env_v, char *arg)
 	rep_env(&env_v, ft_strdup("?"), ft_strdup("0"), false);
 }
 
-void	export(t_env *env_v, char *arg)
+void	export(t_env_v *env_v, char *arg)
 {
-	t_env	*tmp;
+	t_env_v	*tmp;
 	char	*last;
 
 	if (arg == NULL)

@@ -6,15 +6,15 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:29:25 by tom               #+#    #+#             */
-/*   Updated: 2022/02/19 14:42:50 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	env(t_env *env_v, char *arg)
+void	env(t_env_v *env_v, char *arg)
 {
-	t_env	*tmp;
+	t_env_v	*tmp;
 
 	if (arg != NULL)
 		return ;

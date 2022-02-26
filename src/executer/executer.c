@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 19:50:32 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:26:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	own_function(char *s)
 	return (false);
 }
 
-static int	fork_execute(char *path, char **args, char **envp, t_env *env_v)
+static int	fork_execute(char *path, char **args, t_env *env)
 {
 	pid_t	pid;
 	int		error;
@@ -33,7 +33,7 @@ static int	fork_execute(char *path, char **args, char **envp, t_env *env_v)
 	pid = fork();
 	if (pid == 0)
 	{
-		error = execve(path, args, envp);
+		error = execve(path, args, env->envp);
 		exit(error);
 	}
 	else
@@ -41,11 +41,11 @@ static int	fork_execute(char *path, char **args, char **envp, t_env *env_v)
 	error /= 255;
 	if (error == 256)
 		error = 127;
-	rep_env(&env_v, ft_strdup("?"), ft_itoa(error), false);
+	rep_env(&env->env_v, ft_strdup("?"), ft_itoa(error), false);
 	return (error);
 }
 
-static void	exec_path(char **commands, char **envp, t_env *env_v)
+static void	exec_path(char **commands, t_env *env)
 {
 	int		error;
 	int		i;
@@ -53,19 +53,19 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 	char	**path_vars;
 
 	i = 0;
-	error = fork_execute(commands[0], commands, envp, env_v);
-	if (get_value(env_v, "PATH") == NULL)
+	error = fork_execute(commands[0], commands, env);
+	if (get_value(env->env_v, "PATH") == NULL)
 	{
 		ft_write_error(NULL, commands[0], "No such file or directory");
 		return ;
 	}
-	path_vars = ft_split(get_value(env_v, "PATH"), ':');
+	path_vars = ft_split(get_value(env->env_v, "PATH"), ':');
 	while (error == 127 && path_vars[i] != NULL)
 	{
 		path = ft_strdup(commands[0]);
 		path = ft_insert("/", path);
 		path = ft_insert(path_vars[i], path);
-		error = fork_execute(path, commands, envp, env_v);
+		error = fork_execute(path, commands, env);
 		free(path);
 		i++;
 	}
@@ -74,7 +74,7 @@ static void	exec_path(char **commands, char **envp, t_env *env_v)
 		ft_write_error(NULL, commands[0], "command not found");
 }
 
-static void	exec_functions(char **command, t_env *env_v)
+static void	exec_functions(char **command, t_env_v *env_v)
 {
 	if (ft_strcmp(command[0], "cd") == 0)
 		cd(command[1], env_v);
@@ -92,10 +92,10 @@ static void	exec_functions(char **command, t_env *env_v)
 		ft_exit(command, false, env_v);
 }
 
-void	executer(char **envp, char **commands, t_env *env_v)
+void	executer(char **commands, t_env *env)
 {
 	if (own_function(commands[0]) == true)
-		exec_functions(commands, env_v);
+		exec_functions(commands, env->env_v);
 	else
-		exec_path(commands, envp, env_v);
+		exec_path(commands, env);
 }

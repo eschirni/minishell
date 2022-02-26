@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:20:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 19:12:00 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:27:49 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	parent_process(int *fd, int *tmp)
 	*tmp = fd[0];
 }
 
-static void	pipe_middle(char *input, int *fd, char **envp, t_env *env_v, int *tmp)
+static void	pipe_middle(char *input, int *fd, t_env *env, int *tmp)
 {
 	char	**split;
 
@@ -27,7 +27,7 @@ static void	pipe_middle(char *input, int *fd, char **envp, t_env *env_v, int *tm
 	dup2(fd[1], 1);
 	close(fd[0]);
 	split = ft_split(input, ' ');
-	executer(envp, split, env_v);
+	executer(split, env);
 	free(split);
 	exit(1);
 }
@@ -47,7 +47,7 @@ static	t_token *after_pipe(t_token *tokens)
 	return (tmp);
 }
 
-static void	pipe_last(t_token *tokens, int *fd, char **envp, t_env *env_v, int *tmp)
+static void	pipe_last(t_token *tokens, int *fd, t_env *env, int *tmp)
 {
 	char	**split;
 	t_token	*tmp_tokens;
@@ -56,11 +56,11 @@ static void	pipe_last(t_token *tokens, int *fd, char **envp, t_env *env_v, int *
 	close(fd[0]);
 	tmp_tokens = after_pipe(tokens);
 	if (has_redirections(tmp_tokens) == true)
-		parse_redirections(envp, env_v, tmp_tokens);
+		parse_redirections(env, tmp_tokens);
 	else
 	{
 		split = convert_tokens(tmp_tokens);
-		executer(envp, split, env_v);
+		executer(split, env);
 		ft_free_split(split);
 	}
 	exit(1);
@@ -106,7 +106,7 @@ static char	**split_tokens(t_token *tokens, int type)
 	return (ret);
 }
 
-void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
+void	ft_pipe(t_token *tokens, t_env *env)
 {
 	int		fd[2];
 	int		i;
@@ -125,9 +125,9 @@ void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
 		if (pid == 0)
 		{
 			if (input[i + 1] == NULL)
-				pipe_last(tokens, fd, envp, env_v, &tmp);
+				pipe_last(tokens, fd, env, &tmp);
 			else
-				pipe_middle(input[i], fd, envp, env_v, &tmp);
+				pipe_middle(input[i], fd, env, &tmp);
 		}
 		else
 			parent_process(fd, &tmp);

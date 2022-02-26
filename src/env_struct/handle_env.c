@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   handle_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 14:03:20 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_env	*new_node(void)
+t_env_v	*new_node(void)
 {
-	t_env	*new;
+	t_env_v	*new;
 
-	new = malloc(sizeof(t_env));
+	new = malloc(sizeof(t_env_v));
 	new->name = NULL;
 	new->value = NULL;
 	new->next = NULL;
 	return (new);
 }
 
-void	free_env(t_env **env_v)
+void	free_env(t_env_v **env_v)
 {
-	t_env	*tmp;
-	t_env	*next;
+	t_env_v	*tmp;
+	t_env_v	*next;
 
 	while (*env_v != NULL)
 	{
@@ -39,7 +39,7 @@ void	free_env(t_env **env_v)
 	*env_v = NULL;
 }
 
-bool	search_env(t_env *env_v, char *name)
+bool	search_env(t_env_v *env_v, char *name)
 {
 	while (env_v != NULL)
 	{
@@ -50,7 +50,7 @@ bool	search_env(t_env *env_v, char *name)
 	return (false);
 }
 
-char	*get_value(t_env *env_v, char *name)
+char	*get_value(t_env_v *env_v, char *name)
 {
 	if (env_v != NULL && ft_strcmp(env_v->name, name) == 0)
 		return (env_v->value);
@@ -61,9 +61,9 @@ char	*get_value(t_env *env_v, char *name)
 	return (env_v->value);
 }
 
-void	init_env(t_env **env_v, char **envp)
+void	init_env(t_env_v **env_v, char **envp)
 {
-	t_env	*tmp;
+	t_env_v	*tmp;
 	int		i;
 	char	**split_string;
 
