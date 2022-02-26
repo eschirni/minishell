@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 18:32:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:19:09 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_env_v	*new_node(void)
 
 void	free_env(t_env_v **env_v)
 {
-	t_env_v	*tmp;
 	t_env_v	*next;
 
 	while (*env_v != NULL)

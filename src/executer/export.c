@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:58:13 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:16:02 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static char	*sort_env(t_env_v *env_v, char *last)
 {
 	t_env_v	*tmp;
 	t_env_v	*low;
-	int		i;
 
 	tmp = env_v;
 	low = biggest_name(env_v);

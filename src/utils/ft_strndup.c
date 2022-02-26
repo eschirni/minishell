@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 19:08:40 by tom               #+#    #+#             */
-/*   Updated: 2022/02/23 22:28:09 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:17:04 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strndup(const char *s1, int n)
 {
 	char	*s;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	s = malloc(sizeof(char) + 1 * n);
