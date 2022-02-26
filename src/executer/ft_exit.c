@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:10:16 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	free_arg(char **args, t_env_v *env_v)
 		i++;
 	}
 	free(args);
-	system("leaks minishell");
 	return (atoi);
 }
 

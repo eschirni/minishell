@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:20:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 20:40:20 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:51:59 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_pipe(t_token *tokens, t_env *env, int i)
 	char	**input;
 
 	tmp = 0;
-	input = split_tokens(tokens, PIPE);
+	input = split_tokens(tokens);
 	while (input[i] != NULL)
 	{
 		if (pipe(fd) == -1)

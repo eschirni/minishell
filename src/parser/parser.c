@@ -3,92 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 20:39:28 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 21:03:07 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static int	count_redirections(t_token *tokens, int type, int type1)
-{
-	int		i;
-	t_token	*tmp;
-
-	tmp = tokens;
-	i = 0;
-	while (tmp != NULL)
-	{
-		if (tmp->type == type || tmp->type == type1)
-			i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
-static bool	safe_redirections(t_token *tokens, int type, int type1, int *arr)
-{
-	int		i;
-	int		fd;
-	t_token	*tmp;
-	char	*heredoc;
-
-	tmp = tokens;
-	i = 0;
-	while (tmp != NULL)
-	{
-		if (tmp->type == type || tmp->type == type1)
-		{
-			if (tmp->type == HEREDOC)
-			{
-				heredoc = exec_heredoc(tmp->next->value);
-				fd = open("heredoc", O_RDWR | O_CREAT | O_TRUNC, 0777);
-				write (fd, heredoc, ft_strclen(heredoc, '\0'));
-				close(fd);
-				free(heredoc);
-				arr[i] = redirections("heredoc", HEREDOC);
-			}
-			else
-				arr[i] = redirections(tmp->next->value, tmp->type);
-			if (arr[i] == -1)
-				return (false);
-			i++;
-		}
-		tmp = tmp->next;
-	}
-	arr[i] = -1;
-	return (true);
-}
-
-static int	**create_array(t_token *tokens)
-{
-	int		**arr;
-	int		i;
-	bool	no_error;
-
-	arr = ft_calloc(2, sizeof(int *));
-	if (arr == NULL)
-		return (NULL);
-	i = count_redirections(tokens, INPUT, HEREDOC);
-	arr[0] = ft_calloc(i + 1, sizeof(int));
-	i = count_redirections(tokens, TRUNC, APPEND);
-	arr[1] = ft_calloc(i + 1, sizeof(int));
-	if (arr[0] == NULL || arr[1] == NULL)
-		return (NULL);
-	no_error = safe_redirections(tokens, INPUT, HEREDOC, arr[0]);
-	if (no_error == true)
-		no_error = safe_redirections(tokens, TRUNC, APPEND, arr[1]);
-	if (no_error == false)
-	{
-		free(arr[0]);
-		free(arr[1]);
-		free(arr);
-		return (NULL);
-	}
-	return (arr);
-}
 
 static int	get_fd(int	*arr)
 {
@@ -120,9 +42,22 @@ static void	remove_heredoc(t_env *env)
 	}
 }
 
-void	parse_redirections(t_env *env, t_token *tokens)
+static void	parse_red_child(t_token *tokens, int fd_in, int fd_out, t_env *env)
 {
 	char	**input;
+
+	dup2(fd_in, STDIN_FILENO);
+	if (fd_out != -1)
+		dup2(fd_out, STDOUT_FILENO);
+	input = convert_tokens(tokens);
+	if (input[0] != NULL)
+		executer(input, env);
+	ft_free_split(input);
+	exit(0);
+}
+
+void	parse_redirections(t_env *env, t_token *tokens)
+{
 	int		pid;
 	int		fd_in;
 	int		fd_out;
@@ -135,17 +70,7 @@ void	parse_redirections(t_env *env, t_token *tokens)
 	fd_out = get_fd(arr[1]);
 	pid = fork();
 	if (pid == 0)
-	{
-		if (fd_in != -1)
-			dup2(fd_in, STDIN_FILENO);
-		if (fd_out != -1)
-			dup2(fd_out, STDOUT_FILENO);
-		input = convert_tokens(tokens);
-		if (input[0] != NULL)
-			executer(input, env);
-		ft_free_split(input);
-		exit(0);
-	}
+		parse_red_child(tokens, fd_in, fd_out, env);
 	else
 	{
 		close(fd_in);
