@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 20:25:19 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:43:15 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	rep_env(t_env_v **env_v, char *name, char *value, bool export);
 int		redirections(char *right, int type);
 void	parse_redirections(t_env *env, t_token *tokens);
 void	parser(char *line, t_env *env);
-void	ft_pipe(t_token *tokens, t_env *env);
+void	ft_pipe(t_token *tokens, t_env *env, int i);
 void	reset_fd(int og_fd, char *operator);
 char	*replace_grep(char *s);
 void	remove_quotes(t_token *tokens);
@@ -133,11 +133,13 @@ char	*env_vars(char *s, t_env_v *env_v);
 char	*exec_heredoc(char *delimiter);
 char	*remove_spaces(char *s);
 char	**convert_tokens(t_token *tokens);
+char	**split_tokens(t_token *tokens, int type);
 bool	check_quotes(char *s);
 bool	check_redirections(char *s);
 bool	in_quotes(char *s, int pos, char c, char c2);
 bool	has_redirections(t_token *tokens);
 bool	has_pipes(t_token *tokens);
+t_token	*after_pipe(t_token *tokens);
 t_token	*lexer(char **line);
 
 #endif

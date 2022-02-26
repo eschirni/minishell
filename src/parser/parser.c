@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 20:27:22 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 20:39:28 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	parser(char *line, t_env *env)
 	{
 		remove_quotes(tokens);
 		if (has_pipes(tokens) == true)
-			ft_pipe(tokens, env);
+			ft_pipe(tokens, env, 0);
 		else if (has_redirections(tokens) == true)
 			parse_redirections(env, tokens);
 		else
