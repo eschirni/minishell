@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 12:58:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/23 19:57:53 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:51:11 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	free_arg(char **args, t_env *env_v)
 		free(args[i]);
 		i++;
 	}
-	free(args); //cloud cause malloc error on tom pc
+	free(args);
 	system("leaks minishell");
 	return (atoi);
 }

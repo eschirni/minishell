@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_checker.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 19:38:17 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/20 20:09:51 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:59:35 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	check_pipes(char *s)
 				i += 2;
 			else if (s[i] == '>' && s[i + 1] == '>')
 				i += 2;
-			else if(s[i] == '<' || s[i] == '>')
+			else if (s[i] == '<' || s[i] == '>')
 				i++;
 			while (s[i] == ' ')
 				i++;
@@ -106,7 +106,8 @@ bool	check_redirections(char *s)
 		ft_write_error(NULL, NULL, "parse error");
 		return (false);
 	}
-	if (check_double_arrows(s, '<') == false || check_double_arrows(s, '>') == false)
+	if (check_double_arrows(s, '<') == false
+		|| check_double_arrows(s, '>') == false)
 	{
 		ft_write_error(NULL, NULL, "parse error");
 		return (false);

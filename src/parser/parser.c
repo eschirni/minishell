@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 19:04:23 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:58:29 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	safe_redirections(t_token *tokens, int type, int type1, int *arr)
 			if (tmp->type == HEREDOC)
 			{
 				heredoc = exec_heredoc(tmp->next->value);
-				fd = open("heredoc", O_RDWR | O_CREAT | O_TRUNC, 0777); // remove trunc later, there bc file doesnt get deleted
+				fd = open("heredoc", O_RDWR | O_CREAT | O_TRUNC, 0777);
 				write (fd, heredoc, ft_strclen(heredoc, '\0'));
 				close(fd);
 				free(heredoc);
@@ -64,16 +64,16 @@ static bool	safe_redirections(t_token *tokens, int type, int type1, int *arr)
 
 static int	**create_array(t_token *tokens)
 {
-	int	**arr;
-	int	i;
+	int		**arr;
+	int		i;
 	bool	no_error;
 
 	arr = ft_calloc(2, sizeof(int *));
 	if (arr == NULL)
 		return (NULL);
-	i =  count_redirections(tokens, INPUT, HEREDOC);
+	i = count_redirections(tokens, INPUT, HEREDOC);
 	arr[0] = ft_calloc(i + 1, sizeof(int));
-	i =  count_redirections(tokens, TRUNC, APPEND);
+	i = count_redirections(tokens, TRUNC, APPEND);
 	arr[1] = ft_calloc(i + 1, sizeof(int));
 	if (arr[0] == NULL || arr[1] == NULL)
 		return (NULL);
@@ -98,16 +98,17 @@ static int	get_fd(int	*arr)
 	while (arr[i] != -1)
 	{
 		if (arr[i + 1] == -1)
-			return(arr[i]);
+			return (arr[i]);
 		close(arr[i]);
 		i++;
 	}
 	return (-1);
 }
 
-static void	remove_heredoc(char ** envp, t_env *env_v)
+static void	remove_heredoc(char **envp, t_env *env_v)
 {
 	char	**tmp;
+
 	if (access("heredoc", F_OK) == 0)
 	{
 		tmp = ft_calloc(3, sizeof(char *));

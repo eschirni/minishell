@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:07:45 by tom               #+#    #+#             */
-/*   Updated: 2022/02/25 20:38:21 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 19:54:30 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ static int	check_n(int i, int j, char **input, bool *flag)
 	return (j);
 }
 
+static bool	check_empty(char **input)
+{
+	if (input[1] == NULL)
+	{
+		write(1, "\n", 1);
+		return (false);
+	}
+	return (true);
+}
+
 void	echo(char **input, t_env *env_v)
 {
 	bool	flag;
@@ -29,11 +39,8 @@ void	echo(char **input, t_env *env_v)
 	int		j;
 
 	j = 1;
-	if (input[j] == NULL)
-	{
-		write(1, "\n", 1);
+	if (check_empty(input) == false)
 		return ;
-	}
 	flag = false;
 	i = 0;
 	j = check_n(i, j, input, &flag);

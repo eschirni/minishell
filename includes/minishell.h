@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 19:04:34 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:48:22 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <fcntl.h>	//open
 # include <limits.h>
 
-# define PRINT_HERE() (printf("in file: %s at line %d\n", __FILE__, __LINE__))
 # define BLUE "\033[38;5;36m"
 # define RED "\033[0;31m"
 # define YELLOW "\033[0;33m"

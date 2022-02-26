@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 19:18:33 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/24 22:21:44 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:50:32 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static int	fork_execute(char *path, char **args, char **envp, t_env *env_v)
 		exit(error);
 	}
 	else
-		wait(&error); //catching signal sent by exit of(child)
+		wait(&error);
 	error /= 255;
 	if (error == 256)
-		error = 127; //because in bash 127 says the command doesn't exist
+		error = 127;
 	rep_env(&env_v, ft_strdup("?"), ft_itoa(error), false);
 	return (error);
 }
@@ -92,7 +92,6 @@ static void	exec_functions(char **command, t_env *env_v)
 		ft_exit(command, false, env_v);
 }
 
-//TODO: add paths to the right commands, /usr/bin for env /bin for ls, etc
 void	executer(char **envp, char **commands, t_env *env_v)
 {
 	if (own_function(commands[0]) == true)

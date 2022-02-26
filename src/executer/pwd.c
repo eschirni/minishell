@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 18:32:10 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/24 22:12:59 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:50:59 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	pwd(t_env *env_v)
 {
 	char	*cwd;
 
-	cwd = ft_calloc(18052520, 1); //18052520 because it's not too slow but handles still a really long pwd
+	cwd = ft_calloc(18052520, 1);
 	if (cwd == NULL)
 		return ;
 	getcwd(cwd, 18052520);

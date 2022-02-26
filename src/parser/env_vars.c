@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_vars.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:58:59 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 12:15:33 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:55:30 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static bool	in_split_quotes(char **split, int pos)
 	}
 	b = in_quotes(tmp, ft_strclen(tmp, '\0'), '\'', '"');
 	free(tmp);
-	return(b);
+	return (b);
 }
 
 static char	*replace_env_var(char **split, t_env *env_v, int pos)

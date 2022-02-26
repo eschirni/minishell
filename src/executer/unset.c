@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 01:39:46 by tom               #+#    #+#             */
-/*   Updated: 2022/02/19 15:35:23 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:50:48 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	del_env(t_env **env, char *name)
 	tmp = *env;
 	if (tmp != NULL && ft_strcmp(tmp->name, name) == 0)
 	{
-		*env = tmp->next; // Changed head
+		*env = tmp->next;
 		free(tmp->name);
 		free(tmp->value);
-		free(tmp); // free old head
+		free(tmp);
 		return ;
 	}
 	while (tmp != NULL && ft_strcmp(tmp->name, name) != 0)
@@ -36,7 +36,7 @@ static void	del_env(t_env **env, char *name)
 	prev->next = tmp->next;
 	free(tmp->name);
 	free(tmp->value);
-	free(tmp); // Free memory
+	free(tmp);
 }
 
 void	unset(t_env **env_v, char *arg)

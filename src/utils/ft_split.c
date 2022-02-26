@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:55:13 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/23 19:40:08 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:49:22 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static char	*ft_create_array(size_t start, char *s, size_t chars)
 {
 	char	*dst;
 	size_t	i;
+
 	i = 0;
 	dst = malloc(chars + 1);
 	while (i < chars)
@@ -27,11 +28,13 @@ static char	*ft_create_array(size_t start, char *s, size_t chars)
 	dst[i] = '\0';
 	return (dst);
 }
+
 static char	*ft_inner_string(size_t *start, char *s, char c)
 {
 	size_t	chars;
 	size_t	i;
 	char	*dst;
+
 	chars = 0;
 	while (*start < ft_strclen(s, '\0'))
 	{
@@ -51,10 +54,12 @@ static char	*ft_inner_string(size_t *start, char *s, char c)
 	*start += chars + 1;
 	return (dst);
 }
+
 static int	ft_count_string(char *s, char c)
 {
 	size_t	i;
 	int		string_count;
+
 	i = 0;
 	string_count = 0;
 	while (i < ft_strclen(s, '\0'))
@@ -69,12 +74,14 @@ static int	ft_count_string(char *s, char c)
 	}
 	return (string_count);
 }
+
 char	**ft_split(char *s, char c)
 {
 	int		string_count;
 	size_t	i;
 	size_t	start;
 	char	**split;
+
 	if (s == NULL)
 		return (NULL);
 	string_count = ft_count_string(s, c);

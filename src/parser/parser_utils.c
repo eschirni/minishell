@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 15:03:06 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/25 18:03:15 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:56:47 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	in_quotes(char *s, int pos, char quote, char other)
 	int	count_other;
 	int	i;
 
-	if (quote  == '"' && in_quotes(s, pos, '\'', '"') == true)
+	if (quote == '"' && in_quotes(s, pos, '\'', '"') == true)
 		return (true);
 	count = 0;
 	count_other = 0;
@@ -90,7 +90,7 @@ char	**convert_tokens(t_token *tokens)
 
 	tmp = tokens;
 	i = 0;
-	while (tmp != NULL && tmp->type == NONE) //add smth for pipes
+	while (tmp != NULL && tmp->type == NONE)
 	{
 		tmp = tmp->next;
 		i++;
@@ -100,7 +100,7 @@ char	**convert_tokens(t_token *tokens)
 		return (NULL);
 	tmp = tokens;
 	i = 0;
-	while (tmp != NULL && tmp->type == NONE) //add smth for pipes
+	while (tmp != NULL && tmp->type == NONE)
 	{
 		ret[i] = ft_strdup(tmp->value);
 		tmp = tmp->next;

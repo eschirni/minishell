@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 17:52:08 by tom               #+#    #+#             */
-/*   Updated: 2022/02/25 16:42:37 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 20:00:01 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ static int	re_input(char *right, int fd)
 	if (fd == -1)
 	{
 		ft_write_error(NULL, right, "No such file or directory");
-		return (-1); // error message
+		return (-1);
 	}
 	fd = open(right, O_RDONLY, 0777);
 	if (fd == -1)
 	{
 		ft_write_error(NULL, right, "Permission denied");
-		return (-1); // error message
+		return (-1);
 	}
 	return (fd);
 }
 
 static int	re_output(char *right, int fd)
 {
-	fd = open(right, O_RDWR | O_CREAT | O_TRUNC, 0777); // number for file perms
+	fd = open(right, O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (fd == -1)
 	{
 		ft_write_error(NULL, right, "Permission denied");
-		return (-1); // error message
+		return (-1);
 	}
 	return (fd);
 }
@@ -62,7 +62,7 @@ int	redirections(char *right, int type)
 		if (fd == -1)
 		{
 			ft_write_error(NULL, right, "Permission denied");
-			return (-1); // error message
+			return (-1);
 		}
 		return (fd);
 	}
