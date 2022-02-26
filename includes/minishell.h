@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/25 21:27:35 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:04:34 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	rep_env(t_env **env_v, char *name, char *value, bool export);
 
 //parser
 int		redirections(char *right, int type);
+void	parse_redirections(char **envp, t_env *env_v, t_token *tokens);
 void	parser(char *line, char **envp, t_env *env_v);
 void	ft_pipe(t_token *tokens, char **envp, t_env *env_v);
 void	reset_fd(int og_fd, char *operator);

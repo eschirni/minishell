@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:20:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/25 21:47:30 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 19:12:00 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	pipe_middle(char *input, int *fd, char **envp, t_env *env_v, int *tm
 	char	**split;
 
 	dup2(*tmp, 0);
-	dup2(fd[1], 1); // redirects stdout to pipe write end
+	dup2(fd[1], 1);
 	close(fd[0]);
 	split = ft_split(input, ' ');
 	executer(envp, split, env_v);
@@ -32,19 +32,41 @@ static void	pipe_middle(char *input, int *fd, char **envp, t_env *env_v, int *tm
 	exit(1);
 }
 
-static void	pipe_last(char *input, int *fd, char **envp, t_env *env_v, int *tmp)
+static	t_token *after_pipe(t_token *tokens)
+{
+	t_token	*tmp;
+	t_token	*end;
+
+	end = tokens;
+	while (end != NULL)
+	{
+		if (end->type == PIPE)
+			tmp = end->next;
+		end = end->next;
+	}
+	return (tmp);
+}
+
+static void	pipe_last(t_token *tokens, int *fd, char **envp, t_env *env_v, int *tmp)
 {
 	char	**split;
+	t_token	*tmp_tokens;
 
 	dup2(*tmp, 0);
 	close(fd[0]);
-	split = ft_split(input, ' ');
-	executer(envp, split, env_v);
-	ft_free_split(split);
+	tmp_tokens = after_pipe(tokens);
+	if (has_redirections(tmp_tokens) == true)
+		parse_redirections(envp, env_v, tmp_tokens);
+	else
+	{
+		split = convert_tokens(tmp_tokens);
+		executer(envp, split, env_v);
+		ft_free_split(split);
+	}
 	exit(1);
 }
 
-static char	**split_tokens(t_token *tokens)
+static char	**split_tokens(t_token *tokens, int type)
 {
 	char	**ret;
 	t_token	*tmp;
@@ -52,10 +74,13 @@ static char	**split_tokens(t_token *tokens)
 
 	tmp = tokens;
 	i = 1;
-	while (tmp != NULL && tmp->type == NONE) //add smth for pipes
+	while (tmp != NULL)
 	{
-		if (tmp->type == PIPE)
+		if (tmp->type == type)
+		{
 			i++;
+			tmp = tmp->next;
+		}
 		tmp = tmp->next;
 	}
 	ret = ft_calloc(i + 1, sizeof(char *));
@@ -63,13 +88,13 @@ static char	**split_tokens(t_token *tokens)
 		return (NULL);
 	tmp = tokens;
 	i = 0;
-	while (tmp != NULL) //add smth for pipes
+	while (tmp != NULL)
 	{
-		if (tmp->type == PIPE)
+		if (tmp->type == type)
 			tmp = tmp->next;
 		ret[i] = ft_strdup(tmp->value);
 		tmp = tmp->next;
-		while (tmp != NULL && tmp->type != PIPE)
+		while (tmp != NULL && tmp->type != type)
 		{
 			ret[i] = ft_append(ret[i], " ");
 			ret[i] = ft_append(ret[i], tmp->value);
@@ -91,10 +116,7 @@ void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
 
 	i = 0;
 	tmp = 0;
-	input = ft_calloc(3, sizeof(char *));
-	input[0] = "cat Makefile";
-	input[1] = "grep #";
-	input[2] = NULL;
+	input = split_tokens(tokens, PIPE);
 	while (input[i] != NULL)
 	{
 		if (pipe(fd) == -1)
@@ -102,9 +124,8 @@ void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
 		pid = fork();
 		if (pid == 0)
 		{
-			write(1, "", 0);
 			if (input[i + 1] == NULL)
-				pipe_last(input[i], fd, envp, env_v, &tmp);
+				pipe_last(tokens, fd, envp, env_v, &tmp);
 			else
 				pipe_middle(input[i], fd, envp, env_v, &tmp);
 		}

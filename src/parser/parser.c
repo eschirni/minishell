@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 19:42:36 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 17:04:25 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 19:04:23 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ static void	remove_heredoc(char ** envp, t_env *env_v)
 	}
 }
 
-static void	parse_redirections(char **envp, t_env *env_v, t_token *tokens)
+void	parse_redirections(char **envp, t_env *env_v, t_token *tokens)
 {
 	char	**input;
 	int		pid;
