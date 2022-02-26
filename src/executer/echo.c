@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/31 11:07:45 by tom               #+#    #+#             */
-/*   Updated: 2022/02/25 18:06:21 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/25 20:38:21 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	echo(char **input, t_env *env_v)
 
 	j = 1;
 	if (input[j] == NULL)
+	{
+		write(1, "\n", 1);
 		return ;
+	}
 	flag = false;
 	i = 0;
 	j = check_n(i, j, input, &flag);
