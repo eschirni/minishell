@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:20:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/25 21:55:05 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 16:08:48 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ static char	**split_tokens(t_token *tokens)
 
 	tmp = tokens;
 	i = 1;
-	while (tmp != NULL && tmp->type == NONE) //add smth for pipes
+	while (tmp != NULL)
 	{
 		if (tmp->type == PIPE)
+		{
 			i++;
+			tmp = tmp->next;
+		}
 		tmp = tmp->next;
 	}
 	ret = ft_calloc(i + 1, sizeof(char *));
@@ -63,7 +66,7 @@ static char	**split_tokens(t_token *tokens)
 		return (NULL);
 	tmp = tokens;
 	i = 0;
-	while (tmp != NULL) //add smth for pipes
+	while (tmp != NULL)
 	{
 		if (tmp->type == PIPE)
 			tmp = tmp->next;
@@ -91,10 +94,7 @@ void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
 
 	i = 0;
 	tmp = 0;
-	input = ft_calloc(3, sizeof(char *));
-	input[0] = ft_strdup("cat Makefile");
-	input[1] = ft_strdup("grep #");
-	input[2] = NULL;
+	input = split_tokens(tokens);
 	while (input[i] != NULL)
 	{
 		if (pipe(fd) == -1)
