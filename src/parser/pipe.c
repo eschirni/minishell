@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:20:43 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 16:08:48 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 16:36:01 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	ft_pipe(t_token *tokens, char **envp, t_env *env_v)
 		pid = fork();
 		if (pid == 0)
 		{
-			write(1, "", 0);
 			if (input[i + 1] == NULL)
 				pipe_last(input[i], fd, envp, env_v, &tmp);
 			else
