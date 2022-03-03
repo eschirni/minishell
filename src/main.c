@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 20:44:28 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/28 17:34:11 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv, char **envp)
 	env->envp = envp;
 	init_env(&env->env_v, env->envp);
 	add_env(&env->env_v, ft_strdup("?"), ft_strdup("0"), false);
-	signal(SIGINT, handler);
+	signal(SIGINT, handler); // add control codes for cut line
 	signal(SIGQUIT, handler);
 	while (true)
 	{
