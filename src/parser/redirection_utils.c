@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 21:02:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 21:09:12 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/02/26 21:17:38 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	make_heredoc(t_token *tmp, int *arr, int i)
 bool	safe_redirections(t_token *tokens, int type, int type1, int *arr)
 {
 	int		i;
-	int		fd;
 	t_token	*tmp;
 
 	tmp = tokens;

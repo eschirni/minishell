@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:09:22 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 20:12:19 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:57:11 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,23 @@ static char	*replace_home(char *path)
 	return (ret);
 }
 
+static int	oldpwd(void)
+{
+	int		ret;
+	char	*path;
+
+	path = getenv("OLDPWD");
+	if (path == NULL)
+	{
+		ft_write_error(NULL, "cd", "OLDPWD not set");
+		return (-1);
+	}
+	write(1, path, ft_strclen(path, '\0'));
+	write(1, "\n", 1);
+	ret = chdir(path);
+	return (ret);
+}
+
 void	cd(char *path, t_env_v *env_v)
 {
 	int		ret;
@@ -59,8 +76,10 @@ void	cd(char *path, t_env_v *env_v)
 
 	if (path == NULL)
 		return ;
-	if (ft_strchr(path, '~') == -1)
+	if (ft_strchr(path, '~') == -1 && ft_strcmp(path, "-") != 0)
 		ret = chdir(path);
+	else if (ft_strcmp(path, "-") == 0)
+		ret = oldpwd();
 	else
 	{
 		home = replace_home(path);
@@ -69,7 +88,8 @@ void	cd(char *path, t_env_v *env_v)
 	}
 	if (ret == -1)
 	{
-		ft_write_error("cd", path, strerror(errno));
+		if (ft_strcmp(path, "-") != 0)
+			ft_write_error("cd", path, strerror(errno));
 		rep_env(&env_v, ft_strdup("?"), ft_strdup("1"), false);
 	}
 	else

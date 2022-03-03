@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 17:44:28 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 00:40:21 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/03/01 23:02:46 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 void	ft_write_error(char *command, char *arg, char *error)
 {
-	pid_t	fd;
-
-	fd = fork();
-	if (fd == 0)
+	write(2, RED, ft_strclen(RED, '\0'));
+	write(2, "minishell: ", 11);
+	if (command != NULL)
 	{
-		dup2(STDERR_FILENO, STDOUT_FILENO);
-		printf(RED "minishell: ");
-		if (command != NULL)
-			printf("%s: ", command);
-		if (arg != NULL)
-			printf("%s: ", arg);
-		printf("%s\n", error);
-		exit(0);
+		write(2, command, ft_strclen(command, '\0'));
+		write(2, ": ", 2);
 	}
-	else
-		wait(NULL);
+	if (arg != NULL)
+	{
+		write(2, arg, ft_strclen(arg, '\0'));
+		write(2, ": ", 2);
+	}
+	write(2, error, ft_strclen(error, '\0'));
+	write(2, "\n", 1);
+	write(2, RESETCOLOR, ft_strclen(RESETCOLOR, '\0'));
 }

@@ -6,7 +6,7 @@
 /*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:31:18 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/28 17:34:11 by tom              ###   ########.fr       */
+/*   Updated: 2022/03/03 18:14:43 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	t_env	*env;
 
-	if (argc != 1)
+	if (argc != 1 && argv != NULL)
 	{
 		perror(RED"Usage: ./minishell");
 		return (1);

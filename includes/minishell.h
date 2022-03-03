@@ -6,7 +6,7 @@
 /*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 23:14:37 by tom               #+#    #+#             */
-/*   Updated: 2022/02/26 21:04:55 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/03/01 20:20:15 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void	parse_redirections(t_env *env, t_token *tokens);
 void	parser(char *line, t_env *env);
 void	ft_pipe(t_token *tokens, t_env *env, int i);
 void	reset_fd(int og_fd, char *operator);
-char	*replace_grep(char *s);
 void	remove_quotes(t_token *tokens);
 char	*env_vars(char *s, t_env_v *env_v);
 char	*exec_heredoc(char *delimiter);

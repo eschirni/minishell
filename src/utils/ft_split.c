@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 17:55:13 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 19:49:22 by tom              ###   ########.fr       */
+/*   Updated: 2022/02/26 21:16:36 by eschirni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static char	*ft_inner_string(size_t *start, char *s, char c)
 	char	*dst;
 
 	chars = 0;
+	i = 0;
 	while (*start < ft_strclen(s, '\0'))
 	{
 		if (s[*start] != c || in_quotes(s, i, '"', '\''))
