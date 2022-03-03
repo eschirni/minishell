@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 21:02:39 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/26 21:17:38 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:17:16 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_redirections(t_token *tokens, int type, int type1)
 	i = 0;
 	while (tmp != NULL)
 	{
-		if (tmp->type == type || tmp->type == type1)
+		if ((int)tmp->type == type || (int)tmp->type == type1)
 			i++;
 		tmp = tmp->next;
 	}
@@ -50,7 +50,7 @@ bool	safe_redirections(t_token *tokens, int type, int type1, int *arr)
 	i = 0;
 	while (tmp != NULL)
 	{
-		if (tmp->type == type || tmp->type == type1)
+		if ((int)tmp->type == type || (int)tmp->type == type1)
 		{
 			if (tmp->type == HEREDOC)
 				make_heredoc(tmp, arr, i);

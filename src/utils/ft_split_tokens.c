@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_tokens.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eschirni <eschirni@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tom <tom@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 12:38:32 by eschirni          #+#    #+#             */
-/*   Updated: 2022/02/21 14:13:16 by eschirni         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:16:49 by tom              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_count_string(t_token *tokens, int type)
 	i = 1;
 	while (tmp != NULL)
 	{
-		if (type == tmp->type)
+		if (type == (int)tmp->type)
 			i++;
 		tmp = tmp->next;
 	}
@@ -61,7 +61,7 @@ char	**ft_split_tokens(t_token *tokens, int type)
 	tmp = tokens;
 	while (tmp != NULL)
 	{
-		if (type != tmp->type)
+		if (type != (int)tmp->type)
 		{
 			split[i] = inner_string(size, tokens);
 			i++;
