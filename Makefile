@@ -6,12 +6,12 @@
 #    By: tom <tom@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/21 11:22:27 by tom               #+#    #+#              #
-#    Updated: 2022/02/26 21:14:32 by tom              ###   ########.fr        #
+#    Updated: 2022/02/28 18:06:12 by tom              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # FLAGS
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 LFR= -L$$HOME/.brew/opt/readline/lib -lreadline
 LFRC = -I$$HOME/.brew/opt/readline/include
 
@@ -56,11 +56,13 @@ $(OBJ_PATH)%.o :$(SRC_PATH)%.c
 	@echo $(Y)Compiling [$@]...$(X)
 	@mkdir -p $(dir $@)
 	@gcc $(LFRC) $(CFLAGS) -c -o $@ $<
+	@sleep 0.5
+	@printf $(UP)$(CUT)
 	@echo $(G)Finished [$@]$(X)
+	@sleep 0.5
+	@printf $(UP)$(CUT)
 
 $(NAME): $(OBJ)
-	@echo $(Y)Compiling [$(SRC)]
-	@echo into [$(NAME)]...$(X)
 	@gcc $(CFLAGS) $(OBJ) $(LFR) $(LFRC) -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
